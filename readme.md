@@ -1,5 +1,5 @@
-# Project Name
+# Email Client
 - Jeffrey Lam (@klam20)
-- Name (@username)
+- Bryant Bautista (@bryantbautista)
 - Name (@username)
 - Nicole Nacua (@nnacua)
