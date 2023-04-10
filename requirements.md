@@ -143,6 +143,61 @@ messages/attachments
        * System displays an error message to user
        * System prompts user to enter a valid email address
 
+5. Search for Email(s)
+- **Pre-condition:** User must be logged in and has preexisting emails
+  
+- **Trigger:** User clicks the search box
+  
+- **Primary Sequence:**
+  
+  1. System prompts the user to search
+  2. User types into the search box (using keywords or names)
+  3. User presses enter to prompt the system to search
+  4. System pops up recommended emails based on user input
+
+- **Primary Postconditions:**
+
+  1. The user can view emails that matched their search criteria
+  2. The user can interact with the displayed emails
+
+- **Alternate Sequence:**
+  
+  1. The user does not have emails that matched the input
+       * System displays message to user that there are no emails that matched the input
+       * System allows user to revise the text or clear the search box
+       * User refines their search to perform a new search
+       * User presses enter to prompt the system to search
+       * System displays new recommended emails based on the new search
+  2. The system takes a long time to complete the search
+       * User can wait for it to complete or cancel the search
+       * The system displays a progress bar to show the loading status of the search
+       * If the loading cannot complete, the system displays an error message
+  
+6. Reply to Email
+- **Pre-condition:** User must be logged in and have an email (from a recipient) to reply to
+  
+- **Trigger:** User clicks and opens the email they want to reply to
+  
+- **Primary Sequence:**
+  
+  1. User clicks on the "reply" button
+  2. System opens up a compose window with the recipient's name/email address in the "To" field
+  3. User types their reply in the body of the email
+  4. User clicks the "send" button to send the email
+  5. System sends the email to the recipient
+
+- **Primary Postconditions:**
+
+  1. The user successfully sends the reply and the recipient receives the email
+  2. User's reply mail is added/saved under a "Sent" folder
+
+- **Alternate Sequence:**
+  
+  1. User decides to cancel the reply
+       * User clicks cancel button or the "x" button to close the window
+       * System sends a confirmation message to user wanting to cancel the reply
+       * User confirms and system exits user out of the window
+  
 13. Set Notification Settings
 
 - **Preconditions:** User must have an account, user must bein their email home
