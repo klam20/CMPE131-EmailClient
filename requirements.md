@@ -2,23 +2,24 @@
 
 ## Functional Requirements
 
-1. requirement
-2. requirement
-3. requirement
-4. requirement
-5. requirement
-6. requirement
-7. requirement
-8. requirement
-9. requirement
-10. requirement
-11. requirement
-12. requirement
+1. Login/Logout Page
+2. Register User
+3. Send Email
+4. Send Messages through Chat
+5. Search for Emails
+6. Reply to Email
+7. Send Emojis
+8. Creating todo list
+9. Add items to todo list
+10. Mark off completed items on todo list
+11. Filtering/Sorting Emails
+12. Deleting Email
+13. Set Notification Setting (do not disturb/online)
 
 ## Non-functional Requirements
 
-1. non-functional
-2. non-functional
+1. Must have an interactive UI
+2. Have a noise notification when email is received
 3. non-functional
 4. non-functional
 
@@ -55,5 +56,64 @@
   1. Ut enim ad minim veniam, quis nostrum e
   2. Ut enim ad minim veniam, quis nostrum e
   3. ...
-2. Use Case Name (Should match functional requirement name)
-   ...
+
+2. Register User
+- **Pre-condition:** User does not have an existing account$
+  
+- **Trigger:** User selects "Register" button$
+  
+- **Primary Sequence:**
+  
+  1. Page directs user to a registration page asking for user’s full name, email address and 
+password
+  2. User enters full name
+  3. User creates an email address
+  4. User creates a password 
+  5. User selects Create Account
+
+- **Primary Postconditions:** 
+
+  1. User successfully creates a new account
+    a. Page directs to log in page
+    b. System allows User to log in with an email address and password
+  2. User did not create an account
+    a. System did not save data
+    b. User cannot login with their email and password
+
+- **Alternate Sequence:**
+  
+  1. System checks data and finds that there is an existing account with the entered email 
+address
+    a. System displays an notifying the user that there’s an existing account 
+    b. System prompts user to enter another email address
+  
+3. Send Email
+- **Pre-condition:** User is registered and logged into web application$
+  
+- **Trigger:** User selects "Compose" button$
+  
+- **Primary Sequence:**
+  
+  1. System prompts user to enter recipient(s) email address, email subject, and 
+messages/attachments
+  2. User enters recipient(s) email address
+  3. User enters an email address
+  4. User enters a message or adds an attachment in the email body
+  5. User selects “send” button
+
+- **Primary Postconditions:**
+
+  1. User sends an email
+    a. Recipient receives email
+    b. System categories email as sent
+  2. User does not send an email
+    a. Recipeint does not receive email
+
+- **Alternate Sequence:**
+  
+  1. User did not enter a email address, subject line, or message
+    a. System does not allow email to be sent
+    b. System prompts user to fill up the missing information
+  2. User did not enter a valid/existing email address
+    a. System displays an error message to user
+    b. System prompts user to enter a valid email address
