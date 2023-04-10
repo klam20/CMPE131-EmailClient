@@ -58,9 +58,9 @@
   3. ...
 
 2. Register User
-- **Pre-condition:** User does not have an existing account$
+- **Pre-condition:** User does not have an existing account
   
-- **Trigger:** User selects "Register" button$
+- **Trigger:** User selects "Register" button
   
 - **Primary Sequence:**
   
@@ -74,23 +74,23 @@ password
 - **Primary Postconditions:** 
 
   1. User successfully creates a new account
-    a. Page directs to log in page
-    b. System allows User to log in with an email address and password
+      * Page directs to log in page
+      * System allows User to log in with an email address and password
   2. User did not create an account
-    a. System did not save data
-    b. User cannot login with their email and password
+      * System did not save data
+      * User cannot login with their email and password
 
 - **Alternate Sequence:**
   
   1. System checks data and finds that there is an existing account with the entered email 
 address
-    a. System displays an notifying the user that there’s an existing account 
-    b. System prompts user to enter another email address
+      * System displays an notifying the user that there’s an existing account 
+      * System prompts user to enter another email address
   
 3. Send Email
-- **Pre-condition:** User is registered and logged into web application$
+- **Pre-condition:** User is registered and logged into web application
   
-- **Trigger:** User selects "Compose" button$
+- **Trigger:** User selects "Compose" button
   
 - **Primary Sequence:**
   
@@ -104,16 +104,16 @@ messages/attachments
 - **Primary Postconditions:**
 
   1. User sends an email
-    a. Recipient receives email
-    b. System categories email as sent
+       * Recipient receives email
+       * System categories email as sent
   2. User does not send an email
-    a. Recipeint does not receive email
+       * Recipeint does not receive email
 
 - **Alternate Sequence:**
   
   1. User did not enter a email address, subject line, or message
-    a. System does not allow email to be sent
-    b. System prompts user to fill up the missing information
+       * System does not allow email to be sent
+       * System prompts user to fill up the missing information
   2. User did not enter a valid/existing email address
-    a. System displays an error message to user
-    b. System prompts user to enter a valid email address
+       * System displays an error message to user
+       * System prompts user to enter a valid email address
