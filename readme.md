@@ -1,5 +1,5 @@
 # Project Name
-- Jeffrey (@klam20)
+- Jeffrey Lam (@klam20)
 - Name (@username)
 - Name (@username)
 - Nicole Nacua (@nnacua)
