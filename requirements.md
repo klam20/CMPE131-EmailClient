@@ -1,3 +1,4 @@
+
 ## <remove all of the example text and notes in < > such as this one>
 
 ## Functional Requirements
@@ -56,6 +57,30 @@
   1. Ut enim ad minim veniam, quis nostrum e
   2. Ut enim ad minim veniam, quis nostrum e
   3. ...
+
+1. Login User 
+- **Pre-condition:** User must have an account, user must be on the homepage 
+
+- **Trigger:** User presses login page redirect button
+
+- **Primary Sequence:**
+  
+  1. User is directed to login page
+  2. User types in account username
+  3. User types in account pasword
+  4. User presses log-in button
+  5. Database logs the user in
+  6. App redirects user to homepage
+
+- **Primary Postconditions:** User receives confirmation message. User is logged in and able to use the app.
+
+- **Alternate Sequence:** 
+  
+  1. User fails to login 3 times.
+  2. Message displays saying that 2 more attempts and account will be locked for 10 minutes.
+  3. User fails to login 2 more times.
+  4. Message displays saying that account is locked, button saying "Go back to home" is also displayed.
+
 
 2. Register User
 - **Pre-condition:** User does not have an existing account
@@ -117,3 +142,28 @@ messages/attachments
   2. User did not enter a valid/existing email address
        * System displays an error message to user
        * System prompts user to enter a valid email address
+
+13. Set Notification Settings
+
+- **Preconditions:** User must have an account, user must bein their email home
+
+- **Trigger:** User presses notifcation setting pull-down bar
+
+- **Primary Sequence:**
+
+  1. User presses do not disturb option in the pull-down menu
+  2. A prompt will display 1) textbox asking user how long they want to stay in do-not-disturb 2) a pull-down bar inside the textbox which is used to select length of time
+  3. User will press the pull-down bar inside the prompt
+  4. User will select time options that are between 30 minutes - 2 hrs in 30 minute increments, OR choose an option to keep do not disturb on until deactivated
+  5. User presses OK button after filling all details
+  6. Email client mutes notification sounds based on user's requrest/details provided
+  7. Redirect to email home
+
+- **Primary Postconditions:**
+  1. Email client is set to mute any incoming emails/messages
+
+- **Alternative Sequence:**
+
+  1. User chooses online mode instead of do not disturb
+  2. User presses OK button
+  3. Email client enables notification sounds
