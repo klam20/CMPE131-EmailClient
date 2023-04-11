@@ -197,7 +197,66 @@ messages/attachments
        * User clicks cancel button or the "x" button to close the window
        * System sends a confirmation message to user wanting to cancel the reply
        * User confirms and system exits user out of the window
-  
+
+ 9. Create to-do list
+
+- **Predconditions:** User must be logged into an account, the user is on the lists page
+
+- **Trigger:** The user clicks a "Create new list" button
+
+- **Primary Sequence:**
+
+  1. The client displays a prompt that asks for the user to input list name and tasks with their due date.
+  2. The user enters the name of the list
+  3. The user enters the names of the tasks and their due dates
+  4. The user clicks a “make list” buttons
+  5. The lists with the name and desired tasks inside are created
+  6. The new list is added to the lists page
+  7. The user is taken back to the lists page
+
+- **Primary Postconditions:**
+
+  1. User has created a todo list with the desired tasks
+  2. The list is displayed on the lists page and usable
+
+- **Alternative Sequence:**
+
+  1. The user decides to not make the list
+  	*The user clicks an x button at the top of the input box
+  	*The input box erases all of the given inputs up to that point
+  	*The input box is closed
+  	*The user is taken back to the lists page
+
+10. Add items to to-do list
+
+- **Preconditions:** The user is logged into an account, the user is on the lists page, there is an existing list in the account
+
+- **Trigger:** The user clicks on a list to edit it
+
+- **Primary Sequence:**
+
+  1. The user clicks on a edit button
+  2. The user is prompted to enter a new task and its due dates
+  3. The user enters the task name and due date
+  4. The user clicks an add task button
+  5. The task is added to the list
+  6. The text inputs are cleared and the user is able to add more tasks if desired
+  7. When the user is done adding tasks the user clicks a save button
+  8. The user is taken back to the lists page
+
+- **Primary Postconditions:**
+
+  1. The new tasks are added to the existing list
+  2. The new tasks are displayed then the list is selected
+
+- **Alternative Sequence:**
+  1. The user decides to not add tasks
+  	*The user clicks an x button at the top of the input box
+  	*The input box erases all of the given inputs up to that point
+   	*The input box is closed
+  	*The user is taken back to the lists page
+
+
 13. Set Notification Settings
 
 - **Preconditions:** User must have an account, user must bein their email home

@@ -1,5 +1,5 @@
 # Email Client
 - Jeffrey Lam (@klam20)
 - Bryant Bautista (@bryantbautista)
-- Name (@username)
+- Anthony Nguyen (@antiscoder)
 - Nicole Nacua (@nnacua)
