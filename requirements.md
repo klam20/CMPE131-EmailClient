@@ -1,6 +1,3 @@
-
-## <remove all of the example text and notes in < > such as this one>
-
 ## Functional Requirements
 
 1. Login/Logout Page
@@ -26,39 +23,7 @@
 
 ## Use Cases
 
-1. Use Case Name (Should match functional requirement name)
-- **Pre-condition:** <can be a list or short description> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
-
-- **Trigger:** <can be a list or short description> Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. 
-
-- **Primary Sequence:**
-  
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Et sequi incidunt 
-  3. Quis aute iure reprehenderit
-  4. ... 
-  5. ...
-  6. ...
-  7. ...
-  8. ...
-  9. ...
-  10. <Try to stick to a max of 10 steps>
-
-- **Primary Postconditions:** <can be a list or short description> 
-
-- **Alternate Sequence:** <you can have more than one alternate sequence to describe multiple issues that may arise>
-  
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Ut enim ad minim veniam, quis nostrum e
-  3. ...
-
-- **Alternate Sequence <optional>:** <you can have more than one alternate sequence to describe multiple issues that may arise>
-  
-  1. Ut enim ad minim veniam, quis nostrum e
-  2. Ut enim ad minim veniam, quis nostrum e
-  3. ...
-
-1. Login User 
+1. Login User (Jeffrey)
 - **Pre-condition:** User must have an account, user must be on the homepage 
 
 - **Trigger:** User presses login page redirect button
@@ -82,7 +47,7 @@
   4. Message displays saying that account is locked, button saying "Go back to home" is also displayed.
 
 
-2. Register User
+2. Register User (Nicole)
 - **Pre-condition:** User does not have an existing account
   
 - **Trigger:** User selects "Register" button
@@ -112,7 +77,7 @@ address
       * System displays an notifying the user that there’s an existing account 
       * System prompts user to enter another email address
   
-3. Send Email
+3. Send Email (Nicole)
 - **Pre-condition:** User is registered and logged into web application
   
 - **Trigger:** User selects "Compose" button
@@ -143,7 +108,7 @@ messages/attachments
        * System displays an error message to user
        * System prompts user to enter a valid email address
 
-5. Search for Email(s)
+5. Search for Email(s) (Bryant)
 - **Pre-condition:** User must be logged in and has preexisting emails
   
 - **Trigger:** User clicks the search box
@@ -173,7 +138,7 @@ messages/attachments
        * The system displays a progress bar to show the loading status of the search
        * If the loading cannot complete, the system displays an error message
   
-6. Reply to Email
+6. Reply to Email (Bryant)
 - **Pre-condition:** User must be logged in and have an email (from a recipient) to reply to
   
 - **Trigger:** User clicks and opens the email they want to reply to
@@ -198,7 +163,7 @@ messages/attachments
        * System sends a confirmation message to user wanting to cancel the reply
        * User confirms and system exits user out of the window
 
- 9. Create to-do list
+ 9. Create to-do list (Anthony)
 
 - **Predconditions:** User must be logged into an account, the user is on the lists page
 
@@ -227,7 +192,7 @@ messages/attachments
        * The input box is closed
        * The user is taken back to the lists page
 
-10. Add items to to-do list
+10. Add items to to-do list (Anthony)
 
 - **Preconditions:** The user is logged into an account, the user is on the lists page, there is an existing list in the account
 
@@ -258,7 +223,7 @@ messages/attachments
        * The user is taken back to the lists page
 
 
-13. Set Notification Settings
+13. Set Notification Settings (Jeffrey)
 
 - **Preconditions:** User must have an account, user must bein their email home
 
