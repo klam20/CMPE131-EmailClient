@@ -222,10 +222,10 @@ messages/attachments
 - **Alternative Sequence:**
 
   1. The user decides to not make the list
-  	*The user clicks an x button at the top of the input box
-  	*The input box erases all of the given inputs up to that point
-  	*The input box is closed
-  	*The user is taken back to the lists page
+  	* The user clicks an x button at the top of the input box
+  	* The input box erases all of the given inputs up to that point
+  	* The input box is closed
+  	* The user is taken back to the lists page
 
 10. Add items to to-do list
 
@@ -251,10 +251,10 @@ messages/attachments
 
 - **Alternative Sequence:**
   1. The user decides to not add tasks
-  	*The user clicks an x button at the top of the input box
-  	*The input box erases all of the given inputs up to that point
-   	*The input box is closed
-  	*The user is taken back to the lists page
+  	* The user clicks an x button at the top of the input box
+  	* The input box erases all of the given inputs up to that point
+   	* The input box is closed
+  	* The user is taken back to the lists page
 
 
 13. Set Notification Settings
