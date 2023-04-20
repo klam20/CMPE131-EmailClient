@@ -5,21 +5,18 @@
 3. Send Email
 4. Send Messages through Chat
 5. Search for Emails
-6. Reply to Email
-7. Send Emojis
-8. Creating todo list
-9. Add items to todo list
-10. Mark off completed items on todo list
-11. Filtering/Sorting Emails
-12. Deleting Email
-13. Set Notification Setting (do not disturb/online)
+6. Add reactions to chat messages
+7. Creating todo list
+8. Add items to todo list
+9. Mark off completed items on todo list
+10. Filter Emails by Category (date,alphabetic,unread)
+11. Deleting Email
+12. Set Notification Setting (do not disturb/online)
 
 ## Non-functional Requirements
 
 1. Must have an interactive UI
 2. Have a noise notification when email is received
-3. non-functional
-4. non-functional
 
 ## Use Cases
 
@@ -32,19 +29,18 @@
   
   1. User is directed to login page
   2. User types in account username
-  3. User types in account pasword
+  3. User types in account password
   4. User presses log-in button
-  5. Database logs the user in
-  6. App redirects user to homepage
+  5. App redirects user to homepage on success
 
 - **Primary Postconditions:** User receives confirmation message. User is logged in and able to use the app.
 
 - **Alternate Sequence:** 
   
-  1. User fails to login 3 times.
-  2. Message displays saying that 2 more attempts and account will be locked for 10 minutes.
-  3. User fails to login 2 more times.
-  4. Message displays saying that account is locked, button saying "Go back to home" is also displayed.
+  1. Incorrect password or username entered
+      * Display message "incorrect username or password entered"
+      * Clear username and password text-boxes
+      * User will not be logged in
 
 
 2. Register User (Nicole)
@@ -54,8 +50,7 @@
   
 - **Primary Sequence:**
   
-  1. Page directs user to a registration page asking for user’s full name, email address and 
-password
+  1. Page directs user to a registration page
   2. User enters full name
   3. User creates an email address
   4. User creates a password 
@@ -66,10 +61,7 @@ password
   1. User successfully creates a new account
       * Page directs to log in page
       * System allows User to log in with an email address and password
-  2. User did not create an account
-      * System did not save data
-      * User cannot login with their email and password
-
+      
 - **Alternate Sequence:**
   
   1. System checks data and finds that there is an existing account with the entered email 
@@ -83,9 +75,7 @@ address
 - **Trigger:** User selects "Compose" button
   
 - **Primary Sequence:**
-  
-  1. System prompts user to enter recipient(s) email address, email subject, and 
-messages/attachments
+  1. A compose message box opens
   2. User enters recipient(s) email address
   3. User enters an email address
   4. User enters a message or adds an attachment in the email body
@@ -138,32 +128,32 @@ messages/attachments
        * The system displays a progress bar to show the loading status of the search
        * If the loading cannot complete, the system displays an error message
   
-6. Reply to Email (Bryant)
-- **Pre-condition:** User must be logged in and have an email (from a recipient) to reply to
+4. Send Messages through Chat (Bryant)
+- **Pre-condition:** User must be logged in
   
-- **Trigger:** User clicks and opens the email they want to reply to
+- **Trigger:** User clicks chat button
   
 - **Primary Sequence:**
   
-  1. User clicks on the "reply" button
-  2. System opens up a compose window with the recipient's name/email address in the "To" field
-  3. User types their reply in the body of the email
-  4. User clicks the "send" button to send the email
-  5. System sends the email to the recipient
+  1. Enter email of person you want to message
+  2. Press Start Chat button
+  3. Open a chat box with the recipient email auto-filled
+  4. Type your message
+  5. User clicks the "send" button to send the message
 
 - **Primary Postconditions:**
 
-  1. The user successfully sends the reply and the recipient receives the email
-  2. User's reply mail is added/saved under a "Sent" folder
+  1. The user successfully sends the message and the recipient receives the messages
+  2. Message should display on both sender and receiver chat-history
+  3. The chat-box must stay open
 
 - **Alternate Sequence:**
   
-  1. User decides to cancel the reply
-       * User clicks cancel button or the "x" button to close the window
-       * System sends a confirmation message to user wanting to cancel the reply
-       * User confirms and system exits user out of the window
+  1. User presses Start Chat button with an invalid email
+       * Have a text-box display stating that the email is invalid
+       * Gray out the Start Chat button until a new email is inserted
 
- 9. Create to-do list (Anthony)
+ 7. Create to-do list (Anthony)
 
 - **Predconditions:** User must be logged into an account, the user is on the lists page
 
@@ -192,11 +182,11 @@ messages/attachments
        * The input box is closed
        * The user is taken back to the lists page
 
-10. Add items to to-do list (Anthony)
+8. Add items to to-do list (Anthony)
 
-- **Preconditions:** The user is logged into an account, the user is on the lists page, there is an existing list in the account
+- **Preconditions:** The user is logged into an account, the user is on the embedded list section, there is an existing list in the account
 
-- **Trigger:** The user clicks on a list to edit it
+- **Trigger:** The user clicks on an existing list
 
 - **Primary Sequence:**
 
@@ -223,7 +213,7 @@ messages/attachments
        * The user is taken back to the lists page
 
 
-13. Set Notification Settings (Jeffrey)
+12. Set Notification Settings (Jeffrey)
 
 - **Preconditions:** User must have an account, user must bein their email home
 
