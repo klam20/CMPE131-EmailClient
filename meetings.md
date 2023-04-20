@@ -4,8 +4,20 @@
   -All members showed up
   -Discussed potential page layouts for email client
   -Assigned task for the week to create sketches/drawings of web layout
+  -Anthony drew drafts of potential web-page layout/design
 
 ### 2023-04-19 at 20:00
+  -All members showed up
+  -Went over and fixed each comment made on Milestone 1
+      -Nicole clarified Register User post condition and primary sequence
+      -Jeffrey clarified Login User alternate sequence
+      -Anthony fixed to-do list trigger
+      -Bryant took on a new functional requirement to replace "Reply to Email"
+  
+  -Assignments:
+    -Everyone assigned to finish Milestone 1 Contributions on Canvas
+    -Everyone will be assigned specific tasks soon once Professor approves functional requirements
+
 
 ### 2023-04-26 at 20:00
 
