@@ -130,10 +130,10 @@ address
 - **Trigger:** User clicks chat button
   
 - **Primary Sequence:**
-  
+  1. Text field for entering email recipient pops up
   1. Enter email of person you want to message
   2. Press Start Chat button
-  3. Open a chat box with the recipient email auto-filled
+  3. Opens a chat box with the recipient email auto-filled
   4. Type your message
   5. User clicks the "send" button to send the message
 
@@ -151,7 +151,7 @@ address
 
  7. Create to-do list (Anthony)
 
-- **Predconditions:** User must be logged into an account, the user is on the lists page
+- **Preconditions:** User must be logged into an account, the user is on the lists page
 
 - **Trigger:** The user clicks a "Create new list" button
 
