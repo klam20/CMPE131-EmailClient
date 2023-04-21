@@ -110,7 +110,6 @@ address
 - **Primary Postconditions:**
 
   1. The user can view emails that matched their search criteria
-  2. The user can interact with the displayed emails
 
 - **Alternate Sequence:**
   
