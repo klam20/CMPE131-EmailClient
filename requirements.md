@@ -77,17 +77,14 @@ address
 - **Primary Sequence:**
   1. A compose message box opens
   2. User enters recipient(s) email address
-  3. User enters an email address
-  4. User enters a message or adds an attachment in the email body
-  5. User selects “send” button
+  3. User enters a message or adds an attachment in the email body
+  4. User selects “send” button
 
 - **Primary Postconditions:**
 
   1. User sends an email
        * Recipient receives email
        * System categories email as sent
-  2. User does not send an email
-       * Recipeint does not receive email
 
 - **Alternate Sequence:**
   
