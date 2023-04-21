@@ -15,7 +15,7 @@
 
 ## Non-functional Requirements
 
-1. Must have an interactive UI
+1. Must have an interactive UI (small user feedbacks on hover)
 2. Have a noise notification when email is received
 
 ## Use Cases
@@ -94,8 +94,33 @@ address
   2. User did not enter a valid/existing email address
        * System displays an error message to user
        * System prompts user to enter a valid email address
+  
+4. Send Messages through Chat (Bryant)
+- **Pre-condition:** User must be logged in
+  
+- **Trigger:** User clicks chat button
+  
+- **Primary Sequence:**
+  1. Text field for entering email recipient pops up
+  1. Enter email of person you want to message
+  2. Press Start Chat button
+  3. Opens a chat box with the recipient email auto-filled
+  4. Type your message
+  5. User clicks the "send" button to send the message
 
-5. Search for Email(s) (Bryant)
+- **Primary Postconditions:**
+
+  1. The user successfully sends the message and the recipient receives the messages
+  2. Message should display on both sender and receiver chat-history
+  3. The chat-box must stay open
+
+- **Alternate Sequence:**
+  
+  1. User presses Start Chat button with an invalid email
+       * Have a text-box display stating that the email is invalid
+       * Gray out the Start Chat button until a new email is inserted
+ 
+ 5. Search for Email(s) (Bryant)
 - **Pre-condition:** User must be logged in and has preexisting emails
   
 - **Trigger:** User clicks the search box
@@ -123,31 +148,6 @@ address
        * User can wait for it to complete or cancel the search
        * The system displays a progress bar to show the loading status of the search
        * If the loading cannot complete, the system displays an error message
-  
-4. Send Messages through Chat (Bryant)
-- **Pre-condition:** User must be logged in
-  
-- **Trigger:** User clicks chat button
-  
-- **Primary Sequence:**
-  1. Text field for entering email recipient pops up
-  1. Enter email of person you want to message
-  2. Press Start Chat button
-  3. Opens a chat box with the recipient email auto-filled
-  4. Type your message
-  5. User clicks the "send" button to send the message
-
-- **Primary Postconditions:**
-
-  1. The user successfully sends the message and the recipient receives the messages
-  2. Message should display on both sender and receiver chat-history
-  3. The chat-box must stay open
-
-- **Alternate Sequence:**
-  
-  1. User presses Start Chat button with an invalid email
-       * Have a text-box display stating that the email is invalid
-       * Gray out the Start Chat button until a new email is inserted
 
  7. Create to-do list (Anthony)
 
