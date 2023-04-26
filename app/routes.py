@@ -19,3 +19,6 @@ def login():
 def register():
     return render_template('register.html')
 
+@myapp_obj.route("/chat")
+def chat():
+    return render_template('chat.html')

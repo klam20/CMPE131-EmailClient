@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Chat Messages</title>
+   <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="previous-messages">
+        <div class="user-panel">
+          <span class="user-name">User name</span>
+          <button class="new-message-button">New Message</button>
+        </div>
+        <div class="message-history">
+          <!-- Previous messages will be displayed here -->
+        </div>
+      </div>
+      <div class="chat-container">
+        <div class="message-box">
+          <!-- Current messages will be displayed here -->
+        </div>
+        <div class="send-message">
+          <input class="message-input" type="text" placeholder="Type your message here...">
+          <button class="send-button">Send</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
