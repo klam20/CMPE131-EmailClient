@@ -5,7 +5,7 @@ from app import login
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(32), nullable=False)
+    email = db.Column(db.String(32), nullable=False)
     password = db.Column(db.String(32), nullable=False)
 
     def set_password(self,password):
@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
 
 
     def __repr__(self):
-        return f'<user {self.id} {self.username}>'
+        return f'<user {self.id} {self.email}>'
 
 @login.user_loader
 def load_user(id):
