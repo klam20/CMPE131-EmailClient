@@ -96,7 +96,8 @@ div li {
   flex-grow: 1;
   margin: 2px;
   border-radius: 5px;
-  height: 20px;
+  height: 38 px;
+  
 }
 
 div li:hover {
@@ -130,7 +131,7 @@ div li.checked::before {
   margin-right: 15px;
 }
 
-div a {
+div a[type="delete"]{
   background-color: #ce7474;
   border: none;
   color: #fff;
@@ -147,19 +148,35 @@ div a {
   padding-bottom: 12px;
 }
 
-div a:link { text-decoration: none; }
+div a[type="delete"]:link { text-decoration: none; }
 
 
-div a:visited { text-decoration: none; }
+div a[type="delete"]:visited { text-decoration: none; }
 
 
-div a:hover { 
+div a[type="delete"]:hover { 
   text-decoration: none; 
   background-color: #863737;
 }
 
+div a[type="delete"]:active { text-decoration: none; }
 
-div a:active { text-decoration: none; }
+div a[type="edit"] { 
+  background-color: #46b478;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  height: 20px;
+  width: 40px;
+  margin-left: 8px;
+  margin-bottom: 2px;
+  text-align: center;
+  padding-top: 9px;
+  padding-bottom: 15px;
+}
 
 </style>
 </head>
@@ -178,13 +195,15 @@ div a:active { text-decoration: none; }
             {%if task.done==False%}
             <li onclick='window.location.href="/update/{{task.task_id}}"'>{{task.name}}
               <div class="date">{{task.date}}</div>
+              <div class="linebreak"></div>
             </li>
             {%else%}
             <li class="checked" onclick='window.location.href="/update/{{task.task_id}}"'>{{task.name}}
               <div class="date">{{task.date}}</div>
             </li>
             {%endif%}
-            <td><a href="/delete/{{task.task_id}}">X</a></td>
+            <td><a type="edit">✎</a></td>
+            <td><a type = "delete" href="/delete/{{task.task_id}}">X</a></td>
         </tr>
         {%endfor%}
     </div>
