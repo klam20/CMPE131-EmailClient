@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for
 from flask_wtf import FlaskForm, CSRFProtect
 from app import myapp_obj, db
-from app.models import User, Message
+from app.models import User, Message, Recipient
 
 @myapp_obj.route("/")
 
@@ -40,11 +40,20 @@ def send_message():
 
     return redirect(url_for("chat"))
 
-class ChatForm(FlaskForm):
-     pass
+@myapp_obj.route("/chat/<int:recipient_id>")
+def chat_with_recipient(recipient_id):
+     form = ChatForm()
+     recipients = Recipient.query.all()
+     messages_with_recipient = Message.query.filter_by(recipient_id=recipient_id).all()
+     return render_template('chat.html', recipients=recipients, selected_recipient_id=recipient_id, messages_with_recipient=messages_with_recipient, form=form)
+
 
 @myapp_obj.route('/delete_messages', methods=['POST'])
 def delete_messages():
     Message.query.delete()
     db.session.commit()
     return redirect(url_for('chat'))
+
+# empty class, passes form
+class ChatForm(FlaskForm):
+   pass

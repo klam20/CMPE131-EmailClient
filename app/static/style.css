@@ -83,3 +83,22 @@
 .sent-message {
         text-align: right;
 }
+
+.recipient-list {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	margin: 10px;
+}
+
+.recipient-box {
+	padding: 5px;
+	border: 1px solid black;
+	border-radius:5px;
+	cursor: pointer;
+}
+
+.recipient-box.selected {
+	background-color: #4CAF50;
+	color: #fff;
+}

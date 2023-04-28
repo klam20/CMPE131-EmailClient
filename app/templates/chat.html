@@ -15,8 +15,20 @@
             <button class="new-message-button">Delete Messages</button>
           </form>
         </div>
+        <div class="recipient-list">
+          {% for recipient in recipients %}
+            <div class="recipient-box {% if recipient.id == selected_recipient_id %}selected{% endif %}" onclick="location.href='{{ url_for('chat', recipient_id=recipient.id) }}'">
+               {{ recipient.name }}
+            </div>
+          {% endfor %}
+        </div>
         <div class="message-history">
+          {% if selected_recipient_id %}
           <!-- Previous messages will be displayed here -->
+            {% for message in messages_with_recipient %}
+              <p class="sent-message">{{ message.content }}</p>
+            {% endfor %}
+          {% endif %}
         </div>
       </div>
       <div class="chat-container">
