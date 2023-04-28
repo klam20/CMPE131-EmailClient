@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from app import myapp_obj
 from app import db
 from app.models import *
+from .forms import RegistrationForm
 
 @myapp_obj.route("/")
 
@@ -22,9 +23,13 @@ def login():
 def register():
     form = RegistrationForm()    
     db.create_all()
+    
+    new_user = Register(email= "fml@gmail.com")
+
+    new_user.set_password('123')
     db.session.add(new_user)
-    db.session.commit()
-   
+    db.session.commit()   
+
     if form.validate_on_submit():
         new_user = User(email=form.email.data)
         new_user.set_password(form.password.data)
