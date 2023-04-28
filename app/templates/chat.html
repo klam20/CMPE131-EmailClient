@@ -10,7 +10,10 @@
       <div class="previous-messages">
         <div class="user-panel">
           <span class="user-name">User name</span>
-          <button class="new-message-button">New Message</button>
+          <form action="{{ url_for('delete_messages') }}" method="POST" style="display:inline;">
+            {{ form.hidden_tag() }}
+            <button class="new-message-button">Delete Messages</button>
+          </form>
         </div>
         <div class="message-history">
           <!-- Previous messages will be displayed here -->
@@ -19,10 +22,16 @@
       <div class="chat-container">
         <div class="message-box">
           <!-- Current messages will be displayed here -->
+          {% for message in sent_messages %}
+            <p class="sent-message">{{ message.content }}</p>
+          {% endfor %}
         </div>
         <div class="send-message">
-          <input class="message-input" type="text" placeholder="Type your message here...">
+         <form action="{{ url_for('send_message') }}" method="POST">
+           {{ form.hidden_tag() }}
+          <input class="message-input" name="message" type="text" placeholder="Type your message here...">
           <button class="send-button">Send</button>
+         </form>
         </div>
       </div>
     </div>
