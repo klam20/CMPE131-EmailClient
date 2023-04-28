@@ -1,5 +1,8 @@
-from flask import render_template
+from flask import render_template,flash, redirect
+from flask_sqlalchemy import SQLAlchemy
 from app import myapp_obj
+from app import db
+from app.models import *
 
 @myapp_obj.route("/")
 
@@ -15,7 +18,19 @@ def email():
 def login():
     return render_template('login.html')
 
-@myapp_obj.route("/register")
+@myapp_obj.route('/register', methods=['GET', 'POST'])
 def register():
-    return render_template('register.html')
+    form = RegistrationForm()    
+    db.create_all()
+    db.session.add(new_user)
+    db.session.commit()
+   
+    if form.validate_on_submit():
+        new_user = User(email=form.email.data)
+        new_user.set_password(form.password.data)
+        flash('You are now a registered user!')
+        return redirect(url_for('login'))
+    return render_template('register.html', title='Register', form=form)
+
+
 
