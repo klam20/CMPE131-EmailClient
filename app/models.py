@@ -1,4 +1,4 @@
-from app import db
+from app import *
 
 class task(db.Model):
     task_id = db.Column(db.Integer, primary_key=True)

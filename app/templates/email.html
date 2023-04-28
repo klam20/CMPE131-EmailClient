@@ -14,14 +14,17 @@ body {
 .todo {
   display: flex;
   flex-wrap: wrap;
-  height: 100%;
-  min-height: 100%;
   width: 30%; 
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 40px;
   
+}
+
+form {
+  display: flex;
+  flex-grow: 1;
 }
 
 div h1 {
@@ -35,32 +38,33 @@ div label {
   color: #555;
 }
 
-div input[type="text"] {
+form input[type="text"] {
   padding: 10px;
   margin-bottom: 20px;
-  width: 50%;
   height: 20px;
   border: none;
   border-radius: 5px;
   background-color: #f5f5f5;
   font-size: 16px;
   color: #333;
+  min-width: 50%;
+  flex-grow: 1;
 }
 
-div input[type="date"] {
+form input[type="date"] {
   padding: 10px;
   margin-bottom: 20px;
-  width: 20%;
   height: 20px;
   border: none;
   border-radius: 5px;
   background-color: #f5f5f5;
   font-size: 16px;
   margin-left: 10px;
+  width: 120px;
   color: #333;
 }
 
-div button[type="submit"] {
+form button[type="submit"] {
   background-color: #4e5fc4;
   border: none;
   color: #fff;
@@ -70,7 +74,7 @@ div button[type="submit"] {
   cursor: pointer;
   transition: background-color 0.3s ease;
   height: 40px;
-  width: 10%;
+  width: 40px;
   margin-left: 10px;
 }
 
@@ -131,10 +135,12 @@ div li.checked::before {
 <body>
 	<div class="todo">
 		<h1>Todo List</h1>
-        <div class="linebreak"></div>
-		<input type="text" id="name" name="name" placeholder="Enter task..." required>
-		<input type="date" id="date" name="date" placeholder="mm/dd" required>
-		<button type="submit">+</button>
+    <div class="linebreak"></div>
+    <form action="/add" method="post">
+      <input type="text" id="name" name="name" placeholder="Enter task..." required>
+      <input type="date" id="date" name="date" placeholder="mm/dd" required>
+      <button type="submit">+</button>
+    </form>
         <div class="linebreak"></div>
         <li>Hit the gym
             <div class="date">04/23</div>
@@ -160,16 +166,19 @@ div li.checked::before {
             <div class="date">04/23</div>
         </li>
         {%for task in todo_list%}
+        <div class="linebreak"></div>
         <tr>
-            <td>{{todo.task_id}}</td>
-            <td>{{todo.name}}</td>
-            {%if todo.done==False%}
-            <td>Not Done</td>
+            {%if task.done==False%}
+            <li>{{task.name}}
+              <div class="date">{{task.date}}</div>
+            </li>
             {%else%}
-            <td>Done</td>
+            <li class="checked">{{task.name}}
+              <div class="date">{{task.date}}</div>
+            </li>
             {%endif%}
-            <td><a href="/update/{{todo.task_id}}">Update</a></td>
-            <td><a href="/delete/{{todo.task_id}}">Delete</a></td>
+            <td><a href="/update/{{task.task_id}}">Update</a></td>
+            <td><a href="/delete/{{task.task_id}}">Delete</a></td>
         </tr>
         {%endfor%}
     </div>

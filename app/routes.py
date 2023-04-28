@@ -19,9 +19,9 @@ def email():
 
 @myapp_obj.route('/add', methods=['POST'])
 def addToDo():
-    name = request.form.get('name')
-    test = task(name = "lol", done = False)
-    test.set_date("04/23")
+    name = request.form.get("name")
+    date = request.form.get("date")
+    test = task(name = name, date = date, done = False)
     db.session.add(test)
     db.session.commit()
 
@@ -29,7 +29,7 @@ def addToDo():
 
 @myapp_obj.route('/update/<int:todo_id>')
 def update(todo_id):
-    todo= task.query.get(todo_id)
+    todo = task.query.get(todo_id)
     todo.done=not todo.done
     db.session.commit()
     return redirect(url_for("email"))
@@ -37,7 +37,7 @@ def update(todo_id):
 
 @myapp_obj.route('/delete/<int:todo_id>')
 def delete(todo_id):
-    todo= task.query.get(todo_id)
+    todo = task.query.get(todo_id)
     db.session.delete(todo)
     db.session.commit()
     return redirect(url_for("email"))
