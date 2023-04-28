@@ -2,6 +2,7 @@ from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import login
+from app import myapp_obj
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -21,3 +22,11 @@ class User(db.Model, UserMixin):
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+
+with myapp_obj.app_context():
+    db.create_all()
+    user = User(email = 'klam23@gmail.com')
+    user.set_password('password123')
+    db.session.add(user)
+    db.session.commit()

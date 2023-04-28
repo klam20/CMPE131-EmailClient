@@ -1,4 +1,5 @@
 from flask import render_template
+from flask import request
 from flask import flash
 from flask import redirect
 from .forms import LoginForm
@@ -12,25 +13,27 @@ from app import db
 
 @myapp_obj.route("/")
 
-@myapp_obj.route("/home")
+@myapp_obj.route("/home", methods=['GET','POST'])
 def home():
-    return render_template('home.html')
-
+    form = LoginForm()
+    if current_user.is_authenticated:
+        
+        if request.method == 'POST':
+            if request.form.get('logOut') == 'Log-Out': 
+                logout_user()
+                return redirect('/home')
+        return render_template('home_logged_in.html', form = form)
+    else:
+        return render_template('home_logged_out.html', form = form)
+    
 @myapp_obj.route("/email")
-@login_required
 def email():
     return render_template('email.html')
 
 @myapp_obj.route("/login", methods=['GET','POST'])
 def login():    
     form = LoginForm()
-
     #Assume register page entered this into a database already
-    db.create_all()
-    user = User(email = 'klam23@gmail.com')
-    user.set_password('password123')
-    db.session.add(user)
-    db.session.commit()
     
     if form.validate_on_submit():
         # Check if email account exists first
