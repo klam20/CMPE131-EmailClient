@@ -17,13 +17,17 @@ from app import db
 def home():
     form = LoginForm()
     if current_user.is_authenticated:
-        
         if request.method == 'POST':
             if request.form.get('logOut') == 'Log-Out': 
                 logout_user()
                 return redirect('/home')
         return render_template('home_logged_in.html', form = form)
     else:
+        if request.method == 'POST':
+            if request.form.get('logIn') == 'Log-In': 
+                return redirect('/login')
+            elif request.form.get('signUp') == 'Sign-Up':
+                return redirect('/register')
         return render_template('home_logged_out.html', form = form)
     
 @myapp_obj.route("/email")
