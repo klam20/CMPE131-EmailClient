@@ -19,3 +19,13 @@ def login():
 def register():
     return render_template('register.html')
 
+@myapp_obj.route("/send_email", methods=['GET', 'POST'])
+def send_email():
+    if request.method == 'POST':
+        recipient = request.form['recipient']
+        subject = request.form['subject']
+        body = request.form['body']
+                
+        flash('Email sent successfully!')
+        
+    return render_template('send_email.html')
