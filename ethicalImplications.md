@@ -1,3 +1,4 @@
+
 In developing an email client, it is our responsibility to ensure that 
 user information, data, and emails are not shared with any third-parties 
 or internally within the team. Spam will be prevented and a clear set of 
