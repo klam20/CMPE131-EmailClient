@@ -34,6 +34,7 @@ def home():
 @myapp_obj.route("/email", methods=['GET','POST'])
 @login_required
 def email():
+    form = LoginForm()
     todo_list = task.query.all()
     currentUser = current_user
     if request.method == 'POST':
@@ -42,7 +43,14 @@ def email():
                 db.session.commit()    
                 logout_user()
                 return redirect('/home')
-    return render_template('email.html', todo_list=todo_list)
+            else:
+                composeEmail = Message(recipient=form.email.data, subject=form.subject.data, content=form.content.data)
+                db.session.add(composeEmail)
+                db.session.commit()
+                flash(f'Email is sent')
+                return redirect('/email')
+                
+    return render_template('email.html', todo_list=todo_list, form=form)
 
 @myapp_obj.route("/login", methods=['GET','POST'])
 def login():    
@@ -79,17 +87,6 @@ def register():
         return redirect('/home')
 
     return render_template('register.html', title='Register', form=form)
-
-@myapp_obj.route("/send_email", methods=['GET', 'POST'])
-def send_email():
-    if request.method == 'POST':
-        recipient = request.form['recipient']
-        subject = request.form['subject']
-        body = request.form['body']
-                
-        flash('Email sent successfully!')
-        
-    return render_template('send_email.html')
 
 @myapp_obj.route('/add', methods=['POST'])
 def addToDo():

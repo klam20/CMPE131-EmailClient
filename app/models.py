@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
         return f'<user {self.id} {self.email}>'
 
 
-class task(db.Model):
+class task(db.Model, UserMixin):
     task_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32))
     date = db.Column(db.String(32))
@@ -30,6 +30,12 @@ class task(db.Model):
 
     def set_date(self, dueDate):
         self.date = dueDate
+
+class Message(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    recipient = db.Column(db.String(60), nullable=False)
+    subject = db.Column(db.String(60), nullable=False)
+    content = db.Column(db.String(200), nullable=False)
 
 
 @login.user_loader
