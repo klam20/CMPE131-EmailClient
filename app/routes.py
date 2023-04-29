@@ -1,7 +1,8 @@
 from flask import render_template, request, redirect, url_for
 from flask_wtf import FlaskForm, CSRFProtect
 from app import myapp_obj, db
-from app.models import User, Message, Recipient
+from app.models import  User, Message, Recipient
+from app.forms import ChatForm, AddRecipientForm
 
 @myapp_obj.route("/")
 
@@ -25,7 +26,8 @@ def register():
 def chat():
     form = ChatForm()
     sent_messages = Message.query.all()
-    return render_template('chat.html', sent_messages=sent_messages, form=form)
+    recipients = Recipient.query.all()
+    return render_template('chat.html', sent_messages=sent_messages, recipients=recipients, form=form)
 
 @myapp_obj.route("/chat/send_message", methods=["GET", "POST"])
 def send_message():
@@ -40,13 +42,24 @@ def send_message():
 
     return redirect(url_for("chat"))
 
-@myapp_obj.route("/chat/<int:recipient_id>")
+@myapp_obj.route("/chat/<int:recipient_id>", methods=['GET', 'POST'])
 def chat_with_recipient(recipient_id):
      form = ChatForm()
      recipients = Recipient.query.all()
-     messages_with_recipient = Message.query.filter_by(recipient_id=recipient_id).all()
-     return render_template('chat.html', recipients=recipients, selected_recipient_id=recipient_id, messages_with_recipient=messages_with_recipient, form=form)
+     messages = Message.query.filter_by(recipient_id=recipient_id).all()
+     return render_template('chat.html', recipients=recipients, messages=messages, form=form, selected_recipient_id=recipient_id)
 
+@myapp_obj.route("/add_recipient", methods=["GET", "POST"])
+def add_recipient():
+    form = AddRecipientForm()
+    if form.validate_on_submit():
+        recipient_name = form.name.data
+        new_recipient = Recipient(name=recipient_name)
+        db.session.add(new_recipient)
+        db.session.commit()
+        return redirect(url_for("chat"))
+
+    return render_template("add_recipient.html", form=form)
 
 @myapp_obj.route('/delete_messages', methods=['POST'])
 def delete_messages():
@@ -54,6 +67,10 @@ def delete_messages():
     db.session.commit()
     return redirect(url_for('chat'))
 
-# empty class, passes form
-class ChatForm(FlaskForm):
-   pass
+@myapp_obj.route('/remove_recipient/<int:recipient_id>', methods=['POST'])
+def remove_recipient(recipient_id):
+    recipient = Recipient.query.get(recipient_id)
+    if recipient:
+        db.session.delete(recipient)
+        db.session.commit()
+    return redirect(url_for('chat'))

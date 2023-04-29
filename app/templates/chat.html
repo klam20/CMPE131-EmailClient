@@ -10,6 +10,7 @@
       <div class="previous-messages">
         <div class="user-panel">
           <span class="user-name">User name</span>
+          <a href="{{ url_for('add_recipient') }}">New Message</a>
           <form action="{{ url_for('delete_messages') }}" method="POST" style="display:inline;">
             {{ form.hidden_tag() }}
             <button class="new-message-button">Delete Messages</button>
@@ -17,8 +18,12 @@
         </div>
         <div class="recipient-list">
           {% for recipient in recipients %}
-            <div class="recipient-box {% if recipient.id == selected_recipient_id %}selected{% endif %}" onclick="location.href='{{ url_for('chat', recipient_id=recipient.id) }}'">
+            <div class="recipient-box {% if recipient.id == selected_recipient_id %}selected{% endif %}" onclick="location.href'{{ url_for('chat_with_recipient', recipient_id=recipient.id) }}'">
                {{ recipient.name }}
+               <form action="{{ url_for('remove_recipient', recipient_id=recipient.id) }}" method="POST" style="display:inline;">
+                 {{ form.hidden_tag() }}
+                 <button class="remove-recipient-button">x</button>
+               </form>
             </div>
           {% endfor %}
         </div>
@@ -39,7 +44,7 @@
           {% endfor %}
         </div>
         <div class="send-message">
-         <form action="{{ url_for('send_message') }}" method="POST">
+         <form action="{{ url_for('send_message', recipient_id=selected_recipient_id) }}" method="POST">
            {{ form.hidden_tag() }}
           <input class="message-input" name="message" type="text" placeholder="Type your message here...">
           <button class="send-button">Send</button>
