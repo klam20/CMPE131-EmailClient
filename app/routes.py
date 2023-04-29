@@ -10,6 +10,7 @@ from flask_login import logout_user
 from flask_login import login_required
 from app.models import User
 from app import db
+from app.models import db
 
 @myapp_obj.route("/")
 
@@ -30,8 +31,16 @@ def home():
                 return redirect('/register')
         return render_template('home_logged_out.html', form = form)
     
-@myapp_obj.route("/email")
+@myapp_obj.route("/email", methods=['GET','POST'])
+@login_required
 def email():
+    currentUser = current_user
+    if request.method == 'POST':
+            if request.form.get('delAcc') == 'del-Acc':
+                db.session.delete(currentUser)
+                db.session.commit()    
+                logout_user()
+                return redirect('/home')
     return render_template('email.html')
 
 @myapp_obj.route("/login", methods=['GET','POST'])
@@ -49,7 +58,7 @@ def login():
             if (user.check_password(form.password.data)):
                 flash(f'Successful login')
                 login_user(user)
-                #return redirect('/email')
+                return redirect('/email')
             else:
                 flash(f'Invalid password')
         else:
@@ -58,7 +67,7 @@ def login():
     return render_template('login.html', form=form)
     
 
-@myapp_obj.route("/register")
+@myapp_obj.route("/register", methods=['GET','POST'])
 def register():
     return render_template('register.html')
 

@@ -15,18 +15,14 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    def deleteUser(self):
+        user3 = User.query.filter_by(email="klam23@gmail.com")
+        db.session.delete(user3)
+        db.session.commit()
 
     def __repr__(self):
         return f'<user {self.id} {self.email}>'
 
 @login.user_loader
 def load_user(id):
-    return User.query.get(int(id))
-
-
-with myapp_obj.app_context():
-    db.create_all()
-    user = User(email = 'klam23@gmail.com')
-    user.set_password('password123')
-    db.session.add(user)
-    db.session.commit()
+    return User.query.get(int(id))    
