@@ -16,6 +16,7 @@ from app.models import db
 
 @myapp_obj.route("/home", methods=['GET','POST'])
 def home():
+    db.create_all()
     form = LoginForm()
     if current_user.is_authenticated:
         if request.method == 'POST':
@@ -67,7 +68,16 @@ def login():
     return render_template('login.html', form=form)
     
 
-@myapp_obj.route("/register", methods=['GET','POST'])
+@myapp_obj.route('/register', methods=['GET', 'POST'])
 def register():
-    return render_template('register.html')
+    form = LoginForm()
+    
+    if form.validate_on_submit():
+        new_user = User(email=form.email.data)
+        new_user.set_password(form.password.data)
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect('/home')
+
+    return render_template('register.html', title='Register', form=form)
 
