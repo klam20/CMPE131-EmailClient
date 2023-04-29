@@ -8,9 +8,8 @@ from flask_login import current_user
 from flask_login import login_user
 from flask_login import logout_user
 from flask_login import login_required
-from app.models import User
+from app.models import *
 from app import db
-from app.models import db
 
 @myapp_obj.route("/")
 
@@ -35,6 +34,7 @@ def home():
 @myapp_obj.route("/email", methods=['GET','POST'])
 @login_required
 def email():
+    todo_list = task.query.all()
     currentUser = current_user
     if request.method == 'POST':
             if request.form.get('delAcc') == 'del-Acc':
@@ -42,7 +42,7 @@ def email():
                 db.session.commit()    
                 logout_user()
                 return redirect('/home')
-    return render_template('email.html')
+    return render_template('email.html', todo_list=todo_list)
 
 @myapp_obj.route("/login", methods=['GET','POST'])
 def login():    
@@ -57,7 +57,6 @@ def login():
             user = User.query.filter_by(email = form.email.data).first()
             #Check the password entered hashes and matches with database
             if (user.check_password(form.password.data)):
-                flash(f'Successful login')
                 login_user(user)
                 return redirect('/email')
             else:
@@ -81,3 +80,38 @@ def register():
 
     return render_template('register.html', title='Register', form=form)
 
+@myapp_obj.route("/send_email", methods=['GET', 'POST'])
+def send_email():
+    if request.method == 'POST':
+        recipient = request.form['recipient']
+        subject = request.form['subject']
+        body = request.form['body']
+                
+        flash('Email sent successfully!')
+        
+    return render_template('send_email.html')
+
+@myapp_obj.route('/add', methods=['POST'])
+def addToDo():
+    name = request.form.get("name")
+    date = request.form.get("date")
+    test = task(name = name, date = date, done = False)
+    db.session.add(test)
+    db.session.commit()
+
+    return redirect("/email")
+
+@myapp_obj.route('/update/<int:todo_id>')
+def update(todo_id):
+    todo = task.query.get(todo_id)
+    todo.done=not todo.done
+    db.session.commit()
+    return redirect("/email")
+    
+
+@myapp_obj.route('/delete/<int:todo_id>')
+def delete(todo_id):
+    todo = task.query.get(todo_id)
+    db.session.delete(todo)
+    db.session.commit()
+    return redirect("/email")
