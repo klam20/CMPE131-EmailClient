@@ -18,4 +18,4 @@ db = SQLAlchemy(myapp_obj)
 migrate = Migrate(myapp_obj, db)
 csrf = CSRFProtect(myapp_obj)
 
-from app import routes, models
+from app import routes, models, forms

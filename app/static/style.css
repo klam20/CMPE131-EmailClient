@@ -102,3 +102,12 @@
 	background-color: #4CAF50;
 	color: #fff;
 }
+
+.remove-recipient-button {
+	color: red;
+	float: right;
+	background: none;
+	border: none;
+	font-size: 18px;
+	cursor: pointer;
+}
