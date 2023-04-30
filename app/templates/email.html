@@ -70,7 +70,7 @@
         </style>
 
         <!--CSS for ToDoList-->
-        <!--
+
             <style>
             /* Body styles */
             body {
@@ -91,10 +91,12 @@
               
             }
             
+            /*
             form {
               display: flex;
               flex-grow: 1;
             }
+            */
             
             div h1 {
               text-align: left;
@@ -106,7 +108,7 @@
               margin-bottom: 8px;
               color: #555;
             }
-            
+            /*
             form input[type="text"] {
               padding: 10px;
               margin-bottom: 20px;
@@ -145,7 +147,7 @@
               width: 40px;
               margin-left: 10px;
             }
-            
+            */
             .linebreak {
                 flex-basis: 100%;
             }
@@ -258,10 +260,8 @@
               background-color: #2d744d;
             }
             
-            div a[type="delete"]:active { text-decoration: none; }
-            
+            div a[type="delete"]:active { text-decoration: none; }     
         </style>
-        -->
         
 
         <!--Compose Button-->
@@ -270,18 +270,18 @@
             <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
                 <p>
-                    {{ form.email.label }}<br>
-                    {{ form.email(size=32) }}
+                    {{form2.recipient.label }}<br>
+                    {{form2.recipient(size=32) }}
                 </p>
                 <p>
-                    {{ form.subject.label }}<br>
-                    {{ form.subject(size=32) }}
+                    {{form2.subject.label }}<br>
+                    {{form2.subject(size=32)}}
                 </p>
                 <p>
-                    {{ form.content.label }}<br>
-                    {{ form.content(size=32) }}
+                    {{form2.content.label}}<br>
+                    {{form2.content(size=32)}}
                 </p>
-                <p>{{ form.sendEmail()}}</p>
+                <p>{{ form2.sendEmail()}}</p>
               </form>
         </div>
 

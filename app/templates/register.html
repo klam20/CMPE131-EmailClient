@@ -63,16 +63,16 @@ form button[type="submit"]:hover {
 <body>
 	<form action = "" method="post" novalidate>
 		<h1>Registration Form</h1>
-	    {{ form.hidden_tag() }}
+	    {{registerForm.hidden_tag() }}
             <p>
-                {{ form.email.label }}<br>
-                {{ form.email(size=32) }}
+                {{registerForm.email.label }}<br>
+                {{registerForm.email(size=32) }}
             </p>
             <p>
-                {{ form.password.label }}<br>
-                {{ form.password(size=32) }}
+                {{registerForm.password.label }}<br>
+                {{registerForm.password(size=32) }}
             </p>
-            <p>{{ form.submit()}}</p>
+            <p>{{registerForm.submit()}}</p>
 	</form>
 </body>
 </html>

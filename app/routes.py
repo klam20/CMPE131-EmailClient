@@ -2,7 +2,7 @@ from flask import render_template
 from flask import request
 from flask import flash
 from flask import redirect
-from .forms import LoginForm
+from .forms import LoginForm, sendEmailForm, registerForm
 from app import myapp_obj
 from flask_login import current_user
 from flask_login import login_user
@@ -16,25 +16,25 @@ from app import db
 @myapp_obj.route("/home", methods=['GET','POST'])
 def home():
     db.create_all()
-    form = LoginForm()
     if current_user.is_authenticated:
         if request.method == 'POST':
             if request.form.get('logOut') == 'Log-Out': 
                 logout_user()
                 return redirect('/home')
-        return render_template('home_logged_in.html', form = form)
+        return render_template('home_logged_in.html')
     else:
         if request.method == 'POST':
             if request.form.get('logIn') == 'Log-In': 
                 return redirect('/login')
             elif request.form.get('signUp') == 'Sign-Up':
                 return redirect('/register')
-        return render_template('home_logged_out.html', form = form)
-    
+        return render_template('home_logged_out.html')
+
 @myapp_obj.route("/email", methods=['GET','POST'])
 @login_required
 def email():
     form = LoginForm()
+    form2 = sendEmailForm()
     todo_list = task.query.all()
     currentUser = current_user
     if request.method == 'POST':
@@ -44,13 +44,13 @@ def email():
                 logout_user()
                 return redirect('/home')
             else:
-                composeEmail = Message(recipient=form.email.data, subject=form.subject.data, content=form.content.data)
+                composeEmail = Message(recipient=form2.recipient.data, subject=form2.subject.data, content=form2.content.data)
                 db.session.add(composeEmail)
                 db.session.commit()
                 flash(f'Email is sent')
                 return redirect('/email')
                 
-    return render_template('email.html', todo_list=todo_list, form=form)
+    return render_template('email.html', todo_list=todo_list, form=form, form2=form2)
 
 @myapp_obj.route("/login", methods=['GET','POST'])
 def login():    
@@ -77,8 +77,7 @@ def login():
 
 @myapp_obj.route('/register', methods=['GET', 'POST'])
 def register():
-    form = LoginForm()
-    
+    form = registerForm()
     if form.validate_on_submit():
         new_user = User(email=form.email.data)
         new_user.set_password(form.password.data)
@@ -86,7 +85,7 @@ def register():
         db.session.commit()
         return redirect('/home')
 
-    return render_template('register.html', title='Register', form=form)
+    return render_template('register.html', title='Register', registerForm=form)
 
 @myapp_obj.route('/add', methods=['POST'])
 def addToDo():
