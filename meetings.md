@@ -40,6 +40,25 @@
     Bryant:
       Allow users to send messages in chat
       Search bar functionality, looking into database querying
+
+### 2023-04-29 at 20:00
+    -Jeffrey, Bryant, Nicole meeting
+    -Demoed webpage with features merged together
+    -Discussed testing of database using Flask shell
+    -Discussed some form of Agile work to speed up development
+      -Involves daily updates on tasks worked on
+    
+    Jeffrey:
+        Working on test branch to see how functions will merge together on same branch 
+         
+    Nicole:
+        Polishing individual branches on sending emails and registration page before pull request is made
+         
+    Anthony:
+        To-Do-List is working, looking to help out in other functional requirements to speed up development
+        
+    Bryant:
+        Working on search bar
         
 ### 2023-05-3 at 20:00
 
