@@ -27,34 +27,47 @@ def chat():
     form = ChatForm()
     sent_messages = Message.query.all()
     recipients = Recipient.query.all()
-    return render_template('chat.html', sent_messages=sent_messages, recipients=recipients, form=form)
+    return render_template('chat.html', sent_messages=sent_messages, recipients=recipients, form=form, selected_recipient_id=None)
 
-@myapp_obj.route("/chat/send_message", methods=["GET", "POST"])
-def send_message():
+@myapp_obj.route("/chat/send_message/<int:recipient_id>", methods=["GET", "POST"])
+def send_message(recipient_id):
     if request.method == "POST":
         message_content = request.form["message"]
         # Placeholder user id
         user_id = 1
-        new_message = Message(content=message_content, user_id=user_id)
+        new_message = Message(content=message_content, user_id=user_id, recipient_id=recipient_id)
         db.session.add(new_message)
         db.session.commit()
-        return redirect(url_for("chat"))
+        return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
 
-    return redirect(url_for("chat"))
+    return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
 
 @myapp_obj.route("/chat/<int:recipient_id>", methods=['GET', 'POST'])
 def chat_with_recipient(recipient_id):
      form = ChatForm()
      recipients = Recipient.query.all()
      messages = Message.query.filter_by(recipient_id=recipient_id).all()
-     return render_template('chat.html', recipients=recipients, messages=messages, form=form, selected_recipient_id=recipient_id)
+     user = User.query.get(1)
+     if form.validate_on_submit():
+        message_content = form.message.data
+        user_id = 1
+        new_message = Message(content=message_content, user_id=user_id, recipient_id=recipient_id)
+        db.session.add(new_message)
+        db.session.commit()
+        return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
+     return render_template('chat.html', recipients=recipients, messages=messages, form=form, selected_recipient_id=recipient_id, user=user)
 
 @myapp_obj.route("/add_recipient", methods=["GET", "POST"])
 def add_recipient():
     form = AddRecipientForm()
     if form.validate_on_submit():
         recipient_name = form.name.data
-        new_recipient = Recipient(name=recipient_name)
+        new_user = User(email=f"{recipient_name}@example.com", password="123")
+        db.session.add(new_user)
+        db.session.flush()
+
+        recipient_id = new_user.id
+        new_recipient = Recipient(name=recipient_name, recipient_id=recipient_id)
         db.session.add(new_recipient)
         db.session.commit()
         return redirect(url_for("chat"))

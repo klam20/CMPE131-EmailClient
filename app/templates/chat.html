@@ -18,7 +18,7 @@
         </div>
         <div class="recipient-list">
           {% for recipient in recipients %}
-            <div class="recipient-box {% if recipient.id == selected_recipient_id %}selected{% endif %}" onclick="location.href'{{ url_for('chat_with_recipient', recipient_id=recipient.id) }}'">
+            <div class="recipient-box {% if recipient.id == selected_recipient_id %}selected{% endif %}" onclick="location.href='{{ url_for('chat_with_recipient', recipient_id=recipient.id) }}'">
                {{ recipient.name }}
                <form action="{{ url_for('remove_recipient', recipient_id=recipient.id) }}" method="POST" style="display:inline;">
                  {{ form.hidden_tag() }}
@@ -27,24 +27,24 @@
             </div>
           {% endfor %}
         </div>
-        <div class="message-history">
-          {% if selected_recipient_id %}
-          <!-- Previous messages will be displayed here -->
-            {% for message in messages_with_recipient %}
-              <p class="sent-message">{{ message.content }}</p>
-            {% endfor %}
-          {% endif %}
-        </div>
       </div>
       <div class="chat-container">
         <div class="message-box">
           <!-- Current messages will be displayed here -->
-          {% for message in sent_messages %}
-            <p class="sent-message">{{ message.content }}</p>
-          {% endfor %}
+           {% for message in messages %}
+             {% if message.sender_id == user.id %}
+              <p class="sent-message">{{ message.content }}</p>
+             {% else %}
+              <p class="received-message">{{ message.content }}</p>
+             {% endif %}
+           {% endfor %}
         </div>
         <div class="send-message">
+        {% if selected_recipient_id %}
          <form action="{{ url_for('send_message', recipient_id=selected_recipient_id) }}" method="POST">
+        {% else %}
+         <form method ="POST">
+        {% endif %}
            {{ form.hidden_tag() }}
           <input class="message-input" name="message" type="text" placeholder="Type your message here...">
           <button class="send-button">Send</button>
