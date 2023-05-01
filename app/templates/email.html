@@ -1,6 +1,10 @@
 <html>
     <head>
         <title>Email</title>
+    </head>
+    <body>
+
+        <!--CSS for Compose Button-->
         <style>
             /* Body styles */
             body {
@@ -64,21 +68,28 @@
               background-color: #3e8e41;
             }
         </style>
-    </head>
-    <body>
-        <p>Email Template</p>
+
+        <!--Compose Button-->
         <button id="compose-btn">Compose</button>
         <div id="compose-tab">
-            <form>
-                <label for="to">To:</label>
-                <input type="email" id="to" name="to" required>
-                <label for="subject">Subject:</label>
-                <input type="text" id="subject" name="subject" required>
-                <label for="content">Content:</label>
-                <textarea id="content" name="content" required></textarea>
-                <button type="submit">Send</button>
-            </form>
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <p>
+                    {{form.recipient.label }}<br>
+                    {{form.recipient(size=32) }}
+                </p>
+                <p>
+                    {{form.subject.label }}<br>
+                    {{form.subject(size=32)}}
+                </p>
+                <p>
+                    {{form.content.label}}<br>
+                    {{form.content(size=32)}}
+                </p>
+                <p>{{ form.sendEmail()}}</p>
+              </form>
         </div>
+
         <script>
             var composeBtn = document.getElementById("compose-btn");
             var composeTab = document.getElementById("compose-tab");
@@ -100,6 +111,21 @@
                 composeTab.appendChild(closeBtn);
             };
         </script>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+        <form method="post">
+            <input type="submit" value="del-Acc" name="delAcc"/>
+        </form>
+        <p>Email Template</p>
     </body>
 </html>
 
