@@ -47,7 +47,6 @@ def email():
 def login():    
     form = LoginForm()
     #Assume register page entered this into a database already
-    
     if form.validate_on_submit():
         # Check if email account exists first
         emailExists = bool(User.query.filter_by(email = form.email.data).first())
@@ -63,7 +62,6 @@ def login():
                 flash(f'Invalid password')
         else:
             flash(f'Account does not exist')
-
     return render_template('login.html', form=form)
     
 
