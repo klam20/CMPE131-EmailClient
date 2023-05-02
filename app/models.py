@@ -11,6 +11,14 @@ class Message(db.Model):
     content = db.Column(db.String(200), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
+class Register(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(20), nullable=False)
+    password = db.Column(db.String(50), nullable=False)
+
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(32), nullable=False)
@@ -28,4 +36,5 @@ class User(db.Model, UserMixin):
 
 @login.user_loader
 def load_user(id):
-    return User.query.get(int(id))
+    return User.query.get(int(id))    
+
