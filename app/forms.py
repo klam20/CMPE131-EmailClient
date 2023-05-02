@@ -2,6 +2,12 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo
 
+class sendEmailForm(FlaskForm):
+    recipient = StringField('Recipient', validators=[DataRequired()])
+    subject = StringField('Subject', validators=[DataRequired()])
+    content = StringField('Content', validators=[DataRequired()])
+    sendEmail = SubmitField('Send Email')
+
 class RegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])

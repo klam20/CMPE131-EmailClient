@@ -4,6 +4,114 @@
     </head>
     <body>
 
+        <!--CSS for Compose Button-->
+        <style>
+            /* Body styles */
+            body {
+              background-color: #f9f9f9;
+              font-family: Arial, sans-serif;
+              font-size: 16px;
+            }
+
+            /* Compose button styles */
+            #compose-btn {
+              position: fixed;
+              bottom: 30px;
+              right: 30px;
+              background-color: #4CAF50;
+              color: white;
+              padding: 15px;
+              border: none;
+              border-radius: 50%;
+              cursor: pointer;
+            }
+
+            /* Compose tab styles */
+            #compose-tab {
+              position: fixed;
+              bottom: 30px;
+              right: 30px;
+              background-color: #fff;
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+              padding: 20px;
+              border-radius: 10px;
+              display: none;
+              z-index: 1;
+              max-width: 600px;
+            }
+
+            #compose-tab input[type="email"],
+            #compose-tab input[type="text"],
+            #compose-tab textarea {
+              padding: 10px;
+              margin-bottom: 20px;
+              width: 100%; 
+              border: none;
+              border-radius: 5px;
+              background-color: #f5f5f5;
+              font-size: 16px;
+              color: #333;
+            }
+
+            #compose-tab button[type="submit"] {
+              background-color: #4CAF50;
+              border: none; 
+              color: #fff; 
+              padding: 10px 20px;
+              border-radius: 5px;
+              font-size: 16px;
+              cursor: pointer;
+              transition: background-color 0.3s ease;
+            }
+
+            #compose-tab button[type="submit"]:hover {
+              background-color: #3e8e41;
+            }
+        </style>
+
+        <!--Compose Button-->
+        <button id="compose-btn">Compose</button>
+        <div id="compose-tab">
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <p>
+                    {{form.recipient.label }}<br>
+                    {{form.recipient(size=32) }}
+                </p>
+                <p>
+                    {{form.subject.label }}<br>
+                    {{form.subject(size=32)}}
+                </p>
+                <p>
+                    {{form.content.label}}<br>
+                    {{form.content(size=32)}}
+                </p>
+                <p>{{ form.sendEmail()}}</p>
+              </form>
+        </div>
+
+        <script>
+            var composeBtn = document.getElementById("compose-btn");
+            var composeTab = document.getElementById("compose-tab");
+            var closeBtn = document.createElement("span");
+
+            closeBtn.innerHTML = "&times;";
+            closeBtn.style.position = "absolute";
+            closeBtn.style.top = "10px";
+            closeBtn.style.right = "10px";
+            closeBtn.style.fontSize = "24px";
+            closeBtn.style.cursor = "pointer";
+
+            closeBtn.onclick = function() {
+                composeTab.style.display = "none";
+            };
+
+            composeBtn.onclick = function() {
+                composeTab.style.display = "block";
+                composeTab.appendChild(closeBtn);
+            };
+        </script>
+
         {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul>
@@ -20,3 +128,4 @@
         <p>Email Template</p>
     </body>
 </html>
+
