@@ -2,6 +2,7 @@ from flask import render_template
 from flask import request
 from flask import flash
 from flask import redirect
+from flask import url_for
 from .forms import LoginForm
 from app import myapp_obj
 from flask_login import current_user
@@ -9,8 +10,9 @@ from flask_login import login_user
 from flask_login import logout_user
 from flask_login import login_required
 from app.models import User
-from app import db
 from app.models import db
+from app.models import Register
+from .forms import RegistrationForm
 
 @myapp_obj.route("/")
 
@@ -67,5 +69,13 @@ def login():
 
 @myapp_obj.route("/register", methods=['GET','POST'])
 def register():
-    return render_template('register.html')
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        new_user = Register(email=form.email.data)
+        new_user.set_password(form.password.data)
+        db.session.add(new_user)
+        db.session.commit()
+        flash('You are now a registered user!')
+        return redirect(url_for('login'))
+    return render_template('register.html', title='Register', form=form)
 
