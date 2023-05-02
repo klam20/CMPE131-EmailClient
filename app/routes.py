@@ -87,27 +87,43 @@ def register():
 
     return render_template('register.html', title='Register', registerForm=form)
 
-@myapp_obj.route('/add', methods=['POST'])
+@myapp_obj.route('/addTodo', methods=['POST'])
 def addToDo():
     name = request.form.get("name")
     date = request.form.get("date")
-    test = task(name = name, date = date, done = False)
+    test = task(name = name, date = date, done = False, edit = False)
     db.session.add(test)
     db.session.commit()
 
     return redirect("/email")
 
-@myapp_obj.route('/update/<int:todo_id>')
-def update(todo_id):
+@myapp_obj.route('/updateTodo/<int:todo_id>')
+def updateTask(todo_id):
     todo = task.query.get(todo_id)
     todo.done=not todo.done
     db.session.commit()
     return redirect("/email")
     
 
-@myapp_obj.route('/delete/<int:todo_id>')
-def delete(todo_id):
+@myapp_obj.route('/deleteTodo/<int:todo_id>')
+def deleteTask(todo_id):
     todo = task.query.get(todo_id)
     db.session.delete(todo)
+    db.session.commit()
+    return redirect("/email")
+
+@myapp_obj.route('/submitEdit/<int:todo_id>', methods=['POST'])
+def submitEdit(todo_id):
+    todo = task.query.get(todo_id)
+    todo.name = request.form.get("editInputText")
+    todo.date = request.form.get("editInputDate")
+    todo.edit = not todo.edit
+    db.session.commit()
+    return redirect("/email")
+
+@myapp_obj.route('/startEdit/<int:todo_id>')
+def startEdit(todo_id):
+    todo = task.query.get(todo_id)
+    todo.edit = not todo.edit
     db.session.commit()
     return redirect("/email")

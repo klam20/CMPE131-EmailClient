@@ -94,12 +94,13 @@
               
             }
             
-            /*
+            
             form {
               display: flex;
+              flex-wrap: wrap;
               flex-grow: 1;
             }
-            */
+            
             
             div h1 {
               text-align: left;
@@ -111,8 +112,8 @@
               margin-bottom: 8px;
               color: #555;
             }
-            /*
-            form input[type="text"] {
+            
+            form input[type="taskInput"] {
               padding: 10px;
               margin-bottom: 20px;
               height: 20px;
@@ -122,6 +123,7 @@
               font-size: 16px;
               color: #333;
               flex-grow: 1;
+              text-overflow: ellipsis;
             }
             
             form input[type="date"] {
@@ -137,11 +139,10 @@
               color: #333;
             }
             
-            form button[type="submit"] {
+            form button[type="taskSubmit"] {
               background-color: #4e5fc4;
               border: none;
               color: #fff;
-              padding: 0px;
               border-radius: 5px;
               font-size: 16px;
               cursor: pointer;
@@ -150,16 +151,16 @@
               width: 40px;
               margin-left: 10px;
             }
-            */
+            
             .linebreak {
                 flex-basis: 100%;
             }
             
-            div button[type="submit"]:hover {
+            div button[type="taskSubmit"]:hover {
               background-color: #4148a0;
             }
             
-            div li {
+            div li[type="task"] {
               cursor: pointer;
               position: relative;
               padding: 12px 8px 12px 40px;
@@ -171,20 +172,23 @@
               margin: 2px;
               border-radius: 5px;
               height: 38 px;
-              
             }
             
-            div li:hover {
+            div li[type="task"]:hover {
               background: #ddd;
             }
             
-            div li.checked {
+            div li[type="task"].checked {
               background: #888;
               color: #fff;
               text-decoration: line-through;
             }
+
+            div li[type="task"].checked:hover {
+              background: #999;
+            }
             
-            div li.checked::before {
+            div li[type="task"].checked::before {
               content: '';
               position: absolute;
               border-color: #fff;
@@ -264,8 +268,35 @@
             }
             
             div a[type="delete"]:active { text-decoration: none; }     
+
+            form input[type="editInputText"] {
+              flex-grow: 1;
+            }
+
+            form button[type="submitEdit"] {
+              background-color: #46b478;
+              border: none;
+              color: #fff;
+              border-radius: 5px;
+              font-size: 18px;
+              cursor: pointer;
+              transition: background-color 0.3s ease;
+              height: 44px;
+              width: 40px;
+              margin-left: 8px;
+              margin-bottom: 2px;
+              text-align: center;
+              padding-top: 9px;
+              padding-bottom: 15px;
+            }
+
+            form input[type="editInputText"] {
+              border-radius: 5px;
+              margin-bottom: 2px;
+            }
+
+
         </style>
-        
 
         <!--Compose Button-->
         <button id="compose-btn">Compose</button>
@@ -273,15 +304,18 @@
             <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
                 <p>
-                    {{form2.recipient.label }}<br>
+                    {{form2.recipient.label }}
+                    <div class="linebreak"></div>
                     {{form2.recipient(size=32) }}
                 </p>
                 <p>
-                    {{form2.subject.label }}<br>
+                    {{form2.subject.label }}
+                    <div class="linebreak"></div>
                     {{form2.subject(size=32)}}
                 </p>
                 <p>
-                    {{form2.content.label}}<br>
+                    {{form2.content.label}}
+                    <div class="linebreak"></div>
                     {{form2.content(size=32)}}
                 </p>
                 <p>{{ form2.sendEmail()}}</p>
@@ -292,26 +326,34 @@
         <div class="todo">
             <h1>Todo List</h1>
         <div class="linebreak"></div>
-        <form action="/add" method="post">
-          <input type="text" id="name" name="name" placeholder="Enter task..." required>
+        <form action="/addTodo" method="post">
+          <input type="taskInput" id="name" name="name" placeholder="Enter task..." required>
           <input type="date" id="date" name="date" placeholder="mm/dd" required>
-          <button type="submit">+</button>
+          <button type="taskSubmit">+</button>
         </form>
             {%for task in todo_list%}
             <div class="linebreak"></div>
             <tr>
-                {%if task.done==False%}
-                <li onclick='window.location.href="/update/{{task.task_id}}"'>{{task.name}}
+                {%if task.done==False and task.edit==False %}
+                <li type="task" onclick='window.location.href="/updateTodo/{{task.task_id}}"'>{{task.name}}
                   <div class="date">{{task.date}}</div>
                   <div class="linebreak"></div>
                 </li>
-                {%else%}
-                <li class="checked" onclick='window.location.href="/update/{{task.task_id}}"'>{{task.name}}
+                <td><a type="edit" href="/startEdit/{{task.task_id}}">✎</a></td>
+                {%elif task.done==True and task.edit==False %}
+                <li type="task" class="checked" onclick='window.location.href="/updateTodo/{{task.task_id}}"'>{{task.name}}
                   <div class="date">{{task.date}}</div>
                 </li>
+                <td><a type="edit" href="/startEdit/{{task.task_id}}">✎</a></td>
+                {%else%}
+                <form action="/submitEdit/{{task.task_id}}" method="post">
+                  <input type="editInputText" id="editInputText" name="editInputText" value="{{task.name}}" required>
+                  <input type="date" id="editInputDate" name="editInputDate" value="{{task.date}}" required>
+                  <button type="submitEdit">✎</button>
+                </form>
+                
                 {%endif%}
-                <td><a type="edit">✎</a></td>
-                <td><a type = "delete" href="/delete/{{task.task_id}}">X</a></td>
+                <td><a type = "delete" href="/deleteTodo/{{task.task_id}}">X</a></td>
             </tr>
             {%endfor%}
         </div>
