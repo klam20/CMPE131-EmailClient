@@ -112,3 +112,12 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', registerForm = form)
 
+@myapp_obj.route("/search_email", methods=['GET'])
+@login_required
+def search_email():
+    search_query = request.args.get('search_query', '')
+    search_results = Message.query.filter(
+        Message.user_id == current_user.id,
+        Message.subject.ilike(f"%{search_query}%")
+    ).all()
+    return render_template('search_results.html', search_results=search_results)
