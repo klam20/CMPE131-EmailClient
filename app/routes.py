@@ -18,6 +18,7 @@ from app.models import User
 from app.models import db
 from app.models import Register
 from .forms import RegistrationForm
+from sqlalchemy import or_
 
 @myapp_obj.route("/")
 
@@ -118,6 +119,11 @@ def search_email():
     search_query = request.args.get('search_query', '')
     search_results = Message.query.filter(
         Message.user_id == current_user.id,
-        Message.subject.ilike(f"%{search_query}%")
+        # Searches for emails containing the query in the recipient, subject, and content fields
+        or_(
+            Message.recipient.ilike(f"%{search_query}%"),
+            Message.subject.ilike(f"%{search_query}%"),
+            Message.content.ilike(f"%{search_query}%")
+        )
     ).all()
     return render_template('search_results.html', search_results=search_results)
