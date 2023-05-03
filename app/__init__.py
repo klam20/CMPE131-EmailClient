@@ -12,7 +12,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 myapp_obj.config.from_mapping(
     SECRET_KEY = 'you-will-never-guess',
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db'),
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False,
     MAIL_SERVER='smtp.gmail.com',
     MAIL_PORT=587,
     MAIL_USE_TLS=True,
@@ -30,5 +30,4 @@ login = LoginManager(myapp_obj)
 login.login_view = 'login'
 
 from app import routes, models
-
 from .models import User

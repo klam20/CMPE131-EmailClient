@@ -61,15 +61,18 @@ form button[type="submit"]:hover {
 </style>
 </head>
 <body>
-	<form>
+	<form action = "" method="post" novalidate>
 		<h1>Registration Form</h1>
-	      <!-- <label for="name">Name:</label> 
-	        <input type="text" id="name" name="name" required> -->
-		<label for="email">Email:</label>
-		<input type="email" id="email" name="email" required>
-		<label for="password">Password:</label>
-		<input type="password" id="password" name="password" required>
-		<button type="submit">Register</button>
+	    {{registerForm.hidden_tag() }}
+            <p>
+                {{registerForm.email.label}}<br>
+                {{registerForm.email(size=32) }}
+            </p>
+            <p>
+                {{registerForm.password.label }}<br>
+                {{registerForm.password(size=32) }}
+            </p>
+            <p>{{registerForm.submit()}}</p>
 	</form>
 </body>
 </html>
