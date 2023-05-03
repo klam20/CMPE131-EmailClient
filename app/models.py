@@ -36,6 +36,19 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f'<user {self.id} {self.email}>'
+    
+class task(db.Model, UserMixin):
+    task_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(32))
+    date = db.Column(db.String(32))
+    done = db.Column(db.Boolean)
+    edit = db.Column(db.Boolean)
+
+    def set_name(self,taskDisc):
+        self.name = taskDisc
+
+    def set_date(self, dueDate):
+        self.date = dueDate
 
 @login.user_loader
 def load_user(id):
