@@ -1,4 +1,3 @@
-from app import mail
 from app import db
 from app import myapp_obj
 from app.forms import sendEmailForm
@@ -13,8 +12,6 @@ from flask_login import login_user
 from flask_login import logout_user
 from flask_login import login_required
 from app.models import User
-from app.models import db
-from app.models import Register
 from app.models import task
 from app.models import Message
 from .forms import RegistrationForm
@@ -52,13 +49,6 @@ def email():
         if recipient_user:
             recipient_email = recipient_user.email
 
-        msg = MailMessage(
-            subject=form.subject.data,
-            recipients=[recipient_email],
-            body=form.content.data
-        )
-        mail.send(msg)
-
         message = Message(
             subject=form.subject.data,
             recipient=form.recipient.data,
@@ -86,10 +76,10 @@ def login():
     #Assume register page entered this into a database already
     if form.validate_on_submit():
         # Check if email account exists first
-        emailExists = bool(Register.query.filter_by(email=form.email.data).first())
+        emailExists = bool(User.query.filter_by(email=form.email.data).first())
         if (emailExists):
             #Query the database for the user
-            user = Register.query.filter_by(email = form.email.data).first()
+            user = User.query.filter_by(email = form.email.data).first()
             #Check the password entered hashes and matches with database
             if (user.check_password(form.password.data)):
                 flash(f'Successful login')
@@ -106,7 +96,7 @@ def login():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        new_user = Register(email=form.email.data)
+        new_user = User(email=form.email.data)
         new_user.set_password(form.password.data)
         db.session.add(new_user)
         db.session.commit()
