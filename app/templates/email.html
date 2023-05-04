@@ -4,6 +4,10 @@
         <title>Email</title>
     </head>
     <body>
+        <form method="GET" action="{{ url_for('search_email') }}">
+            <input type="text" name="search_query" placeholder="Search emails" />
+            <input type="submit" value="Search" />
+        </form>
 
       <a href="/home">Home</a>
 

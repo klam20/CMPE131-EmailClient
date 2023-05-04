@@ -1,4 +1,3 @@
-from app import mail
 from app import db
 from app import myapp_obj
 from app.forms import sendEmailForm
@@ -13,12 +12,11 @@ from flask_login import login_user
 from flask_login import logout_user
 from flask_login import login_required
 from app.models import User
-from app.models import db
-from app.models import Register
 from app.models import task
 from app.models import Message
 from .forms import RegistrationForm
 from .forms import LoginForm
+from sqlalchemy import or_
 
 @myapp_obj.route("/")
 
@@ -52,13 +50,6 @@ def email():
         if recipient_user:
             recipient_email = recipient_user.email
 
-        msg = MailMessage(
-            subject=form.subject.data,
-            recipients=[recipient_email],
-            body=form.content.data
-        )
-        mail.send(msg)
-
         message = Message(
             subject=form.subject.data,
             recipient=form.recipient.data,
@@ -86,10 +77,10 @@ def login():
     #Assume register page entered this into a database already
     if form.validate_on_submit():
         # Check if email account exists first
-        emailExists = bool(Register.query.filter_by(email=form.email.data).first())
+        emailExists = bool(User.query.filter_by(email=form.email.data).first())
         if (emailExists):
             #Query the database for the user
-            user = Register.query.filter_by(email = form.email.data).first()
+            user = User.query.filter_by(email = form.email.data).first()
             #Check the password entered hashes and matches with database
             if (user.check_password(form.password.data)):
                 flash(f'Successful login')
@@ -101,18 +92,18 @@ def login():
             flash(f'Account does not exist')
     return render_template('login.html', form=form)
     
-
 @myapp_obj.route("/register", methods=['GET','POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        new_user = Register(email=form.email.data)
+        new_user = User(email=form.email.data)
         new_user.set_password(form.password.data)
         db.session.add(new_user)
         db.session.commit()
         flash('You are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', registerForm = form)
+
 
 @myapp_obj.route('/addTodo', methods=['POST'])
 def addToDo():
@@ -155,3 +146,17 @@ def startEdit(todo_id):
     db.session.commit()
     return redirect("/email")
 
+@myapp_obj.route("/search_email", methods=['GET'])
+@login_required
+def search_email():
+    search_query = request.args.get('search_query', '')
+    search_results = Message.query.filter(
+        Message.user_id == current_user.id,
+        # Searches for emails containing the query in the recipient, subject, and content fields
+        or_(
+            Message.recipient.ilike(f"%{search_query}%"),
+            Message.subject.ilike(f"%{search_query}%"),
+            Message.content.ilike(f"%{search_query}%")
+        )
+    ).all()
+    return render_template('search_results.html', search_results=search_results)
