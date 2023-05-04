@@ -43,11 +43,11 @@ def email():
     currentUser = current_user
     form = sendEmailForm()
     todo_list = task.query.all()
+    inboxMessages = Message.query.filter_by(user_id=current_user.id)
+    messageCount = inboxMessages.count()
+
+
     if form.validate_on_submit():
-        recipient_user = User.query.filter_by(id=form.recipient.data).first()
-        recipient_email = None
-        if recipient_user:
-            recipient_email = recipient_user.email
 
         message = Message(
             subject=form.subject.data,
@@ -57,9 +57,9 @@ def email():
         )
         db.session.add(message)
         db.session.commit()
-        
+
         flash('Email is sent')
-        return redirect(url_for('email'))
+        return redirect('/email')
     
     if request.method == 'POST':
             if request.form.get('delAcc') == 'del-Acc':
@@ -68,8 +68,7 @@ def email():
                 logout_user()
                 return redirect('/home')
             
-    return render_template('email.html', todo_list=todo_list, title='Send Email', form=form)
-
+    return render_template('email.html', todo_list=todo_list, title='Send Email', form=form, inboxMessages=inboxMessages, messageCount=messageCount)
 @myapp_obj.route("/login", methods=['GET','POST'])
 def login():    
     form = LoginForm()

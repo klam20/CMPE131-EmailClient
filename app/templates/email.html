@@ -292,9 +292,16 @@
             border-radius: 5px;
             margin-bottom: 2px;
           }
-
-
         </style>
+
+        <!--Email Inbox-->
+        <div class = "inbox">
+            {%if messageCount > 0%}
+              {%for msg in inboxMessages%}
+                <p>{{msg.subject}}</p>
+              {%endfor%}
+            {%endif%}
+        </div>
 
         <!--Compose Button-->
         <button id="compose-btn">Compose</button>
