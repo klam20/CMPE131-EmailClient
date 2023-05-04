@@ -19,6 +19,7 @@ from app.models import task
 from app.models import Message
 from .forms import RegistrationForm
 from .forms import LoginForm
+from sqlalchemy import or_
 
 @myapp_obj.route("/")
 
@@ -101,7 +102,6 @@ def login():
             flash(f'Account does not exist')
     return render_template('login.html', form=form)
     
-
 @myapp_obj.route("/register", methods=['GET','POST'])
 def register():
     form = RegistrationForm()
@@ -113,6 +113,7 @@ def register():
         flash('You are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', registerForm = form)
+
 
 @myapp_obj.route('/addTodo', methods=['POST'])
 def addToDo():
@@ -155,3 +156,17 @@ def startEdit(todo_id):
     db.session.commit()
     return redirect("/email")
 
+@myapp_obj.route("/search_email", methods=['GET'])
+@login_required
+def search_email():
+    search_query = request.args.get('search_query', '')
+    search_results = Message.query.filter(
+        Message.user_id == current_user.id,
+        # Searches for emails containing the query in the recipient, subject, and content fields
+        or_(
+            Message.recipient.ilike(f"%{search_query}%"),
+            Message.subject.ilike(f"%{search_query}%"),
+            Message.content.ilike(f"%{search_query}%")
+        )
+    ).all()
+    return render_template('search_results.html', search_results=search_results)
