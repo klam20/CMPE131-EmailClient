@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for
 from flask_wtf import FlaskForm, CSRFProtect
 from app import myapp_obj, db
-from app.models import  User, Message, Recipient
+from app.models import  User, ChatMessage, Recipient
 from app.forms import ChatForm, AddRecipientForm
 
 @myapp_obj.route("/")
@@ -25,7 +25,7 @@ def register():
 @myapp_obj.route("/chat")
 def chat():
     form = ChatForm()
-    sent_messages = Message.query.all()
+    sent_messages = ChatMessage.query.all()
     recipients = Recipient.query.all()
     return render_template('chat.html', sent_messages=sent_messages, recipients=recipients, form=form, selected_recipient_id=None)
 
@@ -35,7 +35,7 @@ def send_message(recipient_id):
         message_content = request.form["message"]
         # Placeholder user id
         user_id = 1
-        new_message = Message(content=message_content, user_id=user_id, recipient_id=recipient_id)
+        new_message = ChatMessage(content=message_content, user_id=user_id, recipient_id=recipient_id)
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
@@ -46,12 +46,12 @@ def send_message(recipient_id):
 def chat_with_recipient(recipient_id):
      form = ChatForm()
      recipients = Recipient.query.all()
-     messages = Message.query.filter_by(recipient_id=recipient_id).all()
+     messages = ChatMessage.query.filter_by(recipient_id=recipient_id).all()
      user = User.query.get(1)
      if form.validate_on_submit():
         message_content = form.message.data
         user_id = 1
-        new_message = Message(content=message_content, user_id=user_id, recipient_id=recipient_id)
+        new_message = ChatMessage(content=message_content, user_id=user_id, recipient_id=recipient_id)
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
@@ -76,7 +76,7 @@ def add_recipient():
 
 @myapp_obj.route('/delete_messages', methods=['POST'])
 def delete_messages():
-    Message.query.delete()
+    ChatMessage.query.delete()
     db.session.commit()
     return redirect(url_for('chat'))
 
