@@ -70,7 +70,7 @@ def add_recipient():
         new_recipient = Recipient(name=recipient_name, recipient_id=recipient_id)
         db.session.add(new_recipient)
         db.session.commit()
-        return redirect(url_for("chat"))
+        return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
 
     return render_template("add_recipient.html", form=form)
 

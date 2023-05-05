@@ -3,9 +3,10 @@ from app import *
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
-# empty class, passes form
 class ChatForm(FlaskForm):
-    pass
+    name = StringField('Recipient Name', validators=[DataRequired()])
+    message = StringField('Message', validators=[DataRequired()])
+    submit = SubmitField('Send')
 
 class AddRecipientForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
