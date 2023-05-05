@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -14,7 +13,6 @@ myapp_obj.config.from_mapping(
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 )
 
-db = SQLAlchemy(myapp_obj)
 
 db = SQLAlchemy(myapp_obj)
 
