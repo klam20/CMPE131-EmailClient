@@ -3,6 +3,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+import os
+
 myapp_obj = Flask(__name__)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -21,5 +23,5 @@ login = LoginManager(myapp_obj)
 
 login.login_view = 'login'
 
-from app import routes, models
+from app import routes, models, forms
 from .models import User
