@@ -10,6 +10,7 @@
         </form>
 
       <a href="/home">Home</a>
+      <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
 
         <!--CSS for Compose Button-->
         <style>
@@ -296,9 +297,17 @@
             border-radius: 5px;
             margin-bottom: 2px;
           }
-
-
         </style>
+
+        <!--Email Inbox-->
+        <div class = "inbox">
+          <h1>Inbox</h1>
+            {%if messageCount > 0%}
+              {%for msg in inboxMessages%}
+                <p>{{msg.subject}}</p>
+              {%endfor%}
+            {%endif%}
+        </div>
 
         <!--Compose Button-->
         <button id="compose-btn">Compose</button>

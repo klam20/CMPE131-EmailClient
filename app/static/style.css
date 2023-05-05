@@ -145,3 +145,9 @@
     border: 1px solid black;
     padding:10px;
 }
+
+.inbox {
+    position:absolute;
+    left:40%;
+    top:8%;
+}
