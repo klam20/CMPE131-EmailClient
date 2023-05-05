@@ -302,9 +302,15 @@
         <!--Email Inbox-->
         <div class = "inbox">
           <h1>Inbox</h1>
+            <p>{{currentUserEmail}}</p>
             {%if messageCount > 0%}
-              {%for msg in inboxMessages%}
+              <p><b>Fetching Sent Emails</b></p>
+              {%for msg in sentEmails%}
                 <p>{{msg.subject}}</p>
+              {%endfor%}
+              <p><b>Fetching Received Emails</b></p>
+              {%for msg2 in receivedEmails%}
+                <p>{{msg2.subject}}</p>
               {%endfor%}
             {%endif%}
         </div>
