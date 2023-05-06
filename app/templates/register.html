@@ -61,6 +61,17 @@ form button[type="submit"]:hover {
 </style>
 </head>
 <body>
+
+  {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
 	<form action = "" method="post" novalidate>
 		<h1>Registration Form</h1>
 	    {{registerForm.hidden_tag() }}

@@ -100,12 +100,17 @@ def login():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        new_user = User(email=form.email.data)
-        new_user.set_password(form.password.data)
-        db.session.add(new_user)
-        db.session.commit()
-        flash('You are now a registered user!')
-        return redirect(url_for('login'))
+        emailExists = bool(User.query.filter_by(email=form.email.data).first())
+        if(emailExists):
+            flash(f'Account already exists')
+            return redirect(url_for('register'))
+        else:
+            new_user = User(email=form.email.data)
+            new_user.set_password(form.password.data)
+            db.session.add(new_user)
+            db.session.commit()
+            flash('You are now a registered user!')
+            return redirect(url_for('login'))
     return render_template('register.html', title='Register', registerForm = form)
 
 @myapp_obj.route("/chat")
