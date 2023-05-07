@@ -38,8 +38,9 @@ class ChatMessage(db.Model):
 class Recipient(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    name = db.Column(db.String(64), nullable=False)
-   recipient_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+   user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
    message_id = db.Column(db.Integer, db.ForeignKey('chat_message.id'), nullable=True)
+   sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
    #messages_sent = db.relationship('Message', backref='user', lazy=True)
     
 class task(db.Model, UserMixin):

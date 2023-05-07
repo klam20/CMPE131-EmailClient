@@ -119,8 +119,10 @@ def register():
 @myapp_obj.route("/chat")
 def chat():
     form = ChatForm()
+    current_user_id = current_user.id
     sent_messages = ChatMessage.query.all()
-    recipients = Recipient.query.all()
+    recipients = Recipient.query.filter_by(user_id=current_user.id, sender_id=current_user.id).all()
+    #recipients = Recipient.query.all()
     return render_template('chat.html', sent_messages=sent_messages, recipients=recipients, form=form, selected_recipient_id=None)
 
 @myapp_obj.route("/chat/send_message/<int:recipient_id>", methods=["GET", "POST"])
@@ -138,7 +140,7 @@ def send_message(recipient_id):
 @myapp_obj.route("/chat/<int:recipient_id>", methods=['GET', 'POST'])
 def chat_with_recipient(recipient_id):
      form = ChatForm()
-     recipients = Recipient.query.all()
+     recipients = Recipient.query.filter_by(user_id=current_user.id, sender_id=current_user.id).all()
      current_user_id = current_user.id
      messages = ChatMessage.query.filter(
         (ChatMessage.recipient_id == recipient_id) & (ChatMessage.sender_id == current_user_id)
@@ -158,15 +160,13 @@ def add_recipient():
     form = AddRecipientForm()
     if form.validate_on_submit():
         recipient_name = form.name.data
-        new_user = User(email=f"{recipient_name}@example.com", password="123")
-        db.session.add(new_user)
-        db.session.flush()
-
-        recipient_id = new_user.id
-        new_recipient = Recipient(name=recipient_name, recipient_id=recipient_id)
+        user_id = current_user.id
+        sender_id = current_user.id
+        new_recipient = Recipient(name=recipient_name, user_id=user_id, sender_id=sender_id)
         db.session.add(new_recipient)
         db.session.commit()
-        return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
+        return redirect(url_for("chat"))
+        #return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
 
     return render_template("add_recipient.html", form=form)
 
