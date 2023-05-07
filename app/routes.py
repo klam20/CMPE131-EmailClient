@@ -118,6 +118,7 @@ def register():
     return render_template('register.html', title='Register', registerForm = form)
 
 @myapp_obj.route("/chat")
+@login_required
 def chat():
     form = ChatForm()
     current_user_id = current_user.id
@@ -126,6 +127,7 @@ def chat():
     return render_template('chat.html', sent_messages=sent_messages, recipients=recipients, form=form, selected_recipient_id=None)
 
 @myapp_obj.route("/chat/send_message/<int:recipient_id>", methods=["GET", "POST"])
+@login_required
 def send_message(recipient_id):
     if request.method == "POST":
         message_content = request.form["message"]
@@ -138,6 +140,7 @@ def send_message(recipient_id):
     return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
 
 @myapp_obj.route("/chat/<int:recipient_id>", methods=['GET', 'POST'])
+@login_required
 def chat_with_recipient(recipient_id):
      form = ChatForm()
      recipients = Recipient.query.filter_by(user_id=current_user.id, sender_id=current_user.id).all()
@@ -157,6 +160,7 @@ def chat_with_recipient(recipient_id):
      return render_template('chat.html', recipients=recipients, messages=messages, form=form, selected_recipient_id=recipient_id, user=user)
 
 @myapp_obj.route("/add_recipient", methods=["GET", "POST"])
+@login_required
 def add_recipient():
     form = AddRecipientForm()
     if form.validate_on_submit():
@@ -175,12 +179,14 @@ def add_recipient():
     return render_template("chat.html", form=form)
 
 @myapp_obj.route('/delete_messages', methods=['POST'])
+@login_required
 def delete_messages():
     ChatMessage.query.delete()
     db.session.commit()
     return redirect(url_for('chat'))
 
 @myapp_obj.route('/remove_recipient/<int:recipient_id>', methods=['POST'])
+@login_required
 def remove_recipient(recipient_id):
     recipient = Recipient.query.get(recipient_id)
     if recipient:
