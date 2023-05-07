@@ -40,7 +40,7 @@ class Recipient(db.Model):
    name = db.Column(db.String(64), nullable=False)
    recipient_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
    message_id = db.Column(db.Integer, db.ForeignKey('chat_message.id'), nullable=True)
-#    messages_sent = db.relationship('Message', backref='user', lazy=True)
+   #messages_sent = db.relationship('Message', backref='user', lazy=True)
     
 class task(db.Model, UserMixin):
     task_id = db.Column(db.Integer, primary_key=True)
@@ -48,6 +48,7 @@ class task(db.Model, UserMixin):
     date = db.Column(db.String(32))
     done = db.Column(db.Boolean)
     edit = db.Column(db.Boolean)
+    user_id = db.Column(db.Integer)
 
     def set_name(self,taskDisc):
         self.name = taskDisc

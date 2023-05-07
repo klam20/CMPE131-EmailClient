@@ -166,15 +166,20 @@
           div li[type="task"] {
             cursor: pointer;
             position: relative;
-            padding: 12px 8px 12px 40px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 40px;
+            padding-right: 8px;
             background: #eee;
-            font-size: 18px;
+            font-size: 16px;
             transition: 0.2s;
             list-style-type: none;
             flex-grow: 1;
-            margin: 2px;
+            margin-left: 2px;
+            margin-right: 2px;
+            margin-bottom: 2px;
             border-radius: 5px;
-            height: 38 px;
+            height: 20px;
           }
           
           div li[type="task"]:hover {
@@ -217,16 +222,15 @@
             border: none;
             color: #fff;
             border-radius: 5px;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            height: 20px;
+            height: 30px;
             width: 40px;
             margin-left: 8px;
             margin-bottom: 2px;
             text-align: center;
-            padding-top: 12px;
-            padding-bottom: 12px;
+            padding-top: 10px;
           }
           
           div a[type="delete"]:link { text-decoration: none; }
@@ -247,16 +251,15 @@
             border: none;
             color: #fff;
             border-radius: 5px;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            height: 20px;
+            height: 32px;
             width: 40px;
             margin-left: 8px;
             margin-bottom: 2px;
             text-align: center;
-            padding-top: 9px;
-            padding-bottom: 15px;
+            padding-top: 8px;
           }
           
           div a[type="edit"]:link { text-decoration: none; }
@@ -274,6 +277,7 @@
 
           form input[type="editInputText"] {
             flex-grow: 1;
+            max-height: 35px;
           }
 
           form button[type="submitEdit"] {
@@ -281,21 +285,19 @@
             border: none;
             color: #fff;
             border-radius: 5px;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            height: 44px;
             width: 40px;
+            height: 40px;
             margin-left: 8px;
             margin-bottom: 2px;
-            text-align: center;
-            padding-top: 9px;
-            padding-bottom: 15px;
           }
 
           form input[type="editInputText"] {
             border-radius: 5px;
             margin-bottom: 2px;
+            height: 38px;
           }
         </style>
 
@@ -346,29 +348,31 @@
         </form>
 
         {%for task in todo_list%}
-        <div class="linebreak"></div>
-        <tr>
-            {%if task.done==False and task.edit==False %}
-            <li type="task" onclick='window.location.href="/updateTodo/{{task.task_id}}"'>{{task.name}}
-              <div class="date">{{task.date}}</div>
-              <div class="linebreak"></div>
-            </li>
-            <td><a type="edit" href="/startEdit/{{task.task_id}}">✎</a></td>
-            {%elif task.done==True and task.edit==False %}
-            <li type="task" class="checked" onclick='window.location.href="/updateTodo/{{task.task_id}}"'>{{task.name}}
-              <div class="date">{{task.date}}</div>
-            </li>
-            <td><a type="edit" href="/startEdit/{{task.task_id}}">✎</a></td>
-            {%else%}
-            <form action="/submitEdit/{{task.task_id}}" method="post">
-              <input type="editInputText" id="editInputText" name="editInputText" value="{{task.name}}" required>
-              <input type="date" id="editInputDate" name="editInputDate" value="{{task.date}}" required>
-              <button type="submitEdit">✎</button>
-            </form>
-            
-            {%endif%}
-            <td><a type = "delete" href="/deleteTodo/{{task.task_id}}">X</a></td>
-        </tr>
+          {%if task.user_id==current_user.id%}
+          <div class="linebreak"></div>
+          <tr>
+              {%if task.done==False and task.edit==False %}
+              <li type="task" onclick='window.location.href="/updateTodo/{{task.task_id}}"'>{{task.name}}
+                <div class="date">{{task.date}}</div>
+                <div class="linebreak"></div>
+              </li>
+              <td><a type="edit" href="/startEdit/{{task.task_id}}">✎</a></td>
+              {%elif task.done==True and task.edit==False %}
+              <li type="task" class="checked" onclick='window.location.href="/updateTodo/{{task.task_id}}"'>{{task.name}}
+                <div class="date">{{task.date}}</div>
+              </li>
+              <td><a type="edit" href="/startEdit/{{task.task_id}}">✎</a></td>
+              {%else%}
+              <form action="/submitEdit/{{task.task_id}}" method="post">
+                <input type="editInputText" id="editInputText" name="editInputText" value="{{task.name}}" required>
+                <input type="date" id="editInputDate" name="editInputDate" value="{{task.date}}" required>
+                <button type="submitEdit">✎</button>
+              </form>
+              
+              {%endif%}
+              <td><a type = "delete" href="/deleteTodo/{{task.task_id}}">X</a></td>
+          </tr>
+          {%endif%}
         {%endfor%}
 
         </div>
