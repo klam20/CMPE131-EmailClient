@@ -31,7 +31,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css
                 {{ form.password(class="form-control", placeholder="Password") }}
             {% endif %}
         </div>
-        <button type="submit">Register</button>
+        <div class="button-container">
+            <button type="submit">Register</button>
+        </div>
+        <div class="signin-container">
+            <p>Already have an account?</p>
+            <a href="{{ url_for('login') }}" class="signin-link">Sign in instead</a>
+        </div>
     </form>
 </body>
 </html>
