@@ -143,8 +143,9 @@ def chat_with_recipient(recipient_id):
      recipients = Recipient.query.filter_by(user_id=current_user.id, sender_id=current_user.id).all()
      current_user_id = current_user.id
      messages = ChatMessage.query.filter(
-        (ChatMessage.recipient_id == recipient_id) & (ChatMessage.sender_id == current_user_id)
-    ).all()
+        ((ChatMessage.recipient_id == recipient_id) & (ChatMessage.sender_id == current_user_id)) |
+        ((ChatMessage.recipient_id == current_user_id) & (ChatMessage.sender_id == recipient_id))
+     ).all()
      user = User.query.get(current_user_id)
      if form.validate_on_submit():
         message_content = form.message.data

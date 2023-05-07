@@ -33,10 +33,12 @@
       <div class="previous-messages">
         <div class="user-panel">
           <span class="user-name">User name</span>
-          <a href="#addRecipientPopup">New Message</a>
+          <form action="#addRecipientPopup" method="GET">
+            <button class="new-button" style="margin-right: 10px;">New Message</button>
+          </form>
           <form action="{{ url_for('delete_messages') }}" method="POST" style="display:inline;">
             {{ form.hidden_tag() }}
-            <button class="new-message-button">Delete Messages</button>
+            <button class="del-button">Delete Messages</button>
           </form>
         </div>
         <div class="recipient-list">
@@ -58,7 +60,7 @@
              {% if message.sender_id == user.id %}
               <p class="sent-message">{{ message.content }}</p>
              {% else %}
-              <p class="received-message">{{ message.content }}</p>
+              <p class="recipient-message">{{ message.content }}</p>
              {% endif %}
            {% endfor %}
         </div>

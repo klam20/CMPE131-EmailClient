@@ -23,9 +23,19 @@
         font-weight: bold;
 }
 
-.new-message-button {
+.del-button {
         font-size: 16px;
-        background-color: #4CAF50;
+        background-color: #780000;
+        color: #fff;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+}
+
+.new-button {
+        font-size: 16px;
+        background-color: #003049;
         color: #fff;
         padding: 5px 10px;
         border: none;
@@ -69,7 +79,7 @@
 .send-button {
         font-size: 16px;
         font-weight: bold;
-        background-color: #4CAF50;
+        background-color: #669BBC;
         color: #fff;
         padding: 10px;
         border: none;
@@ -92,12 +102,12 @@
 }
 
 .recipient-box.selected {
-	background-color: #4CAF50;
+	background-color: #669BBC;
 	color: #fff;
 }
 
 .remove-recipient-button {
-	color: red;
+	color: #C1121F;
 	float: right;
 	background: none;
 	border: none;
@@ -150,4 +160,21 @@
     position:absolute;
     left:40%;
     top:8%;
+}
+
+.sent-message {
+        align-self: flex-end;
+        background-color: #669BBC;
+        color: #fff;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin-bottom: 5px;
+}
+      
+.recipient-message {
+        align-self: flex-start;
+        background-color: #f2f2f2;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin-bottom: 5px;
 }
