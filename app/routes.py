@@ -8,6 +8,7 @@ from flask import request
 from flask import flash
 from flask import redirect
 from flask import url_for
+from flask import session
 from flask_login import current_user
 from flask_login import login_user
 from flask_login import logout_user
@@ -122,7 +123,6 @@ def chat():
     current_user_id = current_user.id
     sent_messages = ChatMessage.query.all()
     recipients = Recipient.query.filter_by(user_id=current_user.id, sender_id=current_user.id).all()
-    #recipients = Recipient.query.all()
     return render_template('chat.html', sent_messages=sent_messages, recipients=recipients, form=form, selected_recipient_id=None)
 
 @myapp_obj.route("/chat/send_message/<int:recipient_id>", methods=["GET", "POST"])
@@ -159,16 +159,19 @@ def chat_with_recipient(recipient_id):
 def add_recipient():
     form = AddRecipientForm()
     if form.validate_on_submit():
-        recipient_name = form.name.data
-        user_id = current_user.id
-        sender_id = current_user.id
-        new_recipient = Recipient(name=recipient_name, user_id=user_id, sender_id=sender_id)
-        db.session.add(new_recipient)
-        db.session.commit()
-        return redirect(url_for("chat"))
-        #return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
-
-    return render_template("add_recipient.html", form=form)
+        recipient_email = form.name.data
+        recipient = User.query.filter_by(email=recipient_email).first()
+        if recipient:
+            user_id = current_user.id
+            sender_id = current_user.id
+            new_recipient = Recipient(name=recipient_email, user_id=user_id, sender_id=sender_id)
+            db.session.add(new_recipient)
+            db.session.commit()
+            return redirect(url_for("chat"))
+        else:
+            flash('User email not found')
+            return redirect(url_for("chat"))
+    return render_template("chat.html", form=form)
 
 @myapp_obj.route('/delete_messages', methods=['POST'])
 def delete_messages():
