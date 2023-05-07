@@ -127,9 +127,8 @@ def chat():
 def send_message(recipient_id):
     if request.method == "POST":
         message_content = request.form["message"]
-        # Placeholder user id
-        user_id = 1
-        new_message = ChatMessage(content=message_content, user_id=user_id, recipient_id=recipient_id)
+        sender_id = current_user.id
+        new_message = ChatMessage(content=message_content, sender_id=sender_id, recipient_id=recipient_id)
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
@@ -140,12 +139,15 @@ def send_message(recipient_id):
 def chat_with_recipient(recipient_id):
      form = ChatForm()
      recipients = Recipient.query.all()
-     messages = ChatMessage.query.filter_by(recipient_id=recipient_id).all()
-     user = User.query.get(1)
+     current_user_id = current_user.id
+     messages = ChatMessage.query.filter(
+        (ChatMessage.recipient_id == recipient_id) & (ChatMessage.sender_id == current_user_id)
+    ).all()
+     user = User.query.get(current_user_id)
      if form.validate_on_submit():
         message_content = form.message.data
-        user_id = 1
-        new_message = ChatMessage(content=message_content, user_id=user_id, recipient_id=recipient_id)
+        sender_id = current_user_id
+        new_message = ChatMessage(content=message_content, sender_id=sender_id, recipient_id=recipient_id)
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
