@@ -77,5 +77,9 @@ def register():
         db.session.commit()
         flash('You are now a registered user!')
         return redirect(url_for('login'))
+    #added error message
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash(f'{field.capitalize()} field: {error}', 'error-message')
     return render_template('register.html', title='Register', form=form)
 

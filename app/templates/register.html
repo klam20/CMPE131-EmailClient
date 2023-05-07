@@ -1,22 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-	<title>Registration Form</title>
-<link href="{{url_for('static', filename='registerStyle.css')}}" 
-rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <link href="{{url_for('static', filename='registerStyle.css')}}" rel="stylesheet">
+    <link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 <body>
-	<form>
-		<h1>Registration Form</h1>
-	      <!-- <label for="name">Name:</label> 
-	        <input type="text" id="name" name="name" required> -->
-		<label for="email">Email:</label>
-		<input type="email" id="email" name="email" required>
-		<label for="password">Password:</label>
-		<input type="password" id="password" name="password" required>
-		<button type="submit">Register</button>
-	</form>
+    <form method="POST">
+        <h1>Registration Form</h1>
+        {% for field, errors in form.errors.items() %}
+            {% for error in errors %}
+                <div class="error-message">{{ error }}</div>
+            {% endfor %}
+        {% endfor %}
+        <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            {% if form.email.errors %}
+                {{ form.email(class="form-control error", placeholder="Email") }}
+            {% else %}
+                {{ form.email(class="form-control", placeholder="Email") }}
+            {% endif %}
+        </div>
+        <div class="input-field">
+            <i class="fas fa-lock"></i>
+            {% if form.password.errors %}
+                {{ form.password(class="form-control error", placeholder="Password") }}
+            {% else %}
+                {{ form.password(class="form-control", placeholder="Password") }}
+            {% endif %}
+        </div>
+        <button type="submit">Register</button>
+    </form>
 </body>
 </html>
 
