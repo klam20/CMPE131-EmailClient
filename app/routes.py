@@ -22,11 +22,13 @@ from .forms import LoginForm
 from .forms import ChatForm
 from .forms import AddRecipientForm
 from sqlalchemy import or_
+from app import api
 
 @myapp_obj.route("/")
 
 @myapp_obj.route("/home", methods=['GET','POST'])
 def home():
+    #api.randomImageAPI()
     db.create_all()
     form = LoginForm()
     if current_user.is_authenticated:
@@ -46,11 +48,12 @@ def home():
 @myapp_obj.route("/email", methods=['GET','POST'])
 @login_required
 def email():
-    currentUser = current_user
+    currentUserEmail = User.query.get(current_user.id).email
     form = sendEmailForm()
     todo_list = task.query.all()
-    inboxMessages = Message.query.filter_by(user_id=current_user.id)
-    messageCount = inboxMessages.count()
+    sentEmails = Message.query.filter_by(user_id=current_user.id)
+    receivedEmails = Message.query.filter_by(recipient=currentUserEmail)
+    messageCount = sentEmails.count() + receivedEmails.count()
 
 
     if form.validate_on_submit():
@@ -69,12 +72,12 @@ def email():
     
     if request.method == 'POST':
             if request.form.get('delAcc') == 'del-Acc':
-                db.session.delete(currentUser)
+                db.session.delete(current_user)
                 db.session.commit()    
                 logout_user()
                 return redirect('/home')
             
-    return render_template('email.html', todo_list=todo_list, title='Send Email', form=form, inboxMessages=inboxMessages, messageCount=messageCount)
+    return render_template('email.html', todo_list=todo_list, title='Send Email', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
 @myapp_obj.route("/login", methods=['GET','POST'])
 def login():    
     form = LoginForm()
