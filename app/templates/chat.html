@@ -30,9 +30,9 @@
     </div>
 
     <div class="app-container">
-      <div class="previous-messages">
+      <div class="left-panel">
         <div class="user-panel">
-          <span class="user-name">User name</span>
+          <span class="user-name">{{ current_user.email }}</span>
           <form action="#addRecipientPopup" method="GET">
             <button class="new-button" style="margin-right: 10px;">New Message</button>
           </form>
