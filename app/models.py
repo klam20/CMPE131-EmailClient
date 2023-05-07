@@ -48,6 +48,7 @@ class task(db.Model, UserMixin):
     date = db.Column(db.String(32))
     done = db.Column(db.Boolean)
     edit = db.Column(db.Boolean)
+    user_id = db.Column(db.Integer)
 
     def set_name(self,taskDisc):
         self.name = taskDisc

@@ -178,7 +178,8 @@ def remove_recipient(recipient_id):
 def addToDo():
     name = request.form.get("name")
     date = request.form.get("date")
-    test = task(name = name, date = date, done = False, edit = False)
+    userID = current_user.id
+    test = task(name = name, date = date, done = False, edit = False, user_id = userID)
     db.session.add(test)
     db.session.commit()
 
