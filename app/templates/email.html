@@ -8,27 +8,73 @@ rel="stylesheet">
 rel="stylesheet">
     </head>
     <body>
-<!--Compose Button-->
-        <button id="compose-btn">Compose</button>
+        <form method="GET" action="{{ url_for('search_email') }}">
+            <input type="text" name="search_query" placeholder="Search 
+emails" />
+            <input type="submit" value="Search" />
+        </form>
+
+        <a href="/home">Home</a>
+
+        <!--Compose Button-->
+        <button id="compose-btn"><i class="fas fa-pencil-alt"></i>Compose</button>
         <div id="compose-tab">
             <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
-                <p>
-                    {{form.recipient.label }}<br>
-                    {{form.recipient(size=32) }}
+                <p> {{form.recipient(size=32, placeholder="Recipients")}}
                 </p>
-                <p>
-                    {{form.subject.label }}<br>
-                    {{form.subject(size=32)}}
-                </p>
-                <p>
-                    {{form.content.label}}<br>
-                    {{form.content(size=32)}}
-                </p>
-                <p>{{ form.sendEmail()}}</p>
-              </form>
+                <p> {{form.subject(size=32, placeholder="Subject")}} </p>
+                <p> {{form.content(size=32, placeholder="Enter message")}} </p>
+                <p>{{form.sendEmail()}}</p>
+            </form>
         </div>
 
+        <div class="todo">
+            <h1>Todo List</h1>
+        <div class="linebreak"></div>
+        <form action="/addTodo" method="post">
+          <input type="taskInput" id="name" name="name" placeholder="Enter 
+task..." required>
+          <input type="date" id="date" name="date" placeholder="mm/dd" 
+required>
+          <button type="taskSubmit">+</button>
+        </form>
+
+        {%for task in todo_list%}
+        <div class="linebreak"></div>
+        <tr>
+            {%if task.done==False and task.edit==False %}
+            <li type="task" 
+onclick='window.location.href="/updateTodo/{{task.task_id}}"'>{{task.name}}
+              <div class="date">{{task.date}}</div>
+              <div class="linebreak"></div>
+            </li>
+            <td><a type="edit" 
+href="/startEdit/{{task.task_id}}">✎</a></td>
+            {%elif task.done==True and task.edit==False %}
+            <li type="task" class="checked" 
+onclick='window.location.href="/updateTodo/{{task.task_id}}"'>{{task.name}}
+              <div class="date">{{task.date}}</div>
+            </li>
+            <td><a type="edit" 
+href="/startEdit/{{task.task_id}}">✎</a></td>
+            {%else%}
+            <form action="/submitEdit/{{task.task_id}}" method="post">
+              <input type="editInputText" id="editInputText" 
+name="editInputText" value="{{task.name}}" required>
+              <input type="date" id="editInputDate" name="editInputDate" 
+value="{{task.date}}" required>
+              <button type="submitEdit">✎</button>
+            </form>
+            
+            {%endif%}
+            <td><a type = "delete" 
+href="/deleteTodo/{{task.task_id}}">X</a></td>
+        </tr>
+        {%endfor%}
+
+        </div>
+      
         <script>
             var composeBtn = document.getElementById("compose-btn");
             var composeTab = document.getElementById("compose-tab");
@@ -66,4 +112,3 @@ rel="stylesheet">
         </form>
         <p>Email Template</p>
     </body>
-</html>

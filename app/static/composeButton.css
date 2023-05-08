@@ -42,21 +42,7 @@ body {
   border-radius: 10px;
   display: none;
   z-index: 1;
-  max-width: 600px;
-  resize: both;
-  overflow: auto;
-}
-
-#compose-tab::-webkit-resizer {
-  background-color: #ddd;
-  border: 3px solid #fff;
-  border-radius: 100%;
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  top: -15px;
-  left: -15px;
-  cursor: nw-resize;
+  max-width: 500px;
 }
 
 #compose-tab input[type="email"],
@@ -98,6 +84,18 @@ body {
   height: 200px;
 }
 
+#compose-tab label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#compose-tab input[type="email"]::placeholder,
+#compose-tab input[type="text"]::placeholder,
+#compose-tab textarea::placeholder {
+  color: #999;
+}
+
 #compose-tab button[type="submit"] {
   background-color: #4CAF50;
   border: none;
@@ -112,3 +110,4 @@ body {
 #compose-tab button[type="submit"]:hover {
   background-color: #3e8e41;
 }
+
