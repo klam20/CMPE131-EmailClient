@@ -76,11 +76,11 @@ def email():
                 logout_user()
                 return redirect('/home')
 
-            if request.form.get('inbox') == 'inbox':
+            if request.form.get('Received') == 'Received':
                     return render_template('email.html', todo_list=todo_list, title='Inbox', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
 
 
-            if request.form.get('sent') == 'sent':
+            if request.form.get('Sent') == 'Sent':
                     return render_template('emailSent.html', todo_list=todo_list, title='Sent', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
      
     return render_template('email.html', todo_list=todo_list, title='Inbox', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
@@ -109,13 +109,13 @@ def viewEmail(emailId):
         return redirect('/email')
     
     if request.method == 'POST':
-            if request.form.get('delAcc') == 'del-Acc':
+            if request.form.get('delAcc') == 'Delete Account':
                 db.session.delete(current_user)
                 db.session.commit()    
                 logout_user()
                 return redirect('/home')
 
-            if request.form.get('delEmail') == 'delEmail':
+            if request.form.get('delEmail') == 'Delete Email':
                 deleteEmail = Message.query.get(emailId)
                 db.session.delete(deleteEmail)
                 db.session.commit()

@@ -146,8 +146,37 @@
     padding:10px;
 }
 
+
 .inbox {
+    padding:10px;
+    border-width:1px;
     position:absolute;
-    left:40%;
-    top:8%;
+    left:35%;
+    top:14%;
+}
+
+.list-group-item {
+        padding-right:600px;
+}
+
+.deleteAccount {
+        position:absolute;
+        top:10%;
+        right:2.5%;
+}
+
+.searchBar {
+        position:absolute;
+        top:10%;
+        left:63%;
+}
+
+.navbar {
+        position: relative;
+        left:50%;
+}
+
+.inboxNav {
+        position:relative;
+        left:80.5%
 }
