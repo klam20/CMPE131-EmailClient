@@ -1,3 +1,142 @@
+.app-container {
+        display: flex;
+}
+
+.previous-messages {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        height: 500px;
+        border: 1px solid black;
+}
+
+.user-panel {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #f2f2f2;
+        border-bottom: 1px solid black;
+}
+
+.user-name {
+        font-weight: bold;
+}
+
+.new-message-button {
+        font-size: 16px;
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+}
+
+.chat-container {
+        width: 400px;
+        height: 500px;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+}
+
+.message-box {
+        height: 90%;
+        overflow-y: auto;
+        padding: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.send-message {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 10%;
+        padding: 10px;
+        background-color: #f2f2f2;
+}
+
+
+.message-input {
+        flex: 1;
+        margin-right: 10px;
+}
+
+.send-button {
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+}
+
+.recipient-list {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	margin: 10px;
+}
+
+.recipient-box {
+	padding: 5px;
+	border: 1px solid black;
+	border-radius:5px;
+	cursor: pointer;
+}
+
+.recipient-box.selected {
+	background-color: #4CAF50;
+	color: #fff;
+}
+
+.remove-recipient-button {
+	color: red;
+	float: right;
+	background: none;
+	border: none;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        z-index: 100;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+}
+      
+.popup:target {
+        display: block;
+}
+      
+.overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 50;
+}
+      
+.overlay:target {
+        display: block;
+}
+
 .centerForm {
     display:block;
     margin-left:25%;
@@ -5,4 +144,10 @@
     margin-top:10%;
     border: 1px solid black;
     padding:10px;
+}
+
+.inbox {
+    position:absolute;
+    left:40%;
+    top:8%;
 }

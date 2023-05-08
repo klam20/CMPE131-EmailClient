@@ -61,6 +61,24 @@
         Working on search bar
         
 ### 2023-05-3 at 20:00
+    -Jeffrey, Bryant, Anthony, Nicole meeting
+    -Discussed current state of email client with pull requests approved
+    
+    Next tasks:
+    Jeffrey:
+        Develop notification settings + audio for web client
+        Develop inbox display for emails
+         
+    Nicole:
+        Research front-end theme for web client
+        Research, develop another functional requirement for filtering emails by category
+         
+    Anthony:
+        To-Do-List, making a unique to-do-list for each user
+        
+    Bryant:
+        Fixing merge conflicts with chat message into main
+        Researching, implementing display for sent and received messages for the chat
 
 ### 2023-05-10 at 20:00
 

@@ -10,7 +10,36 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css
 <body>
     <form method="POST">
         <h1>Registration Form</h1>
-        {% for field, errors in form.errors.items() %}
+
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="input-field">
+                <i class="fas fa-envelope"></i>
+                <p>
+                    {{ form.email.label }}<br>
+                    {{ form.email(size=32) }}
+                </p>
+            </div>
+
+            <div class="input-field">
+                <i class="fas fa-lock"></i>
+                {{ form.password.label }}<br>
+                {{ form.password(size=32) }}
+            </div>
+
+            <div class="button-container">
+                <p>{{ form.submit()}}</p>
+            </div>
+
+            <div class="signin-container">
+                <p>Already have an account?</p>
+                <a href="{{ url_for('login') }}" class="signin-link">Sign in instead</a>
+            </div>
+         
+          </form>
+
+          <!--
+              {% for field, errors in form.errors.items() %}
             {% for error in errors %}
                 <div class="error-message">{{ error }}</div>
             {% endfor %}
@@ -39,6 +68,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css
             <a href="{{ url_for('login') }}" class="signin-link">Sign in instead</a>
         </div>
     </form>
+          -->
+      
 </body>
 </html>
 

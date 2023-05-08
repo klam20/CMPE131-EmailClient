@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Chat Messages</title>
+   <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
+  </head>
+  <body>
+    <div id="addRecipientPopup" class="popup">
+     <div class="popup-content">
+      <a href="#close" class="close-button">&times;</a>
+      <h2>New message</h2>
+      <form action="{{ url_for('add_recipient') }}" method="POST">
+        {{ form.hidden_tag() }}
+        To: {{ form.name(id="to") }}
+        {{ form.submit(value="Next") }}
+      </form>
+     </div>
+    </div>
+    <div id="overlay" class="overlay" onclick="location.href='#';">
+    </div>
+
+    <div class="app-container">
+      <div class="previous-messages">
+        <div class="user-panel">
+          <span class="user-name">User name</span>
+          <a href="#addRecipientPopup">New Message</a>
+          <form action="{{ url_for('delete_messages') }}" method="POST" style="display:inline;">
+            {{ form.hidden_tag() }}
+            <button class="new-message-button">Delete Messages</button>
+          </form>
+        </div>
+        <div class="recipient-list">
+          {% for recipient in recipients %}
+            <div class="recipient-box {% if recipient.id == selected_recipient_id %}selected{% endif %}" onclick="location.href='{{ url_for('chat_with_recipient', recipient_id=recipient.id) }}'">
+               {{ recipient.name }}
+               <form action="{{ url_for('remove_recipient', recipient_id=recipient.id) }}" method="POST" style="display:inline;">
+                 {{ form.hidden_tag() }}
+                 <button class="remove-recipient-button">x</button>
+               </form>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="chat-container">
+        <div class="message-box">
+          <!-- Current messages will be displayed here -->
+           {% for message in messages %}
+             {% if message.sender_id == user.id %}
+              <p class="sent-message">{{ message.content }}</p>
+             {% else %}
+              <p class="received-message">{{ message.content }}</p>
+             {% endif %}
+           {% endfor %}
+        </div>
+        <div class="send-message">
+        {% if selected_recipient_id %}
+         <form action="{{ url_for('send_message', recipient_id=selected_recipient_id) }}" method="POST">
+        {% else %}
+         <form method ="POST">
+        {% endif %}
+           {{ form.hidden_tag() }}
+          <input class="message-input" name="message" type="text" placeholder="Type your message here...">
+          <button class="send-button">Send</button>
+         </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
