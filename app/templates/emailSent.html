@@ -316,8 +316,8 @@
             <p>{{currentUserEmail}}</p>
             <a href="" class="list-group-item list-group-item-action active">Inbox</a>
             {%if messageCount > 0%}
-              {%for msg2 in receivedEmails%}
-                <a href="email/{{msg2.id}}" class="list-group-item list-group-item-action">{{msg2.subject}}</a>
+              {%for msg in sentEmails%}
+                <a href="email/{{msg.id}}" class="list-group-item list-group-item-action">{{msg.subject}}</a>
               {%endfor%}
             {%endif%}
         </div>

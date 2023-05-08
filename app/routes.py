@@ -55,14 +55,13 @@ def email():
     receivedEmails = Message.query.filter_by(recipient=currentUserEmail)
     messageCount = sentEmails.count() + receivedEmails.count()
 
-
     if form.validate_on_submit():
-
+        
         message = Message(
             subject=form.subject.data,
             recipient=form.recipient.data,
             content=form.content.data,
-	    user_id=current_user.id
+	        user_id=current_user.id,
         )
         db.session.add(message)
         db.session.commit()
@@ -76,8 +75,54 @@ def email():
                 db.session.commit()    
                 logout_user()
                 return redirect('/home')
-            
-    return render_template('email.html', todo_list=todo_list, title='Send Email', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
+
+            if request.form.get('inbox') == 'inbox':
+                    return render_template('email.html', todo_list=todo_list, title='Inbox', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
+
+
+            if request.form.get('sent') == 'sent':
+                    return render_template('emailSent.html', todo_list=todo_list, title='Sent', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
+     
+    return render_template('email.html', todo_list=todo_list, title='Inbox', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
+
+@myapp_obj.route('/email/<int:emailId>', methods=['GET','POST'])
+def viewEmail(emailId):
+    currentUserEmail = User.query.get(current_user.id).email
+    form = sendEmailForm()
+    todo_list = task.query.all()
+    sentEmails = Message.query.filter_by(user_id=current_user.id)
+    receivedEmails = Message.query.filter_by(recipient=currentUserEmail)
+    messageCount = sentEmails.count() + receivedEmails.count()
+
+    if form.validate_on_submit():
+        
+        message = Message(
+            subject=form.subject.data,
+            recipient=form.recipient.data,
+            content=form.content.data,
+	        user_id=current_user.id,
+        )
+        db.session.add(message)
+        db.session.commit()
+
+        flash('Email is sent')
+        return redirect('/email')
+    
+    if request.method == 'POST':
+            if request.form.get('delAcc') == 'del-Acc':
+                db.session.delete(current_user)
+                db.session.commit()    
+                logout_user()
+                return redirect('/home')
+
+            if request.form.get('return') == 'return':
+                    return redirect('/email')
+
+
+    email = Message.query.get(emailId)
+    return render_template('viewEmail.html', todo_list=todo_list, title='View Email', form=form, currentUserEmail=currentUserEmail, email=email)
+
+
 @myapp_obj.route("/login", methods=['GET','POST'])
 def login():    
     form = LoginForm()
