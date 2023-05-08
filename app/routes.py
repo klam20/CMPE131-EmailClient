@@ -102,19 +102,27 @@ def login():
 @myapp_obj.route("/register", methods=['GET','POST'])
 def register():
     form = RegistrationForm()
+    
+
     if form.validate_on_submit():
         emailExists = bool(User.query.filter_by(email=form.email.data).first())
+        #for field, errors in form.errors.items():
+            #for error in errors:
+               # flash(f'{field.capitalize()} field: {error}', 'error-message')
+
         if(emailExists):
             flash(f'Account already exists')
-            return redirect(url_for('register'))
+            return redirect("/register")
+
         else:
             new_user = User(email=form.email.data)
             new_user.set_password(form.password.data)
             db.session.add(new_user)
             db.session.commit()
             flash('You are now a registered user!')
-            return redirect(url_for('login'))
-    return render_template('register.html', title='Register', registerForm = form)
+            return redirect("/login")
+       
+    return render_template('register.html', title='Register', form = form)
 
 @myapp_obj.route("/chat")
 def chat():
