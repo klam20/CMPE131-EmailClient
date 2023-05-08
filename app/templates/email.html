@@ -2,8 +2,6 @@
 <html>
     <head>
         <title>Email</title>
-	 <link href="{{url_for('static', filename='composeStyle.css')}}" 
-rel="stylesheet">
     </head>
     <body>
         <form method="GET" action="{{ url_for('search_email') }}">
@@ -12,6 +10,71 @@ rel="stylesheet">
         </form>
 
       <a href="/home">Home</a>
+
+        <!--CSS for Compose Button-->
+        <style>
+            /* Body styles */
+            body {
+              background-color: #f9f9f9;
+              font-family: Arial, sans-serif;
+              font-size: 16px;
+            }
+
+            /* Compose button styles */
+            #compose-btn {
+              position: fixed;
+              bottom: 30px;
+              right: 30px;
+              background-color: #4CAF50;
+              color: white;
+              padding: 15px;
+              border: none;
+              border-radius: 50%;
+              cursor: pointer;
+            }
+
+            /* Compose tab styles */
+            #compose-tab {
+              position: fixed;
+              bottom: 30px;
+              right: 30px;
+              background-color: #fff;
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+              padding: 20px;
+              border-radius: 10px;
+              display: none;
+              z-index: 1;
+              max-width: 600px;
+            }
+
+            #compose-tab input[type="email"],
+            #compose-tab input[type="text"],
+            #compose-tab textarea {
+              padding: 10px;
+              margin-bottom: 20px;
+              width: 100%; 
+              border: none;
+              border-radius: 5px;
+              background-color: #f5f5f5;
+              font-size: 16px;
+              color: #333;
+            }
+
+            #compose-tab button[type="submit"] {
+              background-color: #4CAF50;
+              border: none; 
+              color: #fff; 
+              padding: 10px 20px;
+              border-radius: 5px;
+              font-size: 16px;
+              cursor: pointer;
+              transition: background-color 0.3s ease;
+            }
+
+            #compose-tab button[type="submit"]:hover {
+              background-color: #3e8e41;
+            }
+        </style>
 
         <style>
           /* Body styles */
