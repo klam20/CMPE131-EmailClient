@@ -306,20 +306,21 @@
         <!--Email Inbox-->
         <form method="post">
           <div class="btn-group" role="group" aria-label="Basic example"></div>
-          <input type="submit" value="inbox" name="inbox"/>
-          <input type="submit" value="sent" name="sent"/>
+          <input type="submit" value="return" name="return"/>
+          <input type="submit" value="delEmail" name="delEmail"/>
           </div>
       </form>
 
         <div class = "inbox">
           <h1>Inbox</h1>
             <p>{{currentUserEmail}}</p>
-            <a href="" class="list-group-item list-group-item-action active">Inbox</a>
-            {%if messageCount > 0%}
-              {%for msg2 in receivedEmails%}
-                <a href="email/{{msg2.id}}" class="list-group-item list-group-item-action">{{msg2.subject}}</a>
-              {%endfor%}
-            {%endif%}
+            <hr>
+                <div>
+                  <p>Recipient: {{email.recipient}}</p>
+                  <p>Subject: {{email.subject}}</p>
+                  <p>Content: {{email.content}}</p>                 
+                </div>
+                
         </div>
 
         <!--Compose Button-->
