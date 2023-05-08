@@ -115,6 +115,12 @@ def viewEmail(emailId):
                 logout_user()
                 return redirect('/home')
 
+            if request.form.get('delEmail') == 'delEmail':
+                deleteEmail = Message.query.get(emailId)
+                db.session.delete(deleteEmail)
+                db.session.commit()
+                return redirect('/email')
+
             if request.form.get('return') == 'return':
                     return redirect('/email')
 
