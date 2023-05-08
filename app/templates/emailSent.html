@@ -313,13 +313,26 @@
             <input class = "inboxNav" type="submit" value="Received" name="Received"/>
             <input class = "inboxNav" type="submit" value="Sent" name="Sent"/>
           </form>
-            <a href="" class="list-group-item list-group-item-action active">Inbox</a>
+            
+          <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="inboxWidth">Inbox</h5>
+              </div>
+            </a>
+          </div>
+            
             {%if messageCount > 0%}
-              {%for msg in sentEmails%}
-                <a href="email/{{msg.id}}" class="list-group-item list-group-item-action">{{msg.subject}}</a>
+              {%for msg2 in sentEmails%}
+              <a href="email/{{msg2.id}}" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">{{msg2.subject}}</h5>
+                  <small>{{msg2.timestamp}}</small>
+                </div>
+              </a>
               {%endfor%}
-            {%endif%}
-        </div>
+            {%endif%}            
+      </div>
 
         <!--Compose Button-->
         <button id="compose-btn">Compose</button>

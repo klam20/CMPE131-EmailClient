@@ -155,7 +155,11 @@
     top:14%;
 }
 
-.list-group-item {
+.mb-1{
+        padding-right:250px;
+}
+
+.inboxWidth {
         padding-right:600px;
 }
 
@@ -178,5 +182,4 @@
 
 .inboxNav {
         position:relative;
-        left:80.5%
 }

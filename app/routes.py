@@ -23,6 +23,7 @@ from .forms import ChatForm
 from .forms import AddRecipientForm
 from sqlalchemy import or_
 from app import api
+from datetime import datetime
 
 @myapp_obj.route("/")
 
@@ -51,17 +52,18 @@ def email():
     currentUserEmail = User.query.get(current_user.id).email
     form = sendEmailForm()
     todo_list = task.query.all()
-    sentEmails = Message.query.filter_by(user_id=current_user.id)
-    receivedEmails = Message.query.filter_by(recipient=currentUserEmail)
+    sentEmails = Message.query.filter_by(user_id=current_user.id).order_by(Message.id.desc())
+    receivedEmails = Message.query.filter_by(recipient=currentUserEmail).order_by(Message.id.desc())
     messageCount = sentEmails.count() + receivedEmails.count()
-
+    
     if form.validate_on_submit():
-        
+        sourceDate = datetime.now()
         message = Message(
             subject=form.subject.data,
             recipient=form.recipient.data,
             content=form.content.data,
 	        user_id=current_user.id,
+            timestamp = sourceDate
         )
         db.session.add(message)
         db.session.commit()
