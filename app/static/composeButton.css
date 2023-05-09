@@ -35,14 +35,14 @@ body {
 #compose-tab {
   position: fixed;
   bottom: 30px;
-  right: 30px;
+  right: 170px;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   border-radius: 10px;
   display: none;
   z-index: 1;
-  max-width: 500px;
+  max-width: 400px;
 }
 
 #compose-tab input[type="email"],
@@ -52,62 +52,39 @@ body {
   margin-bottom: 20px;
   width: 100%;
   border: none;
-  border-radius: 5px;
-  background-color: #f5f5f5;
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
   font-size: 16px;
   color: #333;
-}
-
-#compose-tab input[type="email"],
-#compose-tab input[type="text"] {
-  width: 48%;
-}
-
-#compose-tab input[type="email"] {
-  float: left;
-  margin-right: 4%;
-}
-
-#compose-tab input[type="text"] {
-  float: right;
 }
 
 #compose-tab textarea {
-  padding: 10px;
+  resize: none;
+  height: 150px;
+}
+
+#compose-tab .form-group {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 20px;
-  width: 100%;
-  border: none;
-  border-radius: 5px;
-  background-color: #f5f5f5;
-  font-size: 16px;
-  color: #333;
-  height: 200px;
 }
 
-#compose-tab label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
+#compose-tab .form-group label {
+  margin-bottom: 10px;
 }
 
-#compose-tab input[type="email"]::placeholder,
-#compose-tab input[type="text"]::placeholder,
-#compose-tab textarea::placeholder {
-  color: #999;
-}
-
-#compose-tab button[type="submit"] {
+#send-btn {
   background-color: #4CAF50;
-  border: none;
-  color: #fff;
-  padding: 10px 20px;
+  border: none; 
+  color: #fff; 
+  padding: 10px;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-#compose-tab button[type="submit"]:hover {
+#send-btn:hover {
   background-color: #3e8e41;
 }
 
