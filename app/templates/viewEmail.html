@@ -317,9 +317,11 @@
         <div class = "inbox">
             <hr>
                 <div>
+                  <p>Sender: {{email.sender}}</p>
                   <p>Recipient: {{email.recipient}}</p>
                   <p>Subject: {{email.subject}}</p>
-                  <p>Content: {{email.content}}</p>      
+                  <p>Content: {{email.content}}</p>
+                  <p>Timestamp: {{email.timestamp}}</p>      
                   <form method="post">
                     <input type="submit" value="Delete Email" name="delEmail"/>   
                   </form>  

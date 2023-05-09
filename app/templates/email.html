@@ -6,17 +6,33 @@
         <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
     </head>
     <body>
+      <!--Email Nav Bar-->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/email">Email <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+        <form method="post">
+          <input type="submit" value="Delete Account" name="delAcc" class="deleteAccount"/>
+      </form>
+      </nav>
+
       <div class ="searchBar">
         <form method="GET" action="{{ url_for('search_email') }}">
           <input type="text" name="search_query" placeholder="Search emails" />
           <input type="submit" value="Search" />
       </form>
       </div>
-
-      <div class ="navbar">
-        <a href="/home">Home</a>
-      </div>
-      <hr>
 
         <!--CSS for Compose Button-->
         <style>
@@ -93,14 +109,16 @@
           
           /* Form styles */
           .todo {
-            display: flex;
+            margin-top:50px;
+            margin-left:50px;
+            position:absolute;
+            display: block;
             flex-wrap: wrap;
             width: 30%; 
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 40px;
-            
           }
           
           
@@ -327,9 +345,10 @@
               {%if messageCount > 0%}
                 {%for msg2 in receivedEmails%}
                 <a href="email/{{msg2.id}}" class="list-group-item list-group-item-action" aria-current="true">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{msg2.subject}}</h5>
-                    <small>{{msg2.timestamp}}</small>
+                  <div class="d-flex w-100">
+                    <h5 class="inboxSender">{{msg2.sender}}</h5>
+                    <h5 class="inboxSubject">{{msg2.subject}}</h5>
+                    <h5 class="inboxTimestamp">{{msg2.timestamp}}</h5>
                   </div>
                 </a>
                 {%endfor%}
@@ -427,10 +446,6 @@
             </ul>
         {% endif %}
     {% endwith %}
-
-        <form method="post">
-            <input type="submit" value="Delete Account" name="delAcc" class="deleteAccount"/>
-        </form>
 
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

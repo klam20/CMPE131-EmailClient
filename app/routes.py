@@ -58,12 +58,14 @@ def email():
     
     if form.validate_on_submit():
         sourceDate = datetime.now()
+        
         message = Message(
+            sender = currentUserEmail,
             subject=form.subject.data,
             recipient=form.recipient.data,
             content=form.content.data,
 	        user_id=current_user.id,
-            timestamp = sourceDate
+            timestamp = sourceDate.strftime("%x")
         )
         db.session.add(message)
         db.session.commit()
@@ -85,7 +87,7 @@ def email():
             if request.form.get('Sent') == 'Sent':
                     return render_template('emailSent.html', todo_list=todo_list, title='Sent', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
      
-    return render_template('email.html', todo_list=todo_list, title='Inbox', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
+    return render_template('email.html', todo_list=todo_list, title='Inbox', form=form, sender = currentUserEmail, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
 
 @myapp_obj.route('/email/<int:emailId>', methods=['GET','POST'])
 def viewEmail(emailId):
@@ -97,12 +99,13 @@ def viewEmail(emailId):
     messageCount = sentEmails.count() + receivedEmails.count()
 
     if form.validate_on_submit():
-        
         message = Message(
+            sender = currentUserEmail,
             subject=form.subject.data,
             recipient=form.recipient.data,
             content=form.content.data,
 	        user_id=current_user.id,
+            timestamp = sourceDate.strftime("%x")
         )
         db.session.add(message)
         db.session.commit()

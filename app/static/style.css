@@ -141,9 +141,11 @@
     display:block;
     margin-left:25%;
     margin-right:25%;
-    margin-top:10%;
-    border: 1px solid black;
-    padding:10px;
+    margin-top:5%;
+    border: 0.5px solid #669BBC;
+    background-color: #FDF0D5;
+    border-radius:5%;
+    padding:25px;
 }
 
 
@@ -155,9 +157,7 @@
     top:14%;
 }
 
-.mb-1{
-        padding-right:250px;
-}
+
 
 .inboxWidth {
         padding-right:600px;
@@ -171,15 +171,27 @@
 
 .searchBar {
         position:absolute;
-        top:10%;
+        top:12%;
         left:63%;
 }
 
-.navbar {
-        position: relative;
-        left:50%;
-}
 
 .inboxNav {
         position:relative;
+}
+
+.inboxSender {
+        padding-right:10px;
+        border-right:gray solid 1px;
+}
+
+.inboxSubject {
+        padding-left:10px;
+        padding-right:10px;
+}
+
+.inboxTimestamp {
+        position:absolute;
+        right:0;
+        padding-right:20px;
 }

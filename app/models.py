@@ -7,6 +7,7 @@ from app import myapp_obj
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    sender = db.Column(db.String(60))
     recipient = db.Column(db.String(60), nullable=False)
     subject = db.Column(db.String(60), nullable=False)
     content = db.Column(db.String(200), nullable=False)
