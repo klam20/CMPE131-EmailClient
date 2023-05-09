@@ -127,7 +127,8 @@ def viewEmail(emailId):
                 return redirect('/email')
 
             if request.form.get('return') == 'return':
-                    return redirect('/email')
+                return redirect('/email')
+            
 
 
     email = Message.query.get(emailId)
