@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from app import *
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms.validators import DataRequired, Email, EqualTo
 
 class ChatForm(FlaskForm):
     name = StringField('Recipient Name', validators=[DataRequired()])
@@ -11,8 +11,7 @@ class ChatForm(FlaskForm):
 class AddRecipientForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     submit = SubmitField("Add Recipient")
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Email, EqualTo
+
 
 class sendEmailForm(FlaskForm):
     recipient = StringField('Recipient', validators=[DataRequired()])
