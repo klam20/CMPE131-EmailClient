@@ -235,6 +235,9 @@ h2 {
         min-height: 100vh;
 }
 
- {
-    color: #780000;   
+.logo {
+      border:none;
+      border-radius:50%;
+      height:50px;
+      width:50px; 
 }
