@@ -23,6 +23,7 @@ from .forms import ChatForm
 from .forms import AddRecipientForm
 from sqlalchemy import or_
 from app import api
+from datetime import datetime
 
 @myapp_obj.route("/")
 
@@ -51,17 +52,20 @@ def email():
     currentUserEmail = User.query.get(current_user.id).email
     form = sendEmailForm()
     todo_list = task.query.all()
-    sentEmails = Message.query.filter_by(user_id=current_user.id)
-    receivedEmails = Message.query.filter_by(recipient=currentUserEmail)
+    sentEmails = Message.query.filter_by(user_id=current_user.id).order_by(Message.id.desc())
+    receivedEmails = Message.query.filter_by(recipient=currentUserEmail).order_by(Message.id.desc())
     messageCount = sentEmails.count() + receivedEmails.count()
-
+    
     if form.validate_on_submit():
+        sourceDate = datetime.now()
         
         message = Message(
+            sender = currentUserEmail,
             subject=form.subject.data,
             recipient=form.recipient.data,
             content=form.content.data,
 	        user_id=current_user.id,
+            timestamp = sourceDate.strftime("%x")
         )
         db.session.add(message)
         db.session.commit()
@@ -70,20 +74,20 @@ def email():
         return redirect('/email')
     
     if request.method == 'POST':
-            if request.form.get('delAcc') == 'del-Acc':
+            if request.form.get('delAcc') == 'Delete Account':
                 db.session.delete(current_user)
                 db.session.commit()    
                 logout_user()
                 return redirect('/home')
 
-            if request.form.get('inbox') == 'inbox':
+            if request.form.get('Received') == 'Received':
                     return render_template('email.html', todo_list=todo_list, title='Inbox', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
 
 
-            if request.form.get('sent') == 'sent':
+            if request.form.get('Sent') == 'Sent':
                     return render_template('emailSent.html', todo_list=todo_list, title='Sent', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
      
-    return render_template('email.html', todo_list=todo_list, title='Inbox', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
+    return render_template('email.html', todo_list=todo_list, title='Inbox', form=form, sender = currentUserEmail, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
 
 @myapp_obj.route('/email/<int:emailId>', methods=['GET','POST'])
 def viewEmail(emailId):
@@ -95,12 +99,13 @@ def viewEmail(emailId):
     messageCount = sentEmails.count() + receivedEmails.count()
 
     if form.validate_on_submit():
-        
         message = Message(
+            sender = currentUserEmail,
             subject=form.subject.data,
             recipient=form.recipient.data,
             content=form.content.data,
 	        user_id=current_user.id,
+            timestamp = sourceDate.strftime("%x")
         )
         db.session.add(message)
         db.session.commit()
@@ -109,20 +114,21 @@ def viewEmail(emailId):
         return redirect('/email')
     
     if request.method == 'POST':
-            if request.form.get('delAcc') == 'del-Acc':
+            if request.form.get('delAcc') == 'Delete Account':
                 db.session.delete(current_user)
                 db.session.commit()    
                 logout_user()
                 return redirect('/home')
 
-            if request.form.get('delEmail') == 'delEmail':
+            if request.form.get('delEmail') == 'Delete Email':
                 deleteEmail = Message.query.get(emailId)
                 db.session.delete(deleteEmail)
                 db.session.commit()
                 return redirect('/email')
 
             if request.form.get('return') == 'return':
-                    return redirect('/email')
+                return redirect('/email')
+            
 
 
     email = Message.query.get(emailId)
@@ -297,3 +303,5 @@ def search_email():
         )
     ).all()
     return render_template('search_results.html', search_results=search_results)
+
+

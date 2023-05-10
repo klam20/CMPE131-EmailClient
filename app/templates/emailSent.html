@@ -3,36 +3,70 @@
     <head>
         <title>Email</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+        <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
     </head>
     <body>
-        <form method="GET" action="{{ url_for('search_email') }}">
-            <input type="text" name="search_query" placeholder="Search emails" />
-            <input type="submit" value="Search" />
+      <!--Email Nav Bar-->
+      <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(90deg, hsla(201, 100%, 14%, 1) 23%, hsla(203, 39%, 57%, 1) 100%);">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          
+          <ul class="navbar-nav">
+            <li class="nav-item ">
+              <img src = "static/img.jpg" class = "logo">
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/email">Email <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+        <form method="post" action="/home">
+          <button type="submit" value="Delete Account" name="delAcc">Delete Account</button>
         </form>
+    </nav>
 
-      <a href="/home">Home</a>
-      <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
+<div class = "email-background">
+
+
+      <div class ="searchBar">
+        <form method="GET" action="{{ url_for('search_email') }}">
+          <input type="text" name="search_query" placeholder="Search emails" />
+          <button type="submit" value="Search">Submit</button>
+      </form>
+      </div>
 
         <!--CSS for Compose Button-->
         <style>
             /* Body styles */
-            body {
-              background-color: #f9f9f9;
-              font-family: Arial, sans-serif;
-              font-size: 16px;
-            }
+
 
             /* Compose button styles */
             #compose-btn {
+              background-color: #669BBC;
               position: fixed;
               bottom: 30px;
               right: 30px;
-              background-color: #4CAF50;
-              color: white;
-              padding: 15px;
-              border: none;
-              border-radius: 50%;
+              color: #FDF0D5;
+              padding: 10px;
+              border: solid 2px;
+              border-radius: 10%;
+              cursor: pointer;
+            }
+
+            #compose-btn:hover {
+              background-color: #FDF0D5;
+              color: black;
+              position: fixed;
+              bottom: 30px;
+              right: 30px;
+              padding: 10px;
+              border: solid 2px;
+              border-radius: 10%;
               cursor: pointer;
             }
 
@@ -80,32 +114,23 @@
         </style>
 
         <style>
-          /* Body styles */
-          body {
-            background-color: #f9f9f9;
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-          }
           
           /* Form styles */
           .todo {
-            display: flex;
+            margin-top:50px;
+            margin-left:15px;
+            position:absolute;
+            display: block;
             flex-wrap: wrap;
-            width: 30%; 
+            width: 34%; 
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 40px;
-            
           }
           
           
-          form {
-            display: flex;
-            flex-wrap: wrap;
-            flex-grow: 1;
-          }
-          
+
           
           div h1 {
             text-align: left;
@@ -117,11 +142,16 @@
             margin-bottom: 8px;
             color: #555;
           }
+
+          div [type="task"] {
+            display: flex;
+            flex-grow: 1;
+          }
           
-          form input[type="taskInput"] {
+          input[type="taskInput"] {
             padding: 10px;
             margin-bottom: 20px;
-            height: 20px;
+            height: 40px;
             border: none;
             border-radius: 5px;
             background-color: #f5f5f5;
@@ -131,20 +161,20 @@
             text-overflow: ellipsis;
           }
           
-          form input[type="date"] {
+          input[type="date"] {
             padding: 10px;
             margin-bottom: 20px;
-            height: 20px;
+            height: 40px;
             border: none;
             border-radius: 5px;
             background-color: #f5f5f5;
             font-size: 16px;
             margin-left: 10px;
-            width: 120px;
+            max-width: 130px;
             color: #333;
           }
           
-          form button[type="taskSubmit"] {
+          button[type="taskSubmit"] {
             background-color: #4e5fc4;
             border: none;
             color: #fff;
@@ -153,8 +183,8 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             height: 40px;
-            width: 40px;
-            margin-left: 10px;
+            min-width: 40px;
+            margin-left: 8px;
           }
           
           .linebreak {
@@ -171,17 +201,18 @@
             padding-top: 10px;
             padding-bottom: 10px;
             padding-left: 40px;
-            padding-right: 8px;
+            padding-right: 10px;
             background: #eee;
             font-size: 16px;
             transition: 0.2s;
             list-style-type: none;
             flex-grow: 1;
+            display: flex;
             margin-left: 2px;
             margin-right: 2px;
             margin-bottom: 2px;
             border-radius: 5px;
-            height: 20px;
+            height: 40px;
           }
           
           div li[type="task"]:hover {
@@ -210,16 +241,14 @@
             height: 15px;
             width: 7px;
           }
-          .date {
+          div [type="date"] {
             font-family: Arial, sans-serif;
-            font-size: 16px;
-            float: right;
-            margin-top: 2px;
-            margin-bottom: 2px;
-            margin-right: 15px;
+            float: right; 
+            flex-grow: 1;
+            text-align: right;
           }
           
-          div a[type="delete"]{
+          div button[type="delete"]{
             background-color: #ce7474;
             border: none;
             color: #fff;
@@ -227,28 +256,28 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            height: 30px;
-            width: 40px;
+            height: 40px;
+            min-width: 40px;
             margin-left: 8px;
             margin-bottom: 2px;
             text-align: center;
-            padding-top: 10px;
+            padding-top: 4px;
           }
           
-          div a[type="delete"]:link { text-decoration: none; }
+          div button[type="delete"]:link { text-decoration: none; }
           
           
-          div a[type="delete"]:visited { text-decoration: none; }
+          div button[type="delete"]:visited { text-decoration: none; }
           
           
-          div a[type="delete"]:hover { 
+          div button[type="delete"]:hover { 
             text-decoration: none; 
             background-color: #863737;
           }
           
-          div a[type="delete"]:active { text-decoration: none; }
+          div button[type="delete"]:active { text-decoration: none; }
           
-          div a[type="edit"] { 
+          div button[type="edit"] { 
             background-color: #46b478;
             border: none;
             color: #fff;
@@ -256,33 +285,31 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            height: 32px;
-            width: 40px;
+            min-width: 40px;
+            height: 40px;
             margin-left: 8px;
             margin-bottom: 2px;
-            text-align: center;
-            padding-top: 8px;
           }
           
-          div a[type="edit"]:link { text-decoration: none; }
+          div button[type="edit"]:link { text-decoration: none; }
           
           
-          div a[type="edit"]:visited { text-decoration: none; }
+          div button[type="edit"]:visited { text-decoration: none; }
           
           
-          div a[type="edit"]:hover { 
+          div button[type="edit"]:hover { 
             text-decoration: none; 
             background-color: #2d744d;
           }
           
-          div a[type="delete"]:active { text-decoration: none; }     
+          div button[type="delete"]:active { text-decoration: none; }     
 
-          form input[type="editInputText"] {
+          input[type="editInputText"] {
             flex-grow: 1;
-            max-height: 35px;
+            min-height: 40px;
           }
 
-          form button[type="submitEdit"] {
+          button[type="submitEdit"] {
             background-color: #46b478;
             border: none;
             color: #fff;
@@ -290,13 +317,18 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            width: 40px;
+            min-width: 40px;
             height: 40px;
             margin-left: 8px;
             margin-bottom: 2px;
           }
 
-          form input[type="editInputText"] {
+          button[type="submitEdit"]:hover { 
+            text-decoration: none; 
+            background-color: #2d744d;
+          }
+
+          input[type="editInputText"] {
             border-radius: 5px;
             margin-bottom: 2px;
             height: 38px;
@@ -304,26 +336,37 @@
         </style>
 
         <!--Email Inbox-->
-        <form method="post">
-          <div class="btn-group" role="group" aria-label="Basic example"></div>
-          <input type="submit" value="inbox" name="inbox"/>
-          <input type="submit" value="sent" name="sent"/>
-          </div>
-      </form>
+        
+        
 
         <div class = "inbox">
-          <h1>Inbox</h1>
-            <p>{{currentUserEmail}}</p>
-            <a href="" class="list-group-item list-group-item-action active">Inbox</a>
-            {%if messageCount > 0%}
-              {%for msg in sentEmails%}
-                <a href="email/{{msg.id}}" class="list-group-item list-group-item-action">{{msg.subject}}</a>
-              {%endfor%}
-            {%endif%}
+          <form method="post">
+            <button  type="submit" value="Received" name="Received">Received</button>
+            <button  type="submit" value="Sent" name="Sent">Sent</button>
+          </form>
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action" style="background-color:#FDF0D5" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="inboxWidth">Inbox</h5>
+                </div>
+              </a>
+            </div>
+              
+              {%if messageCount > 0%}
+                {%for msg2 in sentEmails%}
+                <a href="email/{{msg2.id}}" class="list-group-item list-group-item-action" aria-current="true">
+                  <div class="d-flex w-100">
+                    <h5 class="inboxSender">{{msg2.sender}}</h5>
+                    <h5 class="inboxSubject">{{msg2.subject}}</h5>
+                    <h5 class="inboxTimestamp">{{msg2.timestamp}}</h5>
+                  </div>
+                </a>
+                {%endfor%}
+              {%endif%}            
         </div>
 
         <!--Compose Button-->
-        <button id="compose-btn">Compose</button>
+        <button class="exclude" id="compose-btn">Compose</button>
         <div id="compose-tab">
             <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
@@ -349,24 +392,23 @@
         <form action="/addTodo" method="post">
           <input type="taskInput" id="name" name="name" placeholder="Enter task..." required>
           <input type="date" id="date" name="date" placeholder="mm/dd" required>
-          <button type="taskSubmit">+</button>
+          <button class="exclude" type="taskSubmit">+</button>
         </form>
 
         {%for task in todo_list%}
           {%if task.user_id==current_user.id%}
           <div class="linebreak"></div>
-          <tr>
+          <div type = "task">
               {%if task.done==False and task.edit==False %}
               <li type="task" onclick='window.location.href="/updateTodo/{{task.task_id}}"'>{{task.name}}
-                <div class="date">{{task.date}}</div>
-                <div class="linebreak"></div>
+                <div type="date">{{task.date}}</p>
               </li>
-              <td><a type="edit" href="/startEdit/{{task.task_id}}">✎</a></td>
+              <td><button class="exclude" type="edit" onclick="window.location.href='/startEdit/{{task.task_id}}';">✎</button></td>
               {%elif task.done==True and task.edit==False %}
               <li type="task" class="checked" onclick='window.location.href="/updateTodo/{{task.task_id}}"'>{{task.name}}
-                <div class="date">{{task.date}}</div>
+                <div type="date">{{task.date}}</p>
               </li>
-              <td><a type="edit" href="/startEdit/{{task.task_id}}">✎</a></td>
+              <td><button class="exclude" type="edit" onclick="window.location.href='/startEdit/{{task.task_id}}';">✎</button></td>
               {%else%}
               <form action="/submitEdit/{{task.task_id}}" method="post">
                 <input type="editInputText" id="editInputText" name="editInputText" value="{{task.name}}" required>
@@ -375,8 +417,8 @@
               </form>
               
               {%endif%}
-              <td><a type = "delete" href="/deleteTodo/{{task.task_id}}">X</a></td>
-          </tr>
+              <td><button class="exclude" type = "delete" onclick="window.location.href='/deleteTodo/{{task.task_id}}';">X</button></td>
+            </div>
           {%endif%}
         {%endfor%}
 
@@ -414,11 +456,7 @@
         {% endif %}
     {% endwith %}
 
-        <form method="post">
-            <input type="submit" value="del-Acc" name="delAcc"/>
-        </form>
-        <p>Email Template</p>
-
+  </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
