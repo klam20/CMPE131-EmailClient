@@ -295,3 +295,5 @@ def search_email():
         )
     ).all()
     return render_template('search_results.html', search_results=search_results)
+
+

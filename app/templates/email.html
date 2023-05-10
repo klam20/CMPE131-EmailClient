@@ -117,7 +117,7 @@
           
           /* Form styles */
           .todo {
-            margin-top:50px;
+            top: 12.5%;
             margin-left:15px;
             position:absolute;
             display: block;
@@ -413,7 +413,7 @@
               <form action="/submitEdit/{{task.task_id}}" method="post">
                 <input type="editInputText" id="editInputText" name="editInputText" value="{{task.name}}" required>
                 <input type="date" id="editInputDate" name="editInputDate" value="{{task.date}}" required>
-                <button type="submitEdit">✎</button>
+                <button class = "exclude" type="submitEdit">✎</button>
               </form>
               
               {%endif%}
@@ -445,16 +445,6 @@
                 composeTab.appendChild(closeBtn);
             };
         </script>
-
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
 
   </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

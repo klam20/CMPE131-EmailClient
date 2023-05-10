@@ -7,14 +7,17 @@
     </head>
     <body>
       <!--Email Nav Bar-->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Logo</a>
+      <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(90deg, hsla(201, 100%, 14%, 1) 23%, hsla(203, 39%, 57%, 1) 100%);">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
+          
           <ul class="navbar-nav">
-            <li class="nav-item">
+            <li class="nav-item ">
+              <img src = "static/img.jpg" class = "logo">
+            </li>
+            <li class="nav-item ">
               <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
@@ -22,37 +25,48 @@
             </li>
           </ul>
         </div>
-        <form method="post">
-          <input type="submit" value="Delete Account" name="delAcc" class="deleteAccount"/>
-      </form>
-      </nav>
+        <form method="post" action="/home">
+          <button type="submit" value="Delete Account" name="delAcc">Delete Account</button>
+        </form>
+    </nav>
+
+<div class = "email-background">
+
 
       <div class ="searchBar">
         <form method="GET" action="{{ url_for('search_email') }}">
           <input type="text" name="search_query" placeholder="Search emails" />
-          <input type="submit" value="Search" />
+          <button type="submit" value="Search">Submit</button>
       </form>
       </div>
 
         <!--CSS for Compose Button-->
         <style>
             /* Body styles */
-            body {
-              background-color: #f9f9f9;
-              font-family: Arial, sans-serif;
-              font-size: 16px;
-            }
+
 
             /* Compose button styles */
             #compose-btn {
+              background-color: #669BBC;
               position: fixed;
               bottom: 30px;
               right: 30px;
-              background-color: #4CAF50;
-              color: white;
-              padding: 15px;
-              border: none;
-              border-radius: 50%;
+              color: #FDF0D5;
+              padding: 10px;
+              border: solid 2px;
+              border-radius: 10%;
+              cursor: pointer;
+            }
+
+            #compose-btn:hover {
+              background-color: #FDF0D5;
+              color: black;
+              position: fixed;
+              bottom: 30px;
+              right: 30px;
+              padding: 10px;
+              border: solid 2px;
+              border-radius: 10%;
               cursor: pointer;
             }
 
@@ -100,12 +114,6 @@
         </style>
 
         <style>
-          /* Body styles */
-          body {
-            background-color: #f9f9f9;
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-          }
           
           /* Form styles */
           .todo {
@@ -122,11 +130,7 @@
           }
           
           
-          form {
-            display: flex;
-            flex-grow: 1;
-          }
-          
+
           
           div h1 {
             text-align: left;
@@ -144,7 +148,7 @@
             flex-grow: 1;
           }
           
-          form input[type="taskInput"] {
+          input[type="taskInput"] {
             padding: 10px;
             margin-bottom: 20px;
             height: 40px;
@@ -157,7 +161,7 @@
             text-overflow: ellipsis;
           }
           
-          form input[type="date"] {
+          input[type="date"] {
             padding: 10px;
             margin-bottom: 20px;
             height: 40px;
@@ -170,7 +174,7 @@
             color: #333;
           }
           
-          form button[type="taskSubmit"] {
+          button[type="taskSubmit"] {
             background-color: #4e5fc4;
             border: none;
             color: #fff;
@@ -300,12 +304,12 @@
           
           div button[type="delete"]:active { text-decoration: none; }     
 
-          form input[type="editInputText"] {
+          input[type="editInputText"] {
             flex-grow: 1;
             min-height: 40px;
           }
 
-          form button[type="submitEdit"] {
+          button[type="submitEdit"] {
             background-color: #46b478;
             border: none;
             color: #fff;
@@ -319,12 +323,12 @@
             margin-bottom: 2px;
           }
 
-          form button[type="submitEdit"]:hover { 
+          button[type="submitEdit"]:hover { 
             text-decoration: none; 
             background-color: #2d744d;
           }
 
-          form input[type="editInputText"] {
+          input[type="editInputText"] {
             border-radius: 5px;
             margin-bottom: 2px;
             height: 38px;
@@ -333,21 +337,20 @@
 
         <!--Email Inbox-->
         
+        
 
         <div class = "inbox">
           <form method="post">
-            <input class = "inboxNav" type="submit" value="return" name="return"/>
+            <button  type="submit" value="return" name="return">Return</button>
           </form>
-
             <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action" style="background-color:#003049;" aria-current="true">
+              <a href="#" class="list-group-item list-group-item-action" style="background-color:#FDF0D5" aria-current="true">
                 <div class="d-flex w-100 justify-content-between">
-                  <h5 class="inboxWidth">{{email.subject}}</h5>
+                  <h5 class="inboxWidth">Inbox</h5>
                 </div>
               </a>
             </div>
               
-
             <a href="" class="list-group-item list-group-item-action" aria-current="true">
                   <p><em><b>Sender:</b><em> {{email.sender}}</p>
                   <p><em><b>Recipient:</b><em> {{email.recipient}}</p>
@@ -357,7 +360,7 @@
         </div>
 
         <!--Compose Button-->
-        <button id="compose-btn">Compose</button>
+        <button class="exclude" id="compose-btn">Compose</button>
         <div id="compose-tab">
             <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
@@ -383,7 +386,7 @@
         <form action="/addTodo" method="post">
           <input type="taskInput" id="name" name="name" placeholder="Enter task..." required>
           <input type="date" id="date" name="date" placeholder="mm/dd" required>
-          <button type="taskSubmit">+</button>
+          <button class="exclude" type="taskSubmit">+</button>
         </form>
 
         {%for task in todo_list%}
@@ -394,12 +397,12 @@
               <li type="task" onclick='window.location.href="/updateTodo/{{task.task_id}}"'>{{task.name}}
                 <div type="date">{{task.date}}</p>
               </li>
-              <td><button type="edit" onclick="window.location.href='/startEdit/{{task.task_id}}';">✎</button></td>
+              <td><button class="exclude" type="edit" onclick="window.location.href='/startEdit/{{task.task_id}}';">✎</button></td>
               {%elif task.done==True and task.edit==False %}
               <li type="task" class="checked" onclick='window.location.href="/updateTodo/{{task.task_id}}"'>{{task.name}}
                 <div type="date">{{task.date}}</p>
               </li>
-              <td><button type="edit" onclick="window.location.href='/startEdit/{{task.task_id}}';">✎</button></td>
+              <td><button class="exclude" type="edit" onclick="window.location.href='/startEdit/{{task.task_id}}';">✎</button></td>
               {%else%}
               <form action="/submitEdit/{{task.task_id}}" method="post">
                 <input type="editInputText" id="editInputText" name="editInputText" value="{{task.name}}" required>
@@ -408,7 +411,7 @@
               </form>
               
               {%endif%}
-              <td><button type = "delete" onclick="window.location.href='/deleteTodo/{{task.task_id}}';">X</button></td>
+              <td><button class="exclude" type = "delete" onclick="window.location.href='/deleteTodo/{{task.task_id}}';">X</button></td>
             </div>
           {%endif%}
         {%endfor%}
@@ -447,7 +450,7 @@
         {% endif %}
     {% endwith %}
 
-
+  </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -455,4 +458,5 @@
 
     </body>
 </html>
+
 

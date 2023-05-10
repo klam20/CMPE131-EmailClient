@@ -170,10 +170,9 @@ button:not(.exclude):hover {
 
 .inbox {
     padding:10px;
-    border-width:1px;
-    position:absolute;
-    left:35%;
-    top:14%;
+    padding-top:30px;
+    margin-left: 40%;
+    margin-right:5%;
 }
 
 
@@ -182,11 +181,15 @@ button:not(.exclude):hover {
         padding-right:600px;
 }
 
-
 .searchBar {
-        position:absolute;
-        top:12%;
-        left:63%;
+        padding-left:10px;
+        padding-top:30px;
+        margin-left:40%
+}
+
+.searchBar input {
+        padding:5px;
+        padding-right:300px;
 }
 
 
