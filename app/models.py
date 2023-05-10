@@ -7,10 +7,12 @@ from app import myapp_obj
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    sender = db.Column(db.String(60))
     recipient = db.Column(db.String(60), nullable=False)
     subject = db.Column(db.String(60), nullable=False)
     content = db.Column(db.String(200), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    timestamp = db.Column(db.String)
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
