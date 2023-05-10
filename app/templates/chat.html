@@ -6,13 +6,22 @@
    <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
   </head>
   <body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
     <div id="addRecipientPopup" class="popup">
      <div class="popup-content">
       <a href="#close" class="close-button">&times;</a>
       <h2>New message</h2>
       <form action="{{ url_for('add_recipient') }}" method="POST">
         {{ form.hidden_tag() }}
-        To: {{ form.name(id="to") }}
+        To: {{ form.name(id="to", placeholder="Enter email") }}
         {{ form.submit(value="Next") }}
       </form>
      </div>
@@ -21,13 +30,15 @@
     </div>
 
     <div class="app-container">
-      <div class="previous-messages">
+      <div class="left-panel">
         <div class="user-panel">
-          <span class="user-name">User name</span>
-          <a href="#addRecipientPopup">New Message</a>
+          <span class="user-name">{{ current_user.email }}</span>
+          <form action="#addRecipientPopup" method="GET">
+            <button class="new-button" style="margin-right: 10px;">New Message</button>
+          </form>
           <form action="{{ url_for('delete_messages') }}" method="POST" style="display:inline;">
             {{ form.hidden_tag() }}
-            <button class="new-message-button">Delete Messages</button>
+            <button class="del-button">Delete Messages</button>
           </form>
         </div>
         <div class="recipient-list">
@@ -49,7 +60,7 @@
              {% if message.sender_id == user.id %}
               <p class="sent-message">{{ message.content }}</p>
              {% else %}
-              <p class="received-message">{{ message.content }}</p>
+              <p class="recipient-message">{{ message.content }}</p>
              {% endif %}
            {% endfor %}
         </div>

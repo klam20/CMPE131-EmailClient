@@ -9,9 +9,8 @@ class ChatForm(FlaskForm):
     submit = SubmitField('Send')
 
 class AddRecipientForm(FlaskForm):
-    name = StringField("Name", validators=[DataRequired()])
+    name = StringField("Email", validators=[DataRequired()])
     submit = SubmitField("Add Recipient")
-
 
 class sendEmailForm(FlaskForm):
     recipient = StringField('Recipient', validators=[DataRequired()])
