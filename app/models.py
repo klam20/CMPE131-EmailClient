@@ -10,7 +10,7 @@ class Message(db.Model):
     subject = db.Column(db.String(60), nullable=False)
     content = db.Column(db.String(200), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
+    attachments = db.Column(db.String(200))
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)

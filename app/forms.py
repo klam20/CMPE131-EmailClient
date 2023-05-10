@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, MultipleFileField
 from wtforms.validators import DataRequired, Email, EqualTo
 
 class sendEmailForm(FlaskForm):
@@ -7,6 +7,7 @@ class sendEmailForm(FlaskForm):
     subject = StringField('Subject', validators=[DataRequired()])
     content = StringField('Content', validators=[DataRequired()])
     sendEmail = SubmitField('Send Email')
+    attachments = MultipleFileField('Attachments')
 
 class RegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])

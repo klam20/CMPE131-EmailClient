@@ -17,6 +17,8 @@ from app.models import Message
 from .forms import RegistrationForm
 from .forms import LoginForm
 from sqlalchemy import or_
+from werkzeug.utils import secure_filename
+import os
 
 @myapp_obj.route("/")
 
@@ -50,6 +52,14 @@ def email():
         if recipient_user:
             recipient_email = recipient_user.email
 
+        attachments = []
+        if form.attachments.data:
+            for file in form.attachments.data:
+                filename = secure_filename(file.filename)
+                file_path = os.path.join(myapp_obj.config['UPLOAD_FOLDER'], filename)
+                file.save(file_path)
+                attachments.append(file_path)
+
         message = Message(
             subject=form.subject.data,
             recipient=form.recipient.data,
@@ -70,6 +80,17 @@ def email():
                 return redirect('/home')
             
     return render_template('email.html', todo_list=todo_list, title='Send Email', form=form)
+
+@myapp_obj.route('/download_attachment/<int:message_id>/<int:attachment_index>')
+@login_required
+def download_attachment(message_id, attachment_index):
+    message = Message.query.get_or_404(message_id)
+    attachments = message.attachments.split(',')
+    if attachment_index < len(attachments):
+        attachment_path = attachments[attachment_index]
+        return send_from_directory(myapp_obj.config['UPLOAD_FOLDER'], attachment_path, as_attachment=True)
+    flash('Attachment not found')
+    return redirect(url_for('email'))
 
 @myapp_obj.route("/login", methods=['GET','POST'])
 def login():    
