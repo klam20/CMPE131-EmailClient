@@ -5,7 +5,7 @@
         <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #003049;">
             <a class="navbar-brand" href="#">Logo</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -21,11 +21,15 @@
               </ul>
             </div>
             <form method="post" action="/home">
-                <input type="submit" value="Log-Out" name="logOut"/>
+              <button type="submit" value="Log-Out" name="logOut">Log-Out</button>
             </form>
         </nav>
 
-          <h1 class="display-3">Welcome to ____!</h1>
-        <img src="{{url_for('static', filename='img.jpg')}}">
+        <div class = "background-home">
+          <div class="center">
+            <h2 class="display-1">Welcome to ____!</h1>
+            <h2 class="display-3">____ is a free email client.</h1>
+          </div>
+        </div>
     </body>
 </html>

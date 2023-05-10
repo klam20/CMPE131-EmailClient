@@ -74,7 +74,7 @@ def email():
         return redirect('/email')
     
     if request.method == 'POST':
-            if request.form.get('delAcc') == 'del-Acc':
+            if request.form.get('delAcc') == 'Delete Account':
                 db.session.delete(current_user)
                 db.session.commit()    
                 logout_user()

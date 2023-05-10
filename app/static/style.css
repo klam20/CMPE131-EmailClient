@@ -1,3 +1,22 @@
+button:not(.exclude) {
+        all:unset;
+        color: #FDF0D5;
+        padding:5px;
+        border-radius:5%;
+        border:2px solid;
+
+}
+
+button:not(.exclude):hover {
+        all:unset;
+        background-color: #FDF0D5;
+        color: black;
+        padding:5px;
+        border-radius:5%;
+        border:2px solid;
+
+}
+
 .app-container {
         display: flex;
 }
@@ -163,11 +182,6 @@
         padding-right:600px;
 }
 
-.deleteAccount {
-        position:absolute;
-        top:10%;
-        right:2.5%;
-}
 
 .searchBar {
         position:absolute;
@@ -194,4 +208,33 @@
         position:absolute;
         right:0;
         padding-right:20px;
+}
+
+.background-home {
+        background-color: #669BBC;
+        min-height: 100vh;
+}
+
+.center {
+       position:absolute;
+       top:25%;
+       left:25%;
+}
+
+h2 {
+        color:#FDF0D5;
+}
+
+.navbar-nav {
+        font-size: 15px;
+        line-height: 2.5;
+}
+
+.email-background {
+        background-color:#669BBC;
+        min-height: 100vh;
+}
+
+ {
+    color: #780000;   
 }
