@@ -75,7 +75,10 @@ def email():
                 Message.content.ilike(f"%{search_query}%")
             )
         ).all()
-    
+
+        if not receivedEmails and not sentEmails:
+            flash('No emails found. Please try again')
+            
     if form.validate_on_submit():
         sourceDate = datetime.now()
         
