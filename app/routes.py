@@ -56,6 +56,25 @@ def email():
     sentEmails = Message.query.filter_by(user_id=current_user.id).order_by(Message.id.desc())
     receivedEmails = Message.query.filter_by(recipient=currentUserEmail).order_by(Message.id.desc())
     messageCount = sentEmails.count() + receivedEmails.count()
+    search_query = request.args.get('search_query', None)
+
+    # Search bar 
+    if search_query:
+        receivedEmails = receivedEmails.filter(
+            or_(
+                Message.recipient.ilike(f"%{search_query}%"),
+                Message.subject.ilike(f"%{search_query}%"),
+                Message.content.ilike(f"%{search_query}%")
+            )
+        ).all()
+
+        sentEmails = sentEmails.filter(
+            or_(
+                Message.recipient.ilike(f"%{search_query}%"),
+                Message.subject.ilike(f"%{search_query}%"),
+                Message.content.ilike(f"%{search_query}%")
+            )
+        ).all()
     
     if form.validate_on_submit():
         sourceDate = datetime.now()
@@ -300,20 +319,3 @@ def startEdit(todo_id):
     todo.edit = not todo.edit
     db.session.commit()
     return redirect("/email")
-
-@myapp_obj.route("/search_email", methods=['GET'])
-@login_required
-def search_email():
-    search_query = request.args.get('search_query', '')
-    search_results = Message.query.filter(
-        Message.user_id == current_user.id,
-        # Searches for emails containing the query in the recipient, subject, and content fields
-        or_(
-            Message.recipient.ilike(f"%{search_query}%"),
-            Message.subject.ilike(f"%{search_query}%"),
-            Message.content.ilike(f"%{search_query}%")
-        )
-    ).all()
-    return render_template('search_results.html', search_results=search_results)
-
-
