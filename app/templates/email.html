@@ -353,14 +353,14 @@
             </div>
             {% with messages = get_flashed_messages() %}
               {% if messages %}
-                <ul class=flashes>
+                <ul>
                 {% for message in messages %}
                   <li>{{ message }}</li>
                 {% endfor %}
                 </ul>
               {% endif %}
             {% endwith %}
-            
+
               {%if messageCount > 0%}
                 {%for msg2 in receivedEmails%}
                 <a href="email/{{msg2.id}}" class="list-group-item list-group-item-action" aria-current="true">
