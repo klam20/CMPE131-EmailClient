@@ -56,14 +56,13 @@ def email():
     receivedEmails = Message.query.filter_by(recipient=currentUserEmail)
     messageCount = sentEmails.count() + receivedEmails.count()
 
-
     if form.validate_on_submit():
-
+        
         message = Message(
             subject=form.subject.data,
             recipient=form.recipient.data,
             content=form.content.data,
-	    user_id=current_user.id
+	        user_id=current_user.id,
         )
         db.session.add(message)
         db.session.commit()
@@ -77,8 +76,60 @@ def email():
                 db.session.commit()    
                 logout_user()
                 return redirect('/home')
-            
-    return render_template('email.html', todo_list=todo_list, title='Send Email', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
+
+            if request.form.get('inbox') == 'inbox':
+                    return render_template('email.html', todo_list=todo_list, title='Inbox', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
+
+
+            if request.form.get('sent') == 'sent':
+                    return render_template('emailSent.html', todo_list=todo_list, title='Sent', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
+     
+    return render_template('email.html', todo_list=todo_list, title='Inbox', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
+
+@myapp_obj.route('/email/<int:emailId>', methods=['GET','POST'])
+def viewEmail(emailId):
+    currentUserEmail = User.query.get(current_user.id).email
+    form = sendEmailForm()
+    todo_list = task.query.all()
+    sentEmails = Message.query.filter_by(user_id=current_user.id)
+    receivedEmails = Message.query.filter_by(recipient=currentUserEmail)
+    messageCount = sentEmails.count() + receivedEmails.count()
+
+    if form.validate_on_submit():
+        
+        message = Message(
+            subject=form.subject.data,
+            recipient=form.recipient.data,
+            content=form.content.data,
+	        user_id=current_user.id,
+        )
+        db.session.add(message)
+        db.session.commit()
+
+        flash('Email is sent')
+        return redirect('/email')
+    
+    if request.method == 'POST':
+            if request.form.get('delAcc') == 'del-Acc':
+                db.session.delete(current_user)
+                db.session.commit()    
+                logout_user()
+                return redirect('/home')
+
+            if request.form.get('delEmail') == 'delEmail':
+                deleteEmail = Message.query.get(emailId)
+                db.session.delete(deleteEmail)
+                db.session.commit()
+                return redirect('/email')
+
+            if request.form.get('return') == 'return':
+                    return redirect('/email')
+
+
+    email = Message.query.get(emailId)
+    return render_template('viewEmail.html', todo_list=todo_list, title='View Email', form=form, currentUserEmail=currentUserEmail, email=email)
+
+
 @myapp_obj.route("/login", methods=['GET','POST'])
 def login():    
     form = LoginForm()
@@ -103,19 +154,27 @@ def login():
 @myapp_obj.route("/register", methods=['GET','POST'])
 def register():
     form = RegistrationForm()
+    
+
     if form.validate_on_submit():
         emailExists = bool(User.query.filter_by(email=form.email.data).first())
+        #for field, errors in form.errors.items():
+            #for error in errors:
+               # flash(f'{field.capitalize()} field: {error}', 'error-message')
+
         if(emailExists):
             flash(f'Account already exists')
-            return redirect(url_for('register'))
+            return redirect("/register")
+
         else:
             new_user = User(email=form.email.data)
             new_user.set_password(form.password.data)
             db.session.add(new_user)
             db.session.commit()
             flash('You are now a registered user!')
-            return redirect(url_for('login'))
-    return render_template('register.html', title='Register', registerForm = form)
+            return redirect("/login")
+       
+    return render_template('register.html', title='Register', form = form)
 
 @myapp_obj.route("/chat")
 @login_required
