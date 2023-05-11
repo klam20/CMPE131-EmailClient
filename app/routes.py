@@ -25,6 +25,14 @@ from .forms import AddRecipientForm
 from sqlalchemy import or_
 from app import api
 from datetime import datetime
+from app import ALLOWED_EXTENSIONS
+from werkzeug.utils import secure_filename
+import os
+from flask import send_from_directory
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @myapp_obj.route("/")
 
@@ -46,7 +54,12 @@ def home():
             elif request.form.get('signUp') == 'Sign-Up':
                 return redirect('/register')
         return render_template('home_logged_out.html', form = form)
-    
+
+
+@myapp_obj.route("/attachments/<name>")
+def download(name):
+    return send_from_directory('attachments/', name)
+
 @myapp_obj.route("/email", methods=['GET','POST'])
 @login_required
 def email():
@@ -87,7 +100,21 @@ def email():
 
             if request.form.get('Sent') == 'Sent':
                     return render_template('emailSent.html', todo_list=todo_list, title='Sent', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
-     
+
+                # check if the post request has the file part
+            if 'file' not in request.files:
+                flash('No file part')
+                return redirect(request.url)
+            file = request.files['file']
+            # If the user does not select a file, the browser submits an
+            # empty file without a filename.
+            if file.filename == '':
+                flash('No selected file')
+                return redirect(request.url)
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], filename))
+        
     return render_template('email.html', todo_list=todo_list, title='Inbox', form=form, sender = currentUserEmail, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
 
 @myapp_obj.route('/email/<int:emailId>', methods=['GET','POST'])
@@ -129,6 +156,8 @@ def viewEmail(emailId):
 
             if request.form.get('return') == 'return':
                 return redirect('/email')
+                
+           
             
 
 
@@ -315,5 +344,4 @@ def search_email():
         )
     ).all()
     return render_template('search_results.html', search_results=search_results)
-
 

@@ -34,8 +34,6 @@
     </nav>
 
 <div class = "email-background">
-
-
       <div class ="searchBar">
         <form method="GET" action="{{ url_for('search_email') }}">
           <input type="text" name="search_query" placeholder="Search emails" />
@@ -371,7 +369,7 @@
         <!--Compose Button-->
         <button class="exclude" id="compose-btn">Compose</button>
         <div id="compose-tab">
-            <form action="" method="post" novalidate>
+            <form action="" method="post" novalidate enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
                 <p>
                     {{form.recipient.label }}<br>
@@ -386,6 +384,9 @@
                     {{form.content(size=32)}}
                 </p>
                 <p>{{form.sendEmail()}}</p>
+
+                <input type="file" name="file">
+                <input type="submit" name="Upload">
               </form>
         </div>
 
