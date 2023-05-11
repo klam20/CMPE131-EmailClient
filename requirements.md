@@ -9,9 +9,9 @@
 7. Creating todo list
 8. Add items to todo list
 9. Mark off completed items on todo list
-10. Filter Emails by Category (date,alphabetic,unread)
+10. Utilizes Random Image API
 11. Deleting Email
-12. Set Notification Setting (do not disturb/online)
+12. PLACEHOLDER
 
 ## Non-functional Requirements
 
