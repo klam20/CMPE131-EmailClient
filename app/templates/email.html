@@ -33,6 +33,7 @@
         </form>
     </nav>
 
+<!--Search Email Bar-->
 <div class = "email-background">
       <div class ="searchBar">
         <form method="GET" action="{{ url_for('search_email') }}">
@@ -337,14 +338,12 @@
         </style>
 
         <!--Email Inbox-->
-        
-        
-
         <div class = "inbox">
           <form method="post">
             <button  type="submit" value="Received" name="Received">Received</button>
             <button  type="submit" value="Sent" name="Sent">Sent</button>
           </form>
+            <!--Inbox Header-->
             <div class="list-group">
               <a href="#" class="list-group-item list-group-item-action" style="background-color:#FDF0D5" aria-current="true">
                 <div class="d-flex w-100 justify-content-between">
@@ -352,7 +351,7 @@
                 </div>
               </a>
             </div>
-              
+              <!--Email Retrieval-->
               {%if messageCount > 0%}
                 {%for msg2 in receivedEmails%}
                 <a href="email/{{msg2.id}}" class="list-group-item list-group-item-action" aria-current="true">
@@ -383,13 +382,14 @@
                     {{form.content.label}}<br>
                     {{form.content(size=32)}}
                 </p>
+                <input type="file" name="file">
                 <p>{{form.sendEmail()}}</p>
 
-                <input type="file" name="file">
-                <input type="submit" name="Upload">
+                
               </form>
         </div>
-
+        
+        <!--To Do List-->
         <div class="todo">
             <h1>Todo List</h1>
         <div class="linebreak"></div>

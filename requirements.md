@@ -11,12 +11,12 @@
 9. Mark off completed items on todo list
 10. Utilizes Random Image API
 11. Deleting Email
-12. PLACEHOLDER
+12. Add Attachments to Email Message
 
 ## Non-functional Requirements
 
 1. Must have an interactive UI (small user feedbacks on hover)
-2. Have a noise notification when email is received
+2. PLACEHOLDER
 
 ## Use Cases
 
@@ -209,27 +209,23 @@ address
        * The user is taken back to the lists page
 
 
-12. Set Notification Settings (Jeffrey)
+12. Add Attachments to Email Message (Jeffrey)
 
-- **Preconditions:** User must have an account, user must bein their email home
+- **Preconditions:** User must have an account, User must be in the Compose Email form already
 
-- **Trigger:** User presses notifcation setting pull-down bar
+- **Trigger:** User presses Add Attachment button
 
 - **Primary Sequence:**
 
-  1. User presses do not disturb option in the pull-down menu
-  2. A prompt will display 1) textbox asking user how long they want to stay in do-not-disturb 2) a pull-down bar inside the textbox which is used to select length of time
-  3. User will press the pull-down bar inside the prompt
-  4. User will select time options that are between 30 minutes - 2 hrs in 30 minute increments, OR choose an option to keep do not disturb on until deactivated
-  5. User presses OK button after filling all details
-  6. Email client mutes notification sounds based on user's requrest/details provided
-  7. Redirect to email home
+  1. A file explorer window will open showing user's file directory
+  2. Once a file has been selected, the name of the file will display at the bottom of the compose message form
 
 - **Primary Postconditions:**
-  1. Email client is set to mute any incoming emails/messages
+  1.  An attachment will be ready for transfer if email is successfully composed/sent
 
 - **Alternative Sequence:**
 
-  1. User chooses online mode instead of do not disturb
-  2. User presses OK button
-  3. Email client enables notification sounds
+  1. Unsupported file type is added
+    A. Small prompt will be asserted
+    B. File name will not show within the compose email box
+
