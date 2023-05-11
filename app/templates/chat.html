@@ -1,12 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Chat Messages</title>
-   <link href="{{url_for('static', filename='chatStyle.css')}}" rel="stylesheet">
-  </head>
-  <body>
-    <a class="nav-link" href="/email">Home</a>
+    <head>
+        <title>Chat</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="{{url_for('static', filename='chatStyle.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='todoListStyle.css')}}" rel="stylesheet">
+    </head>
+    <body>
+      <!--Email Nav Bar-->
+      <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(90deg, hsla(201, 100%, 14%, 1) 23%, hsla(203, 39%, 57%, 1) 100%);">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          
+          <ul class="navbar-nav">
+            <li class="nav-item ">
+              <img src = "static/img.jpg" class = "logo">
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="/email">Email <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/chat">Chat <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+        <form method="post" action="/home">
+          <button type="submit" value="Delete Account" name="delAcc">Delete Account</button>
+        </form>
+    </nav>
+
+    <!--Background-->
+    <div class = "email-background">
+        <!--Chat Inbox-->
+        <div class = "center">
+           
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul>
@@ -16,10 +49,11 @@
             </ul>
         {% endif %}
     {% endwith %}
+
     <div id="addRecipientPopup" class="popup">
      <div class="popup-content">
       <a href="#close" class="close-button">&times;</a>
-      <h2>New message</h2>
+      <h3>New message</h3>
       <form action="{{ url_for('add_recipient') }}" method="POST">
         {{ form.hidden_tag() }}
         To: {{ form.name(id="to", placeholder="Enter email") }}
@@ -48,7 +82,7 @@
                {{ recipient.name }}
                <form action="{{ url_for('remove_recipient', recipient_id=recipient.id) }}" method="POST" style="display:inline;">
                  {{ form.hidden_tag() }}
-                 <button class="remove-recipient-button">x</button>
+                 <button class="remove-recipient-button exclude">x</button>
                </form>
             </div>
           {% endfor %}
@@ -95,6 +129,15 @@
         </div>
       </div>
     </div>
-  </body>
+          </div>
+    </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+    </body>
 </html>
+
+
 
