@@ -190,12 +190,19 @@ button:not(.exclude):hover {
 
 .sent-message {
         align-self: flex-end;
-        background-color: #669BBC;
+        background-color: #799ab9;
         color: #fff;
         border-radius: 5px;
         padding: 5px 10px;
         margin-bottom: 5px;
+        user-select: none;
+        transition: background-color 0.3s ease;
 }
+
+.sent-message:hover { 
+        text-decoration: none; 
+        background-color: #8eaac5;
+      }
       
 .recipient-message {
         align-self: flex-start;
@@ -203,10 +210,98 @@ button:not(.exclude):hover {
         border-radius: 5px;
         padding: 5px 10px;
         margin-bottom: 5px;
+        user-select: none;
+        transition: background-color 0.3s ease;
 }
 
+.recipient-message:hover { 
+        text-decoration: none; 
+        background-color: #e0e0e0;
+}
 
+div [type=reactBoxSent]{
+        display: flex;
+        background-color: #cecece;
+        border-radius: 20px;
+        padding-right: 10px;
+        padding-left: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+}
 
+div [type=reactBoxRecived]{
+        display: flex;
+        background-color: #cecece;
+        border-radius: 20px;
+        padding-right: 10px;
+        padding-left: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        align-self: flex-start;
+}
+
+div [type=heart]{
+        transition: 0.3s ease;
+        user-select: none;
+}
+
+div [type=heart]:hover{
+        font-size: 20px;
+}
+
+div [type=anger]{
+        transition: 0.3s ease;
+        user-select: none;
+}
+
+div [type=anger]:hover{
+        font-size: 20px;
+}
+
+div [type=tear]{
+        transition: 0.3s ease;
+        user-select: none;
+}
+
+div [type=tear]:hover{
+        font-size: 20px;
+}
+
+div [type=joy]{
+        transition: 0.3s ease;
+        user-select: none;
+}
+
+div [type=joy]:hover{
+        font-size: 20px;
+}
+
+div [type=thumbsup]{
+        transition: 0.3s ease;
+        user-select: none;
+}
+
+div [type=thumbsup]:hover{
+        font-size: 20px;
+}
+
+div [type=reactionDisplaySent]{
+        padding-right: 8px;
+        padding-left: 8px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-radius: 50px;
+        background-color: #acb9cc;
+}
+
+div [type=reactionDisplayRecieved]{
+        padding-right: 8px;
+        padding-left: 8px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-radius: 50px;
+        background-color: #dadadd;
+}
 
 .inboxWidth {
         padding-right:600px;

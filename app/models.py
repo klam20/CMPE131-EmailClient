@@ -33,7 +33,9 @@ class ChatMessage(db.Model):
     content = db.Column(db.String(200), nullable=False)
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     recipient_id= db.Column(db.Integer, db.ForeignKey('recipient.id'), nullable=False)
-
+    reactMode = db.Column(db.Boolean)
+    reaction = db.Column(db.String(10))
+    
     def __repr__(self):
          return f"<Message {self.content}>"
 

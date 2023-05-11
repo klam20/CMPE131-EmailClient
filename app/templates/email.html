@@ -129,7 +129,12 @@
             padding: 40px;
           }
           
-          
+          form[type="toDoInput"] {
+            all: unset;
+            display: flex;
+            flex-wrap: wrap;
+            flex-grow: 1;
+          }
 
           
           div h1 {
@@ -261,7 +266,6 @@
             margin-left: 8px;
             margin-bottom: 2px;
             text-align: center;
-            padding-top: 4px;
           }
           
           div button[type="delete"]:link { text-decoration: none; }
@@ -389,7 +393,7 @@
         <div class="todo">
             <h1>Todo List</h1>
         <div class="linebreak"></div>
-        <form action="/addTodo" method="post">
+        <form type="toDoInput" action="/addTodo" method="post">
           <input type="taskInput" id="name" name="name" placeholder="Enter task..." required>
           <input type="date" id="date" name="date" placeholder="mm/dd" required>
           <button class="exclude" type="taskSubmit">+</button>
@@ -410,7 +414,7 @@
               </li>
               <td><button class="exclude" type="edit" onclick="window.location.href='/startEdit/{{task.task_id}}';">✎</button></td>
               {%else%}
-              <form action="/submitEdit/{{task.task_id}}" method="post">
+              <form type="toDoInput" action="/submitEdit/{{task.task_id}}" method="post">
                 <input type="editInputText" id="editInputText" name="editInputText" value="{{task.name}}" required>
                 <input type="date" id="editInputDate" name="editInputDate" value="{{task.date}}" required>
                 <button class = "exclude" type="submitEdit">✎</button>
