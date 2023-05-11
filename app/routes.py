@@ -64,7 +64,9 @@ def email():
             or_(
                 Message.recipient.ilike(f"%{search_query}%"),
                 Message.subject.ilike(f"%{search_query}%"),
-                Message.content.ilike(f"%{search_query}%")
+                Message.content.ilike(f"%{search_query}%"),
+                Message.timestamp.ilike(f"%{search_query}"),
+                Message.sender.ilike(f"%{search_query}")
             )
         ).all()
 
@@ -72,7 +74,9 @@ def email():
             or_(
                 Message.recipient.ilike(f"%{search_query}%"),
                 Message.subject.ilike(f"%{search_query}%"),
-                Message.content.ilike(f"%{search_query}%")
+                Message.content.ilike(f"%{search_query}%"),
+                Message.timestamp.ilike(f"%{search_query}"),
+                Message.sender.ilike(f"%{search_query}")
             )
         ).all()
 
