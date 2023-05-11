@@ -93,3 +93,14 @@ h2 {
       width:50px; 
 }
 
+.centerForm {
+        display:block;
+        margin-left:25%;
+        margin-right:25%;
+        margin-top:5%;
+        border: 0.5px solid #669BBC;
+        background-color: #FDF0D5;
+        border-radius:5%;
+        padding:25px;
+}
+    
