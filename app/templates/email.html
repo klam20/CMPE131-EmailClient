@@ -24,6 +24,9 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/email">Email <span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/chat">Chat <span class="sr-only">(current)</span></a>
+            </li>
           </ul>
         </div>
         <form method="post" action="/home">
@@ -31,9 +34,8 @@
         </form>
     </nav>
 
+<!--Search Email Bar-->
 <div class = "email-background">
-
-
       <div class ="searchBar">
         <form method="GET" action="{{ url_for('email') }}">
           <input type="text" name="search_query" placeholder="Search emails" />
@@ -115,13 +117,13 @@
         </style>
 
         <!--Email Inbox-->
-        
 
         <div class = "inbox">
           <form method="post">
             <button  type="submit" value="Received" name="Received">Received</button>
             <button  type="submit" value="Sent" name="Sent">Sent</button>
           </form>
+            <!--Inbox Header-->
             <div class="list-group">
               <a href="#" class="list-group-item list-group-item-action" style="background-color:#FDF0D5" aria-current="true">
                 <div class="d-flex w-100 justify-content-between">
@@ -129,6 +131,9 @@
                 </div>
               </a>
             </div>
+
+              <!--Email Retrieval-->
+
             {% with messages = get_flashed_messages() %}
               {% if messages %}
                 <ul>
@@ -138,6 +143,7 @@
                 </ul>
               {% endif %}
             {% endwith %}
+
 
               {%if messageCount > 0%}
                 {%for msg2 in receivedEmails%}
@@ -155,7 +161,7 @@
         <!--Compose Button-->
         <button class="exclude" id="compose-btn">Compose</button>
         <div id="compose-tab">
-            <form action="" method="post" novalidate>
+            <form action="" method="post" novalidate enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
                 <p>
                     {{form.recipient.label }}<br>
@@ -169,11 +175,16 @@
                     {{form.content.label}}<br>
                     {{form.content(size=32)}}
                 </p>
+                <input type="file" name="file">
                 <p>{{form.sendEmail()}}</p>
+
+                
               </form>
         </div>
 
-        <!--ToDoList-->
+        
+        <!--To Do List-->
+
         <div class="todo">
             <h1>Todo List</h1>
         <div class="linebreak"></div>

@@ -6,16 +6,16 @@ body {
 }
 
 /* Form styles */
-form {
+.registerForm {
+    top:20%;
+    left:30%;
+    position:absolute;
+    text-align:center;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 40px;
-    margin: 50px auto;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    min-width: 600px;
 }
 
 form h1 {
@@ -32,7 +32,6 @@ form .input-field {
 form .input-field i {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
     left: 10px;
     font-size: 18px;
     color: #555;
@@ -62,6 +61,7 @@ form input[type="password"]::placeholder {
     color: #aaa;
 }
 
+/*
 form button[type="submit"] {
     background-color: #669BBC;
     border: none;
@@ -76,25 +76,14 @@ form button[type="submit"] {
 form button[type="submit"]:hover {
     background-color: #003049;
 }
-
-.error {
-    border: 2px solid #C1121F;
-}
-
-.error-message {
-    color: #C1121F
-}
+*/
 
 /* Sign in Instead link */
 .signin-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: 20px;
+
 }
 
 .signin-container p {
-    margin-right: 10px;
 }
 
 .signin-link {

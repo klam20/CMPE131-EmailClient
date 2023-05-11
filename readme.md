@@ -39,7 +39,7 @@
 - Chat Message (Bryant) [WIP]
 ![image](https://user-images.githubusercontent.com/85579906/235287966-fdd56a55-f1d3-4efa-b7e9-6cc215cfd6f7.png)
 
-## ToDo List
+## To-Do List
 Users can keep track of tasks by adding them to a todo list on the email page. 
 Each task is given a discription and a due date which is diplayed on the todo list. 
 Users will be able to edit, markoff and delete task
@@ -61,5 +61,49 @@ Users will be able to edit, markoff and delete task
    There is an edit button next to each task, clicking it will put the task into edit mode
    The user can then edit the task discription and due date
    Clicking on the edit button again will submit the changes and take the task out of edit mode
+</details>
 
+## Emails
+<details><summary><b>Show instructions</b></summary>
+
+### Compose Button
+  On the bottom right, there is a compose button where you can create and send emails
+  
+### Filling out the form
+  The minimum details in order to send an email are recipient email address, subject, and content
+  
+### Adding Attachments
+  Additionally, attachments can be added to the email message. Currently supported file formats are []
+
+### Inbox and Viewing
+  The inbox has viewing modes for sent and received emails
+  Clicking on an email allows you to view its contents
+
+### Deleting Emails
+  To delete an email you must first view the contents of the email
+  The Delete Email button will delete the email from your view.
+
+</details>
+
+
+## Chat System
+
+## Account Setup/Details
+
+<details><summary><b>Show instructions</b></summary>
+
+### Registering
+  From the home page, you may sign-up for an account by pressing the following button
+  You will need to provide an email address and a password
+  
+### Logging In
+  With a created account, you can log-in to access the other features of the web page
+  A registered email and password is required.
+  
+### Logging Out
+  You may log-out using this button located at the nav-bar
+  
+### Deleting Account
+   You may delete account using this button located at the nav-bar
+   
 </details>
