@@ -56,7 +56,7 @@ def home():
         return render_template('home_logged_out.html', form = form)
 
 
-@myapp_obj.route("/attachments/<name>")
+@myapp_obj.route("/email/attachments/<name>")
 def download(name):
     return send_from_directory('attachments/', name)
 
@@ -71,6 +71,21 @@ def email():
     messageCount = sentEmails.count() + receivedEmails.count()
     
     if form.validate_on_submit():
+
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], filename))
+
         sourceDate = datetime.now()
         
         message = Message(
@@ -79,7 +94,8 @@ def email():
             recipient=form.recipient.data,
             content=form.content.data,
 	        user_id=current_user.id,
-            timestamp = sourceDate.strftime("%x")
+            timestamp = sourceDate.strftime("%x"),
+            attachment = secure_filename(file.filename)
         )
         db.session.add(message)
         db.session.commit()
@@ -101,20 +117,6 @@ def email():
             if request.form.get('Sent') == 'Sent':
                     return render_template('emailSent.html', todo_list=todo_list, title='Sent', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
 
-                # check if the post request has the file part
-            if 'file' not in request.files:
-                flash('No file part')
-                return redirect(request.url)
-            file = request.files['file']
-            # If the user does not select a file, the browser submits an
-            # empty file without a filename.
-            if file.filename == '':
-                flash('No selected file')
-                return redirect(request.url)
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], filename))
-        
     return render_template('email.html', todo_list=todo_list, title='Inbox', form=form, sender = currentUserEmail, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
 
 @myapp_obj.route('/email/<int:emailId>', methods=['GET','POST'])
@@ -157,12 +159,9 @@ def viewEmail(emailId):
             if request.form.get('return') == 'return':
                 return redirect('/email')
                 
-           
-            
-
-
     email = Message.query.get(emailId)
-    return render_template('viewEmail.html', todo_list=todo_list, title='View Email', form=form, currentUserEmail=currentUserEmail, email=email)
+    attachment_name = email.attachment
+    return render_template('viewEmail.html', todo_list=todo_list, title='View Email', form=form, currentUserEmail=currentUserEmail, email=email, attachment_name = attachment_name)
 
 
 @myapp_obj.route("/login", methods=['GET','POST'])

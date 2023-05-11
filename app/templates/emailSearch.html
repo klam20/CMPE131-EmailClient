@@ -36,7 +36,7 @@
       <div class ="searchBar">
         <form method="GET" action="{{ url_for('search_email') }}">
           <input type="text" name="search_query" placeholder="Search emails" />
-          <button type="submit" value="Search">Submit</button>
+          <button  type="submit" value="Search" name="Search">Search</button>
       </form>
       </div>
 
@@ -117,7 +117,7 @@
           
           /* Form styles */
           .todo {
-            margin-top:50px;
+            top: 12.5%;
             margin-left:15px;
             position:absolute;
             display: block;
@@ -341,7 +341,8 @@
 
         <div class = "inbox">
           <form method="post">
-            <button  type="submit" value="return" name="return">Return</button>
+            <button  type="submit" value="Received" name="Received">Received</button>
+            <button  type="submit" value="Sent" name="Sent">Sent</button>
           </form>
             <div class="list-group">
               <a href="#" class="list-group-item list-group-item-action" style="background-color:#FDF0D5" aria-current="true">
@@ -351,17 +352,19 @@
               </a>
             </div>
               
-            <div class="list-group-item list-group-item-action" aria-current="true">
-                  <p><em><b>Sender:</b><em> {{email.sender}}</p>
-                  <p><em><b>Recipient:</b><em> {{email.recipient}}</p>
-                  <p>{{email.content}}</p>
-                  <a href = "attachments/{{attachment_name}}">{{attachment_name}}</a>
-            </div>
-
-            <form method="post">
-              <button type="submit" value="Delete Email" name="delEmail">Delete Email</button>
-            </form>
-
+            {% if search_results %}
+            <ul>
+                {% for message in search_results %}
+                    <li>
+                        <strong>{{ message.subject }}</strong> <br>
+                        To: {{ message.recipient }} <br>
+                        Content: {{ message.content }}
+                    </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>No results found.</p>
+            {% endif %}        
         </div>
 
         <!--Compose Button-->
@@ -412,7 +415,7 @@
               <form action="/submitEdit/{{task.task_id}}" method="post">
                 <input type="editInputText" id="editInputText" name="editInputText" value="{{task.name}}" required>
                 <input type="date" id="editInputDate" name="editInputDate" value="{{task.date}}" required>
-                <button type="submitEdit">✎</button>
+                <button class = "exclude" type="submitEdit">✎</button>
               </form>
               
               {%endif%}
@@ -445,16 +448,6 @@
             };
         </script>
 
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-
   </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -463,5 +456,4 @@
 
     </body>
 </html>
-
 
