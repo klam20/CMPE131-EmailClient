@@ -258,6 +258,10 @@ def add_recipient():
             sender_id = current_user.id
             new_recipient = Recipient(name=recipient_email, user_id=user_id, sender_id=sender_id)
             db.session.add(new_recipient)
+
+            user_as_recipient = Recipient(name=current_user.email, user_id=recipient.id, sender_id=recipient.id)
+            db.session.add(user_as_recipient)
+
             db.session.commit()
             return redirect(url_for("chat"))
         else:
