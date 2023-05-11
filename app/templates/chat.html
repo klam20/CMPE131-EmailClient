@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <title>Chat Messages</title>
-   <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
+   <link href="{{url_for('static', filename='chatStyle.css')}}" rel="stylesheet">
   </head>
   <body>
+    <a class="nav-link" href="/email">Home</a>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul>
@@ -58,9 +59,26 @@
           <!-- Current messages will be displayed here -->
            {% for message in messages %}
              {% if message.sender_id == user.id %}
-              <p class="sent-message">{{ message.content }}</p>
+              <p class="sent-message">{{ message.content }}
+                {% if message.reaction is not none  %}
+                <sub type="reactionDisplaySent">{{ message.reaction }}</sub>
+                {% endif %}
+              </p>
              {% else %}
-              <p class="recipient-message">{{ message.content }}</p>
+              <p onclick="window.location.href='/openReactRecieved/{{message.id}}';" class="recipient-message">{{ message.content }}
+                {% if message.reaction is not none  %}
+                <sub type="reactionDisplayRecieved">{{ message.reaction }}</sub>
+                {% endif %}
+              </p>
+              {% if message.reactMode == true %}
+                <div type="reactBoxRecived">
+                  <div onclick="window.location.href='/reactHeart/{{message.id}}';" type="heart">❤️</div>
+                  <div onclick="window.location.href='/reactAnger/{{message.id}}';" type="anger">😡</div>
+                  <div onclick="window.location.href='/reactTear/{{message.id}}';" type="tear">😢</div>
+                  <div onclick="window.location.href='/reactJoy/{{message.id}}';" type="joy">😂</div>
+                  <div onclick="window.location.href='/reactThumbsUp/{{message.id}}';" type="thumbsup">👍</div>
+                </div>
+              {% endif %}
              {% endif %}
            {% endfor %}
         </div>

@@ -69,7 +69,33 @@ def email():
     sentEmails = Message.query.filter_by(user_id=current_user.id).order_by(Message.id.desc())
     receivedEmails = Message.query.filter_by(recipient=currentUserEmail).order_by(Message.id.desc())
     messageCount = sentEmails.count() + receivedEmails.count()
-    
+    search_query = request.args.get('search_query', None)
+
+    # Search bar 
+    if search_query:
+        receivedEmails = receivedEmails.filter(
+            or_(
+                Message.recipient.ilike(f"%{search_query}%"),
+                Message.subject.ilike(f"%{search_query}%"),
+                Message.content.ilike(f"%{search_query}%"),
+                Message.timestamp.ilike(f"%{search_query}"),
+                Message.sender.ilike(f"%{search_query}")
+            )
+        ).all()
+
+        sentEmails = sentEmails.filter(
+            or_(
+                Message.recipient.ilike(f"%{search_query}%"),
+                Message.subject.ilike(f"%{search_query}%"),
+                Message.content.ilike(f"%{search_query}%"),
+                Message.timestamp.ilike(f"%{search_query}"),
+                Message.sender.ilike(f"%{search_query}")
+            )
+        ).all()
+
+        if not receivedEmails and not sentEmails:
+            flash('No emails found. Please try again')
+            
     if form.validate_on_submit():
 
         # check if the post request has the file part
@@ -223,7 +249,7 @@ def send_message(recipient_id):
     if request.method == "POST":
         message_content = request.form["message"]
         sender_id = current_user.id
-        new_message = ChatMessage(content=message_content, sender_id=sender_id, recipient_id=recipient_id)
+        new_message = ChatMessage(content=message_content, sender_id=sender_id, recipient_id=recipient_id, reactMode=False)
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
@@ -262,6 +288,10 @@ def add_recipient():
             sender_id = current_user.id
             new_recipient = Recipient(name=recipient_email, user_id=user_id, sender_id=sender_id)
             db.session.add(new_recipient)
+
+            user_as_recipient = Recipient(name=current_user.email, user_id=recipient.id, sender_id=recipient.id)
+            db.session.add(user_as_recipient)
+
             db.session.commit()
             return redirect(url_for("chat"))
         else:
@@ -275,6 +305,71 @@ def delete_messages():
     ChatMessage.query.delete()
     db.session.commit()
     return redirect(url_for('chat'))
+
+@myapp_obj.route('/openReactRecieved/<int:id>')
+@login_required
+def openReactRecieved(id):
+    message = ChatMessage.query.get(id)
+    message.reactMode = not message.reactMode
+    db.session.commit()
+    sender_id=message.sender_id
+    redirect_URL = "/chat/" + str(sender_id)
+    return redirect(redirect_URL)
+
+@myapp_obj.route('/reactHeart/<int:id>')
+@login_required
+def reactHeart(id):
+    message = ChatMessage.query.get(id)
+    message.reactMode = not message.reactMode
+    message.reaction = "❤️"
+    db.session.commit()
+    sender_id=message.sender_id
+    redirect_URL = "/chat/" + str(sender_id)
+    return redirect(redirect_URL)
+
+@myapp_obj.route('/reactAnger/<int:id>')
+@login_required
+def reactAnger(id):
+    message = ChatMessage.query.get(id)
+    message.reactMode = not message.reactMode
+    message.reaction = "😡"
+    db.session.commit()
+    sender_id=message.sender_id
+    redirect_URL = "/chat/" + str(sender_id)
+    return redirect(redirect_URL)
+
+@myapp_obj.route('/reactTear/<int:id>')
+@login_required
+def reactTear(id):
+    message = ChatMessage.query.get(id)
+    message.reactMode = not message.reactMode
+    message.reaction = "😢"
+    db.session.commit()
+    sender_id=message.sender_id
+    redirect_URL = "/chat/" + str(sender_id)
+    return redirect(redirect_URL)
+
+@myapp_obj.route('/reactJoy/<int:id>')
+@login_required
+def reactJoy(id):
+    message = ChatMessage.query.get(id)
+    message.reactMode = not message.reactMode
+    message.reaction = "😂"
+    db.session.commit()
+    sender_id=message.sender_id
+    redirect_URL = "/chat/" + str(sender_id)
+    return redirect(redirect_URL)
+
+@myapp_obj.route('/reactThumbsUp/<int:id>')
+@login_required
+def reactThumbsUp(id):
+    message = ChatMessage.query.get(id)
+    message.reactMode = not message.reactMode
+    message.reaction = "👍"
+    db.session.commit()
+    sender_id=message.sender_id
+    redirect_URL = "/chat/" + str(sender_id)
+    return redirect(redirect_URL)
 
 @myapp_obj.route('/remove_recipient/<int:recipient_id>', methods=['POST'])
 @login_required
@@ -325,20 +420,4 @@ def startEdit(todo_id):
     todo = task.query.get(todo_id)
     todo.edit = not todo.edit
     db.session.commit()
-    return redirect("/email")
-
-@myapp_obj.route("/search_email", methods=['GET'])
-@login_required
-def search_email():
-    search_query = request.args.get('search_query', '')
-    search_results = Message.query.filter(
-        Message.user_id == current_user.id,
-        # Searches for emails containing the query in the recipient, subject, and content fields
-        or_(
-            Message.recipient.ilike(f"%{search_query}%"),
-            Message.subject.ilike(f"%{search_query}%"),
-            Message.content.ilike(f"%{search_query}%")
-        )
-    ).all()
-    return render_template('search_results.html', search_results=search_results)
 

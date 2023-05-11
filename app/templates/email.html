@@ -4,6 +4,7 @@
         <title>Email</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='todoListStyle.css')}}" rel="stylesheet">
     </head>
     <body>
       <!--Email Nav Bar-->
@@ -36,7 +37,7 @@
 <!--Search Email Bar-->
 <div class = "email-background">
       <div class ="searchBar">
-        <form method="GET" action="{{ url_for('search_email') }}">
+        <form method="GET" action="{{ url_for('email') }}">
           <input type="text" name="search_query" placeholder="Search emails" />
           <button type="submit" value="Search">Submit</button>
       </form>
@@ -115,229 +116,8 @@
             }
         </style>
 
-        <style>
-          
-          /* Form styles */
-          .todo {
-            top: 12.5%;
-            margin-left:15px;
-            position:absolute;
-            display: block;
-            flex-wrap: wrap;
-            width: 34%; 
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-          }
-          
-          
-
-          
-          div h1 {
-            text-align: left;
-            margin-bottom: 20px;
-          }
-          
-          div label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-          }
-
-          div [type="task"] {
-            display: flex;
-            flex-grow: 1;
-          }
-          
-          input[type="taskInput"] {
-            padding: 10px;
-            margin-bottom: 20px;
-            height: 40px;
-            border: none;
-            border-radius: 5px;
-            background-color: #f5f5f5;
-            font-size: 16px;
-            color: #333;
-            flex-grow: 1;
-            text-overflow: ellipsis;
-          }
-          
-          input[type="date"] {
-            padding: 10px;
-            margin-bottom: 20px;
-            height: 40px;
-            border: none;
-            border-radius: 5px;
-            background-color: #f5f5f5;
-            font-size: 16px;
-            margin-left: 10px;
-            max-width: 130px;
-            color: #333;
-          }
-          
-          button[type="taskSubmit"] {
-            background-color: #4e5fc4;
-            border: none;
-            color: #fff;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            height: 40px;
-            min-width: 40px;
-            margin-left: 8px;
-          }
-          
-          .linebreak {
-              flex-basis: 100%;
-          }
-          
-          div button[type="taskSubmit"]:hover {
-            background-color: #4148a0;
-          }
-          
-          div li[type="task"] {
-            cursor: pointer;
-            position: relative;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-left: 40px;
-            padding-right: 10px;
-            background: #eee;
-            font-size: 16px;
-            transition: 0.2s;
-            list-style-type: none;
-            flex-grow: 1;
-            display: flex;
-            margin-left: 2px;
-            margin-right: 2px;
-            margin-bottom: 2px;
-            border-radius: 5px;
-            height: 40px;
-          }
-          
-          div li[type="task"]:hover {
-            background: #ddd;
-          }
-          
-          div li[type="task"].checked {
-            background: #888;
-            color: #fff;
-            text-decoration: line-through;
-          }
-
-          div li[type="task"].checked:hover {
-            background: #999;
-          }
-          
-          div li[type="task"].checked::before {
-            content: '';
-            position: absolute;
-            border-color: #fff;
-            border-style: solid;
-            border-width: 0 2px 2px 0;
-            top: 10px;
-            left: 16px;
-            transform: rotate(45deg);
-            height: 15px;
-            width: 7px;
-          }
-          div [type="date"] {
-            font-family: Arial, sans-serif;
-            float: right; 
-            flex-grow: 1;
-            text-align: right;
-          }
-          
-          div button[type="delete"]{
-            background-color: #ce7474;
-            border: none;
-            color: #fff;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            height: 40px;
-            min-width: 40px;
-            margin-left: 8px;
-            margin-bottom: 2px;
-            text-align: center;
-            padding-top: 4px;
-          }
-          
-          div button[type="delete"]:link { text-decoration: none; }
-          
-          
-          div button[type="delete"]:visited { text-decoration: none; }
-          
-          
-          div button[type="delete"]:hover { 
-            text-decoration: none; 
-            background-color: #863737;
-          }
-          
-          div button[type="delete"]:active { text-decoration: none; }
-          
-          div button[type="edit"] { 
-            background-color: #46b478;
-            border: none;
-            color: #fff;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            min-width: 40px;
-            height: 40px;
-            margin-left: 8px;
-            margin-bottom: 2px;
-          }
-          
-          div button[type="edit"]:link { text-decoration: none; }
-          
-          
-          div button[type="edit"]:visited { text-decoration: none; }
-          
-          
-          div button[type="edit"]:hover { 
-            text-decoration: none; 
-            background-color: #2d744d;
-          }
-          
-          div button[type="delete"]:active { text-decoration: none; }     
-
-          input[type="editInputText"] {
-            flex-grow: 1;
-            min-height: 40px;
-          }
-
-          button[type="submitEdit"] {
-            background-color: #46b478;
-            border: none;
-            color: #fff;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            min-width: 40px;
-            height: 40px;
-            margin-left: 8px;
-            margin-bottom: 2px;
-          }
-
-          button[type="submitEdit"]:hover { 
-            text-decoration: none; 
-            background-color: #2d744d;
-          }
-
-          input[type="editInputText"] {
-            border-radius: 5px;
-            margin-bottom: 2px;
-            height: 38px;
-          }
-        </style>
-
         <!--Email Inbox-->
+
         <div class = "inbox">
           <form method="post">
             <button  type="submit" value="Received" name="Received">Received</button>
@@ -351,7 +131,20 @@
                 </div>
               </a>
             </div>
+
               <!--Email Retrieval-->
+
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+
+
               {%if messageCount > 0%}
                 {%for msg2 in receivedEmails%}
                 <a href="email/{{msg2.id}}" class="list-group-item list-group-item-action" aria-current="true">
@@ -388,12 +181,14 @@
                 
               </form>
         </div>
+
         
         <!--To Do List-->
+
         <div class="todo">
             <h1>Todo List</h1>
         <div class="linebreak"></div>
-        <form action="/addTodo" method="post">
+        <form type="toDoInput" action="/addTodo" method="post">
           <input type="taskInput" id="name" name="name" placeholder="Enter task..." required>
           <input type="date" id="date" name="date" placeholder="mm/dd" required>
           <button class="exclude" type="taskSubmit">+</button>
@@ -414,7 +209,7 @@
               </li>
               <td><button class="exclude" type="edit" onclick="window.location.href='/startEdit/{{task.task_id}}';">✎</button></td>
               {%else%}
-              <form action="/submitEdit/{{task.task_id}}" method="post">
+              <form type="toDoInput" action="/submitEdit/{{task.task_id}}" method="post">
                 <input type="editInputText" id="editInputText" name="editInputText" value="{{task.name}}" required>
                 <input type="date" id="editInputDate" name="editInputDate" value="{{task.date}}" required>
                 <button class = "exclude" type="submitEdit">✎</button>

@@ -17,6 +17,7 @@ button:not(.exclude):hover {
 
 }
 
+
 .app-container {
         display: flex;
 }
@@ -169,35 +170,12 @@ button:not(.exclude):hover {
 }
 
 
-
-
 .inbox {
-    padding:10px;
-    padding-top:30px;
-    margin-left: 40%;
-    margin-right:5%;
+        padding:10px;
+        padding-top:30px;
+        margin-left: 40%;
+        margin-right:5%;
 }
-
-
-.sent-message {
-        align-self: flex-end;
-        background-color: #669BBC;
-        color: #fff;
-        border-radius: 5px;
-        padding: 5px 10px;
-        margin-bottom: 5px;
-}
-      
-.recipient-message {
-        align-self: flex-start;
-        background-color: #f2f2f2;
-        border-radius: 5px;
-        padding: 5px 10px;
-        margin-bottom: 5px;
-}
-
-
-
 
 .inboxWidth {
         padding-right:600px;
@@ -267,3 +245,14 @@ h2 {
       width:50px; 
 }
 
+.centerForm {
+        display:block;
+        margin-left:25%;
+        margin-right:25%;
+        margin-top:5%;
+        border: 0.5px solid #669BBC;
+        background-color: #FDF0D5;
+        border-radius:5%;
+        padding:25px;
+}
+    
