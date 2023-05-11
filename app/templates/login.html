@@ -12,19 +12,33 @@
   </head>
   <body>
 
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+   <!--Email Nav Bar-->
+   <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(90deg, hsla(201, 100%, 14%, 1) 23%, hsla(203, 39%, 57%, 1) 100%);">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      
+      <ul class="navbar-nav">
+        <li class="nav-item ">
+          <img src = "static/img.jpg" class = "logo">
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="/email">Email <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/chat">Chat <span class="sr-only">(current)</span></a>
+      </li>
+      </ul>
+    </div>
+</nav>
 
-    
-    
-    <div class = "centerForm">
+<!--Login Form-->
+  <div class ="background-home">
+    <div class = "center">
       <h1 class="display-1">Welcome back!</h1>
       <h2 class="display-4">Sign in to continue.</h2>
       <br>
@@ -42,6 +56,8 @@
             <p>{{ form.submit()}}</p>
           </form>
     </div>
+  </div>
+   
     
 
     <!-- Optional JavaScript -->
