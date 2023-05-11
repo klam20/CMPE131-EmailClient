@@ -223,7 +223,7 @@ def send_message(recipient_id):
     if request.method == "POST":
         message_content = request.form["message"]
         sender_id = current_user.id
-        new_message = ChatMessage(content=message_content, sender_id=sender_id, recipient_id=recipient_id)
+        new_message = ChatMessage(content=message_content, sender_id=sender_id, recipient_id=recipient_id, reactMode=False)
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
@@ -279,6 +279,71 @@ def delete_messages():
     ChatMessage.query.delete()
     db.session.commit()
     return redirect(url_for('chat'))
+
+@myapp_obj.route('/openReactRecieved/<int:id>')
+@login_required
+def openReactRecieved(id):
+    message = ChatMessage.query.get(id)
+    message.reactMode = not message.reactMode
+    db.session.commit()
+    sender_id=message.sender_id
+    redirect_URL = "/chat/" + str(sender_id)
+    return redirect(redirect_URL)
+
+@myapp_obj.route('/reactHeart/<int:id>')
+@login_required
+def reactHeart(id):
+    message = ChatMessage.query.get(id)
+    message.reactMode = not message.reactMode
+    message.reaction = "❤️"
+    db.session.commit()
+    sender_id=message.sender_id
+    redirect_URL = "/chat/" + str(sender_id)
+    return redirect(redirect_URL)
+
+@myapp_obj.route('/reactAnger/<int:id>')
+@login_required
+def reactAnger(id):
+    message = ChatMessage.query.get(id)
+    message.reactMode = not message.reactMode
+    message.reaction = "😡"
+    db.session.commit()
+    sender_id=message.sender_id
+    redirect_URL = "/chat/" + str(sender_id)
+    return redirect(redirect_URL)
+
+@myapp_obj.route('/reactTear/<int:id>')
+@login_required
+def reactTear(id):
+    message = ChatMessage.query.get(id)
+    message.reactMode = not message.reactMode
+    message.reaction = "😢"
+    db.session.commit()
+    sender_id=message.sender_id
+    redirect_URL = "/chat/" + str(sender_id)
+    return redirect(redirect_URL)
+
+@myapp_obj.route('/reactJoy/<int:id>')
+@login_required
+def reactJoy(id):
+    message = ChatMessage.query.get(id)
+    message.reactMode = not message.reactMode
+    message.reaction = "😂"
+    db.session.commit()
+    sender_id=message.sender_id
+    redirect_URL = "/chat/" + str(sender_id)
+    return redirect(redirect_URL)
+
+@myapp_obj.route('/reactThumbsUp/<int:id>')
+@login_required
+def reactThumbsUp(id):
+    message = ChatMessage.query.get(id)
+    message.reactMode = not message.reactMode
+    message.reaction = "👍"
+    db.session.commit()
+    sender_id=message.sender_id
+    redirect_URL = "/chat/" + str(sender_id)
+    return redirect(redirect_URL)
 
 @myapp_obj.route('/remove_recipient/<int:recipient_id>', methods=['POST'])
 @login_required
