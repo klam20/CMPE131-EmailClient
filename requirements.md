@@ -11,7 +11,7 @@
 9. Mark off completed items on todo list
 10. Connects with Random Image API
 11. Deleting Email
-12. View Email
+12. PLACEHOLDER
 
 ## Non-functional Requirements
 
@@ -212,11 +212,11 @@ address
        * The user is taken back to the lists page
 
 
-12.  
+12.  View Email
 
-- **Preconditions:** User must have an account, User must be in the Compose Email form already
+- **Preconditions:** User must be already be in the sent or received inbox
 
-- **Trigger:** User presses Add Attachment button
+- **Trigger:** User presses on an email
 
 - **Primary Sequence:**
 

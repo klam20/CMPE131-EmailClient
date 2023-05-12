@@ -92,6 +92,7 @@ h2 {
       width:50px; 
 }
 
+
 .centerForm {
         display:block;
         margin-left:25%;
@@ -102,4 +103,13 @@ h2 {
         border-radius:5%;
         padding:25px;
 }
-    
+
+.flash-message {
+        position:absolute;
+        left:0;
+        bottom:0;
+        color:#C1121F;
+        font-family: Helvetica, sans-serif;
+        font-size:20px;
+        padding-left:10px;
+}

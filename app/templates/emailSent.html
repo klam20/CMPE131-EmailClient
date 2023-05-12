@@ -9,9 +9,7 @@
     <body>
       <!--Email Nav Bar-->
       <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(90deg, hsla(201, 100%, 14%, 1) 23%, hsla(203, 39%, 57%, 1) 100%);">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+
         <div class="collapse navbar-collapse" id="navbarNav">
           
           <ul class="navbar-nav">
@@ -29,13 +27,27 @@
             </li>
           </ul>
         </div>
+
+        
+
         <form method="post" action="/home">
+          <button type="submit" value="Log-Out" name="logOut">Log-Out</button>
           <button type="submit" value="Delete Account" name="delAcc">Delete Account</button>
         </form>
     </nav>
 
+    
+
 <!--Search Email Bar-->
 <div class = "email-background">
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+    <div class = "flash-message">ERROR: {{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
       <div class ="searchBar">
         <form method="GET" action="{{ url_for('email') }}">
           <input type="text" name="search_query" placeholder="Search emails" />
@@ -134,15 +146,7 @@
 
               <!--Email Retrieval-->
 
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                <ul>
-                {% for message in messages %}
-                  <li>{{ message }}</li>
-                {% endfor %}
-                </ul>
-              {% endif %}
-            {% endwith %}
+            
 
 
               {%if messageCount > 0%}

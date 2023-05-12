@@ -23,9 +23,7 @@ myapp_obj.config.from_mapping(
     SQLALCHEMY_TRACK_MODIFICATIONS = False,
 )
 
-myapp_obj.add_url_rule(
-    "/attachments/<name>", endpoint="download", build_only=True
-)
+
 
 db = SQLAlchemy(myapp_obj)
 
