@@ -106,12 +106,12 @@ def email():
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
 
-        if not allowed_file(file.filename):
-            return redirect(request.url)
-
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], filename))
+
+        if file and not allowed_file(file.filename):
+            return redirect(request.url)
 
         sourceDate = datetime.now()
         
