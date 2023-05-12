@@ -6,7 +6,7 @@
 - [Developers](#developers)
 - [Installation and Setup](#installation-and-setup)
 -[Libraries](#libraries)
--Functions (#functions)
+-[Functions](#functions)
 
 ## Introduction <a name="introduction"></a>
 
@@ -58,29 +58,31 @@ Once you have followed the installation and setup process, you should see
 the list of libraries used in requirements.txt
 <details>
 <summary> List of Libraries Used </summary>
-- alembic
-- blinker
-- click
-- dnspython
-- email-validator
-- Flask
-- Flask-Login
-- Flask-Mail
-- Flask-Migrate
-- Flask-SQLAlchemy
-- Flask-Uploads
-- Flask-WTF
-- greenlet
-- idna
-- itsdangerous
-- Jinja2
-- Mako
-- MarkupSafe
-- Pillow
-- SQLAlchemy
-- typing_extensions
-- Werkzeug
-- WTForms
+<ul>
+<li>alembic</li>
+<li>blinker</li>
+<li>click</li>
+<li>dnspython</li>
+<li>email-validator</li>
+<li>Flask</li>
+<li>Flask-Login</li>
+<li>Flask-Mail</li>
+<li>Flask-Migrate</li>
+<li>Flask-SQLAlchemy</li>
+<li>Flask-Uploads</li>
+<li>Flask-WTF</li>
+<li>greenlet</li>
+<li>idna</li>
+<li>itsdangerous</li>
+<li>Jinja2</li>
+<li>Mako</li>
+<li>MarkupSafe</li>
+<li>Pillow</li>
+<li>SQLAlchemy</li>
+<li>typing_extensions</li>
+<li>Werkzeug</li>
+<li>WTForms</li>
+</ul>
 </details>
 
 ## Functions <a name=“functions”></a>
@@ -126,3 +128,4 @@ the navigation bar.
     
     </details>
 </details>
+
