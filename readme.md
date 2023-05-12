@@ -179,9 +179,9 @@ sender, subject, and message
 - Then, the user can click on "received" or "sent" to see emails that matched the input
   <details>
   <summary> Show example </summary>
-  image.png
+  ![alt text] (image.png)
   </details>
-  
+
 ### Deleting Emails (Jeffrey)
 - To delete an email, first, view its contents by clicking on it
 - Within the email view, locate the "Delete Email" button
