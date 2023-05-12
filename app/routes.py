@@ -420,4 +420,5 @@ def startEdit(todo_id):
     todo = task.query.get(todo_id)
     todo.edit = not todo.edit
     db.session.commit()
+    return redirect("/email")
 
