@@ -99,7 +99,8 @@ button
 - Create an email address and password to complete registration
     <details>
     <summary> Show example </summary>
-    
+    <img width="166" alt="Screen Shot 2023-05-11 at 9 23 06 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/983ceda8-ba50-4d6e-ac7a-9ccf7aaede4b">
+    <img width="591" alt="registration" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/7cdb752b-2db1-4d98-a37f-34c50933f121">
     </details>
 
 ### Logging In (Jeffrey)
@@ -108,7 +109,8 @@ other functionalities.
 - Enter your registered email and password to log in
     <details>
     <summary> Show example </summary>
-    
+    <img width="166" alt="Screen Shot 2023-05-11 at 9 23 06 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/5330893d-a699-4e31-8fb0-9892a9bb6707">
+    <img width="715" alt="login" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/4ef2547a-2a7a-4e1c-bbb7-8d627127ab8b">
     </details>
 
 ### Logging Out (Jeffrey)
@@ -117,7 +119,7 @@ on it
 - Logging out will terminate your current session
     <details>
     <summary> Show example </summary>
-    
+    <img width="106" alt="Screen Shot 2023-05-11 at 9 24 43 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/d4ab372c-bbad-439b-90c5-77db189bbd39">
     </details>
 
 ### Deleting Account (Jeffrey)
@@ -126,7 +128,7 @@ the navigation bar.
 - Click on the button to initiate the account deletion process
     <details>
     <summary> Show example </summary>
-    
+    <img width="143" alt="Screen Shot 2023-05-11 at 9 25 47 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/2c56c947-dc28-49dc-bb45-b90ce2409805">
     </details>
 </details>
 
@@ -140,7 +142,7 @@ application. Here are the instructions for each action:
 - Click on the compose button to create and send emails
     <details>
     <summary> Show example </summary>
-    
+    <img width="106" alt="Screen Shot 2023-05-11 at 9 26 13 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/140209d6-4008-4054-bd25-a2881ee21f41">
     </details>
 
 ### Filling out the Form (Nicole)
@@ -148,7 +150,7 @@ application. Here are the instructions for each action:
 recipient's email address, subject, and content
     <details>
     <summary> Show example </summary>
-    
+    <img width="363" alt="Screen Shot 2023-05-11 at 9 26 42 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/26f40087-e432-4ff9-9b24-855abeb37d3a">
     </details>
 
 ### Adding Attachments (Jeffrey)
@@ -156,7 +158,7 @@ recipient's email address, subject, and content
 look for an “Choose File” button
     <details>
     <summary> Show example </summary>
-    
+    <img width="332" alt="Screen Shot 2023-05-11 at 9 31 16 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/54def0c8-dae6-4746-8b97-cdb839cc651e">
     </details>
 
 ### Inbox and Viewing (Jeffrey)
@@ -166,16 +168,18 @@ look for an “Choose File” button
 sender, subject, and message
     <details>
     <summary> Show example </summary>
-    
+    <img width="637" alt="Screen Shot 2023-05-11 at 9 32 27 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/adb39945-9dd2-45b5-be48-4fd64adc7a69">
+    <img width="605" alt="Screen Shot 2023-05-11 at 9 32 36 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/25e522cb-01f8-4ba6-8d4e-257705d9a395">
     </details>
+    
 ### Deleting Emails (Jeffrey)
 - To delete an email, first, view its contents by clicking on it
 - Within the email view, locate the "Delete Email" button
 - Clicking the "Delete Email" button will remove the email from your view 
 and potentially move it to a designated trash or deleted items folder
     <details>
-    <summary> Show example </summary>
-    
+    <summary> Show example </summary>  
+    <img width="510" alt="Screen Shot 2023-05-11 at 9 34 08 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/9feccf1b-2e1d-499d-8384-15930d501c67">
     </details>
 </details>
 
@@ -191,14 +195,15 @@ instructions for each action:
 chat window
     <details>
     <summary> Show example </summary>
-    
+    <img width="396" alt="Screen Shot 2023-05-11 at 9 35 14 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/5b526e57-cdad-4da0-a2df-b2d15521c118">
+<img width="235" alt="Screen Shot 2023-05-11 at 9 35 18 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/8849617d-c198-49b1-a10a-c17e9513e532">
     </details>
 
 ### Delete Messages and Conversations (Bryant)
 - You are able to delete messages and will be no longer visible to the other participant
     <details>
     <summary> Show example </summary>
-    
+    <img width="396" alt="Screen Shot 2023-05-11 at 9 35 14 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/2341f4e1-6f3c-474e-886b-549954fdb457">
     </details>
 
 </details>
@@ -214,7 +219,7 @@ instructions for each action:
 - Press the "+" button to add the task to the list
     <details>
     <summary> Show example </summary>
-    
+    <img width="460" alt="Screen Shot 2023-05-11 at 9 38 56 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/f2e50f73-a7d0-47b3-b976-ab142db346fc">
     </details>
 
 ### Marking Off Items (Anthony)
@@ -222,7 +227,7 @@ instructions for each action:
 - The task will be visually indicated as completed
     <details>
     <summary> Show example </summary>
-    
+    <img width="471" alt="Screen Shot 2023-05-11 at 9 39 02 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/fbdaf643-2a5c-4824-8900-185028ee2c43">
     </details>
 
 ### Deleting items (Anthony)
@@ -230,7 +235,7 @@ instructions for each action:
 - Clicking the "x" button will delete the corresponding task from the list
     <details>
     <summary> Show example </summary>
-    
+    <img width="460" alt="Screen Shot 2023-05-11 at 9 38 56 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/4a662c33-73ff-4a78-8830-4fbbcde5ef4c">
     </details>
 
 ### Editing Items (Anthony)
@@ -241,6 +246,6 @@ instructions for each action:
 edit mode.
     <details>
     <summary> Show example </summary>
-    
+    <img width="460" alt="Screen Shot 2023-05-11 at 9 38 56 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/5b9b670c-7308-49a7-a5bf-a4140cb6fbe8">
     </details>
 </details>
