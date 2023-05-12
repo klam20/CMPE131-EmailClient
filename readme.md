@@ -128,4 +128,102 @@ the navigation bar.
     
     </details>
 </details>
+<details>
+<summary> Email Management</summary>
+This section provides instructions for managing emails within the 
+application. Here are the instructions for each action:
 
+### Compose Button
+- Locate the compose button on the bottom right corner
+- Click on the compose button to create and send emails
+    <details>
+    <summary> Show example </summary>
+    
+    </details>
+
+### Filling out the Form
+- To send an email, provide the required information such as the 
+recipient's email address, subject, and content
+    <details>
+    <summary> Show example </summary>
+    
+    </details>
+
+### Adding Attachments
+- To include attachments with the email, click on the attachment icon or 
+look for an “Choose File” button
+    <details>
+    <summary> Show example </summary>
+    
+    </details>
+
+### Inbox and Viewing
+- The inbox provides separate viewing modes for sent and received emails
+- To view an email, click on it from the list in the inbox
+- Clicking on an email will allow you to view its contents, including the 
+sender, subject, and message
+    <details>
+    <summary> Show example </summary>
+    
+    </details>
+### Deleting Emails
+- To delete an email, first, view its contents by clicking on it
+- Within the email view, locate the "Delete Email" button
+- Clicking the "Delete Email" button will remove the email from your view 
+and potentially move it to a designated trash or deleted items folder
+    <details>
+    <summary> Show example </summary>
+    
+    </details>
+</details>
+
+<details>
+<summary> Chat Management </summary>
+
+
+
+
+
+</details>
+<details>
+<summary>ToDo List Management</summary>
+This section covers the management of the To-Do List feature. Here are the 
+instructions for each action:
+
+### Adding Items
+- On the left side of the email page, locate the dedicated section for the 
+To-Do List
+- Fill out the task description and due date fields
+- Press the "+" button to add the task to the list
+    <details>
+    <summary> Show example </summary>
+    
+    </details>
+
+### Marking Off Items
+- To mark a task as done, simply click on the task in the list
+- The task will be visually indicated as completed
+    <details>
+    <summary> Show example </summary>
+    
+    </details>
+
+### Deleting items
+- Each task in the list will have an "x" button next to it
+- Clicking the "x" button will delete the corresponding task from the list
+    <details>
+    <summary> Show example </summary>
+    
+    </details>
+
+### Editing Items
+- Next to each task in the list, there is an edit button.
+- Clicking the edit button will activate the task's edit mode.
+- In edit mode, you can modify the task's description and due date.
+- To save the changes, click the edit button again, and the task will exit 
+edit mode.
+    <details>
+    <summary> Show example </summary>
+    
+    </details>
+</details>
