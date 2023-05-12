@@ -179,12 +179,28 @@ and potentially move it to a designated trash or deleted items folder
 
 <details>
 <summary> Chat Management </summary>
+This section covers the management of chat messages within the application. Here are the 
+instructions for each action:
 
+### Create Messages
+- By selecting the create message button, you can enter the user you want to message
+- You then select the conversation slot with the user’s email address
+- Type message in the input field and press send to see your message displayed in the 
+chat window
+    <details>
+    <summary> Show example </summary>
+    
+    </details>
 
-
-
+### Delete Messages and Conversations
+- You are able to delete messages and will be no longer visible to the other participant
+    <details>
+    <summary> Show example </summary>
+    
+    </details>
 
 </details>
+
 <details>
 <summary>ToDo List Management</summary>
 This section covers the management of the To-Do List feature. Here are the 
