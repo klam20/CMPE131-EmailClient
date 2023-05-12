@@ -179,7 +179,7 @@ sender, subject, and message
 - Then, the user can click on "received" or "sent" to see emails that matched the input
   <details>
   <summary> Show example </summary>
-  ![image](https://github.com/klam20/CMPE131-EmailClient/assets/77865786/f0fa14a7-b13c-4e8b-b00b-a64c195090bc)
+  <img width="600" src="https://github.com/klam20/CMPE131-EmailClient/assets/77865786/f0fa14a7-b13c-4e8b-b00b-a64c195090bc">
   </details>
 
 ### Deleting Emails (Jeffrey)
