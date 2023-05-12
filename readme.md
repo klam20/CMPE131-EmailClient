@@ -58,29 +58,29 @@ Once you have followed the installation and setup process, you should see
 the list of libraries used in requirements.txt
 <details>
 <summary> List of Libraries Used </summary>
-* alembic
-* blinker
-* click
-* dnspython
-* email-validator
-* Flask
-* Flask-Login
-* Flask-Mail
-* Flask-Migrate
-* Flask-SQLAlchemy
-* Flask-Uploads
-* Flask-WTF
-* greenlet
-* idna
-* itsdangerous
-* Jinja2
-* Mako
-* MarkupSafe
-* Pillow
-* SQLAlchemy
-* typing_extensions
-* Werkzeug
-* WTForms
+- alembic
+- blinker
+- click
+- dnspython
+- email-validator
+- Flask
+- Flask-Login
+- Flask-Mail
+- Flask-Migrate
+- Flask-SQLAlchemy
+- Flask-Uploads
+- Flask-WTF
+- greenlet
+- idna
+- itsdangerous
+- Jinja2
+- Mako
+- MarkupSafe
+- Pillow
+- SQLAlchemy
+- typing_extensions
+- Werkzeug
+- WTForms
 </details>
 
 ## Functions <a name=“functions”></a>
