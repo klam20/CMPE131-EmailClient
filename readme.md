@@ -172,6 +172,16 @@ sender, subject, and message
     <img width="605" alt="Screen Shot 2023-05-11 at 9 32 36 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/25e522cb-01f8-4ba6-8d4e-257705d9a395">
     </details>
     
+### Search Bar (Bryant)
+- To search an email, first, click on the search bar
+- Then the user inputs text that they want search within their existing emails
+- Clicking the submit will prompt the system to search based on user input
+- Then, the user can click on "received" or "sent" to see emails that matched the input
+  <details>
+  <summary> Show example </summary>
+  image.png
+  </details>
+  
 ### Deleting Emails (Jeffrey)
 - To delete an email, first, view its contents by clicking on it
 - Within the email view, locate the "Delete Email" button
