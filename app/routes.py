@@ -221,9 +221,9 @@ def login():
 def register():
     form = RegistrationForm()
     newPW = ""
-    #if request.method =='POST':
-        #if request.form.get('generatePW') == 'generatePW':
-            #newPW = api.generatePassword()
+    if request.method =='POST':
+        if request.form.get('generatePW') == 'generatePW':
+            newPW = api.generatePassword()
 
     if form.validate_on_submit():
         emailExists = bool(User.query.filter_by(email=form.email.data).first())
@@ -444,4 +444,5 @@ def startEdit(todo_id):
     todo = task.query.get(todo_id)
     todo.edit = not todo.edit
     db.session.commit()
+    return redirect("/email")
 
