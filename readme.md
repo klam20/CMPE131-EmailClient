@@ -5,8 +5,8 @@
 - [Key Features](#key-features)
 - [Developers](#developers)
 - [Installation and Setup](#installation-and-setup)
--[Libraries](#libraries)
--[Functions](#functions)
+- [Libraries](#libraries)
+- [Functions](#functions)
 
 ## Introduction <a name="introduction"></a>
 
