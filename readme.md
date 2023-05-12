@@ -89,10 +89,11 @@ the list of libraries used in requirements.txt
 
 <details>
 <summary>Account Management</summary>
-This section covers the various actions related to managing user accounts. 
+This section covers the various actions related to managing user 
+accounts. 
 Here are the instructions for each:
 
-### Registration
+### Registration (Nicole)
 - To register for an account, go to the home page and click the “Sign-up” 
 button
 - Create an email address and password to complete registration
@@ -101,7 +102,7 @@ button
     
     </details>
 
-### Logging In
+### Logging In (Jeffrey)
 - Once you have a registered account, use the login feature to access 
 other functionalities.
 - Enter your registered email and password to log in
@@ -110,7 +111,7 @@ other functionalities.
     
     </details>
 
-### Logging Out
+### Logging Out (Jeffrey)
 - To log out, locate the "Log-out" button in the navigation bar and click 
 on it
 - Logging out will terminate your current session
@@ -119,7 +120,7 @@ on it
     
     </details>
 
-### Deleting Account
+### Deleting Account (Jeffrey)
 - If you wish to delete your account, find the "Delete Account" button in 
 the navigation bar.
 - Click on the button to initiate the account deletion process
@@ -128,12 +129,13 @@ the navigation bar.
     
     </details>
 </details>
+
 <details>
 <summary> Email Management</summary>
 This section provides instructions for managing emails within the 
 application. Here are the instructions for each action:
 
-### Compose Button
+### Compose Button (Nicole)
 - Locate the compose button on the bottom right corner
 - Click on the compose button to create and send emails
     <details>
@@ -141,7 +143,7 @@ application. Here are the instructions for each action:
     
     </details>
 
-### Filling out the Form
+### Filling out the Form (Nicole)
 - To send an email, provide the required information such as the 
 recipient's email address, subject, and content
     <details>
@@ -149,7 +151,7 @@ recipient's email address, subject, and content
     
     </details>
 
-### Adding Attachments
+### Adding Attachments (Jeffrey)
 - To include attachments with the email, click on the attachment icon or 
 look for an “Choose File” button
     <details>
@@ -157,7 +159,7 @@ look for an “Choose File” button
     
     </details>
 
-### Inbox and Viewing
+### Inbox and Viewing (Jeffrey)
 - The inbox provides separate viewing modes for sent and received emails
 - To view an email, click on it from the list in the inbox
 - Clicking on an email will allow you to view its contents, including the 
@@ -166,7 +168,7 @@ sender, subject, and message
     <summary> Show example </summary>
     
     </details>
-### Deleting Emails
+### Deleting Emails (Jeffrey)
 - To delete an email, first, view its contents by clicking on it
 - Within the email view, locate the "Delete Email" button
 - Clicking the "Delete Email" button will remove the email from your view 
@@ -182,7 +184,7 @@ and potentially move it to a designated trash or deleted items folder
 This section covers the management of chat messages within the application. Here are the 
 instructions for each action:
 
-### Create Messages
+### Create Messages (Bryant)
 - By selecting the create message button, you can enter the user you want to message
 - You then select the conversation slot with the user’s email address
 - Type message in the input field and press send to see your message displayed in the 
@@ -192,7 +194,7 @@ chat window
     
     </details>
 
-### Delete Messages and Conversations
+### Delete Messages and Conversations (Bryant)
 - You are able to delete messages and will be no longer visible to the other participant
     <details>
     <summary> Show example </summary>
@@ -206,9 +208,8 @@ chat window
 This section covers the management of the To-Do List feature. Here are the 
 instructions for each action:
 
-### Adding Items
-- On the left side of the email page, locate the dedicated section for the 
-To-Do List
+### Adding Items (Anthony)
+- On the left side of the email page, locate the dedicated section for the To-Do List
 - Fill out the task description and due date fields
 - Press the "+" button to add the task to the list
     <details>
@@ -216,7 +217,7 @@ To-Do List
     
     </details>
 
-### Marking Off Items
+### Marking Off Items (Anthony)
 - To mark a task as done, simply click on the task in the list
 - The task will be visually indicated as completed
     <details>
@@ -224,7 +225,7 @@ To-Do List
     
     </details>
 
-### Deleting items
+### Deleting items (Anthony)
 - Each task in the list will have an "x" button next to it
 - Clicking the "x" button will delete the corresponding task from the list
     <details>
@@ -232,7 +233,7 @@ To-Do List
     
     </details>
 
-### Editing Items
+### Editing Items (Anthony)
 - Next to each task in the list, there is an edit button.
 - Clicking the edit button will activate the task's edit mode.
 - In edit mode, you can modify the task's description and due date.
