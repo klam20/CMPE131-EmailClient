@@ -196,9 +196,8 @@ chat window
     <details>
     <summary> Show example </summary>
     <img width="396" alt="Screen Shot 2023-05-11 at 9 35 14 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/5b526e57-cdad-4da0-a2df-b2d15521c118">
-<img width="235" alt="Screen Shot 2023-05-11 at 9 35 18 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/8849617d-c198-49b1-a10a-c17e9513e532">
+    <img width="235" alt="Screen Shot 2023-05-11 at 9 35 18 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/8849617d-c198-49b1-a10a-c17e9513e532">
     </details>
-
 ### Delete Messages and Conversations (Bryant)
 - You are able to delete messages and will be no longer visible to the other participant
     <details>
