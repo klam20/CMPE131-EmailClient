@@ -97,7 +97,7 @@ def email():
             flash('No emails found. Please try again')
             
     if form.validate_on_submit():
-
+        #Attachment handling
         # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
@@ -105,6 +105,9 @@ def email():
         file = request.files['file']
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
+
+        if not allowed_file(file.filename):
+            return redirect(request.url)
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
