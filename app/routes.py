@@ -231,9 +231,9 @@ def register():
 @login_required
 def chat():
     form = ChatForm()
-    current_user_id = current_user.id
+    current_user_id = current_user.id                                                                       # Id of current user (logged in) is received
     sent_messages = ChatMessage.query.all()
-    recipients = Recipient.query.filter_by(user_id=current_user.id, sender_id=current_user.id).all()
+    recipients = Recipient.query.filter_by(user_id=current_user.id, sender_id=current_user.id).all()        # Recipients associated with that current user are queried
 
     if request.method == 'POST':
             if request.form.get('logOut') == 'Log-Out': 
@@ -250,7 +250,7 @@ def send_message(recipient_id):
     if request.method == "POST":
         message_content = request.form["message"]
         sender_id = current_user.id
-        new_message = ChatMessage(content=message_content, sender_id=sender_id, recipient_id=recipient_id, reactMode=False)
+        new_message = ChatMessage(content=message_content, sender_id=sender_id, recipient_id=recipient_id, reactMode=False) # New message created with the content, sender id, and recipient id
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
@@ -263,15 +263,15 @@ def chat_with_recipient(recipient_id):
      form = ChatForm()
      recipients = Recipient.query.filter_by(user_id=current_user.id, sender_id=current_user.id).all()
      current_user_id = current_user.id
-     messages = ChatMessage.query.filter(
+     messages = ChatMessage.query.filter(                                                               # Querying all messages between current user and specific recipient
         ((ChatMessage.recipient_id == recipient_id) & (ChatMessage.sender_id == current_user_id)) |
         ((ChatMessage.recipient_id == current_user_id) & (ChatMessage.sender_id == recipient_id))
      ).all()
      user = User.query.get(current_user_id)
-     if form.validate_on_submit():
+     if form.validate_on_submit():                                                                          # If current user sends a chat (clicks "send" button)
         message_content = form.message.data
         sender_id = current_user_id
-        new_message = ChatMessage(content=message_content, sender_id=sender_id, recipient_id=recipient_id)
+        new_message = ChatMessage(content=message_content, sender_id=sender_id, recipient_id=recipient_id)  # User's message is created with the content, sender id, and recipient id and sent to the recipient
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
