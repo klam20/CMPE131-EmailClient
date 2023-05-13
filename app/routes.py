@@ -315,67 +315,67 @@ def delete_messages():
 
 @myapp_obj.route('/openReactRecieved/<int:id>')
 @login_required
-def openReactRecieved(id):                                     
-    message = ChatMessage.query.get(id)
-    message.reactMode = not message.reactMode                  
+def openReactRecieved(id):                                     #Opening react window for chat messages
+    message = ChatMessage.query.get(id)                        #Get chat message 
+    message.reactMode = not message.reactMode                  #Toggle react mode
     db.session.commit()
-    sender_id=message.sender_id
-    redirect_URL = "/chat/" + str(sender_id)
+    sender_id=message.sender_id                                #Get sender id
+    redirect_URL = "/chat/" + str(sender_id)                   #Redirect to same page with react mode on
     return redirect(redirect_URL)
 
 @myapp_obj.route('/reactHeart/<int:id>')
 @login_required
-def reactHeart(id):
-    message = ChatMessage.query.get(id)
-    message.reactMode = not message.reactMode
-    message.reaction = "❤️"
+def reactHeart(id):                                             #React to message with heart
+    message = ChatMessage.query.get(id)                         #Get chat message
+    message.reactMode = not message.reactMode                   #Toggle react mode
+    message.reaction = "❤️"                                     #Set reaction to heart
     db.session.commit()
     sender_id=message.sender_id
-    redirect_URL = "/chat/" + str(sender_id)
+    redirect_URL = "/chat/" + str(sender_id)                    #Redirect to same page with react mode off and heart reaction
     return redirect(redirect_URL)
 
 @myapp_obj.route('/reactAnger/<int:id>')
 @login_required
-def reactAnger(id):
-    message = ChatMessage.query.get(id)
-    message.reactMode = not message.reactMode
-    message.reaction = "😡"
+def reactAnger(id):                                             #React to message with anger
+    message = ChatMessage.query.get(id)                         #Get chat message
+    message.reactMode = not message.reactMode                   #Toggle react mode
+    message.reaction = "😡"                                     #Set reaction to angry emoji
     db.session.commit()
     sender_id=message.sender_id
-    redirect_URL = "/chat/" + str(sender_id)
+    redirect_URL = "/chat/" + str(sender_id)                    #Redirect to same page with react mode off and angry reaction
     return redirect(redirect_URL)
 
 @myapp_obj.route('/reactTear/<int:id>')
 @login_required
-def reactTear(id):
-    message = ChatMessage.query.get(id)
-    message.reactMode = not message.reactMode
-    message.reaction = "😢"
+def reactTear(id):                                              #React to message with tear
+    message = ChatMessage.query.get(id)                         #Get chat message
+    message.reactMode = not message.reactMode                   #Toggle react mode
+    message.reaction = "😢"                                     #Set reaction to tear
     db.session.commit()
     sender_id=message.sender_id
-    redirect_URL = "/chat/" + str(sender_id)
+    redirect_URL = "/chat/" + str(sender_id)                    #Redirect to same page with react mode off and tear reaction
     return redirect(redirect_URL)
 
 @myapp_obj.route('/reactJoy/<int:id>')
 @login_required
-def reactJoy(id):
-    message = ChatMessage.query.get(id)
-    message.reactMode = not message.reactMode
-    message.reaction = "😂"
+def reactJoy(id):                                               #React to message with joy
+    message = ChatMessage.query.get(id)                         #Get chat message
+    message.reactMode = not message.reactMode                   #Toggle react mode
+    message.reaction = "😂"                                     #Set reaction to joy
     db.session.commit()
     sender_id=message.sender_id
-    redirect_URL = "/chat/" + str(sender_id)
+    redirect_URL = "/chat/" + str(sender_id)                    #Redirect to same page with react mode off and joy reaction
     return redirect(redirect_URL)
 
 @myapp_obj.route('/reactThumbsUp/<int:id>')
 @login_required
-def reactThumbsUp(id):
-    message = ChatMessage.query.get(id)
-    message.reactMode = not message.reactMode
-    message.reaction = "👍"
+def reactThumbsUp(id):                                          #React to message with thumbs up
+    message = ChatMessage.query.get(id)                         #Get chat message
+    message.reactMode = not message.reactMode                   #Toggle react mode
+    message.reaction = "👍"                                     #Set reaction to thumbs up
     db.session.commit()
     sender_id=message.sender_id
-    redirect_URL = "/chat/" + str(sender_id)
+    redirect_URL = "/chat/" + str(sender_id)                    #Redirect to same page with react mode off and thumbs up reaction
     return redirect(redirect_URL)
 
 @myapp_obj.route('/remove_recipient/<int:recipient_id>', methods=['POST'])
@@ -389,43 +389,43 @@ def remove_recipient(recipient_id):
 
 @myapp_obj.route('/addTodo', methods=['POST'])
 def addToDo():
-    name = request.form.get("name")
-    date = request.form.get("date")
-    userID = current_user.id
-    test = task(name = name, date = date, done = False, edit = False, user_id = userID)
-    db.session.add(test)
+    name = request.form.get("name")                                                         #Get name and date from form
+    date = request.form.get("date") 
+    userID = current_user.id                                                                #Get userID of current user
+    test = task(name = name, date = date, done = False, edit = False, user_id = userID)     #Make new task with all given information
+    db.session.add(test)                                                                    #Add task to database
     db.session.commit()
 
-    return redirect("/email")
+    return redirect("/email")                                                               #Redirect to email page with task
 
 @myapp_obj.route('/updateTodo/<int:todo_id>')
-def updateTask(todo_id):
-    todo = task.query.get(todo_id)
-    todo.done=not todo.done
+def updateTask(todo_id):                                                    #Changes the done status of a task
+    todo = task.query.get(todo_id)                                          #Get the task
+    todo.done=not todo.done                                                 #Toggle task done column
     db.session.commit()
-    return redirect("/email")
+    return redirect("/email")                                               #Reload page
     
 
 @myapp_obj.route('/deleteTodo/<int:todo_id>')
-def deleteTask(todo_id):
-    todo = task.query.get(todo_id)
-    db.session.delete(todo)
-    db.session.commit()
-    return redirect("/email")
+def deleteTask(todo_id):                                                    #Delete as task
+    todo = task.query.get(todo_id)                                          #Get the task
+    db.session.delete(todo)                                                 #Delete the task from the data base
+    db.session.commit() 
+    return redirect("/email")                                               #Reload page
 
 @myapp_obj.route('/submitEdit/<int:todo_id>', methods=['POST'])
-def submitEdit(todo_id):
-    todo = task.query.get(todo_id)
-    todo.name = request.form.get("editInputText")
-    todo.date = request.form.get("editInputDate")
-    todo.edit = not todo.edit
+def submitEdit(todo_id):                                                    #Submit changes made to task after editing
+    todo = task.query.get(todo_id)                                          #Get the task
+    todo.name = request.form.get("editInputText")                           #Get inputed task description
+    todo.date = request.form.get("editInputDate")                           #Get inputed due date
+    todo.edit = not todo.edit                                               #Toggle edit mode for task
     db.session.commit()
-    return redirect("/email")
+    return redirect("/email")                                               #Reload page
 
 @myapp_obj.route('/startEdit/<int:todo_id>')
-def startEdit(todo_id):
-    todo = task.query.get(todo_id)
-    todo.edit = not todo.edit
+def startEdit(todo_id):                                                     #Enter edit mode for a spacific task
+    todo = task.query.get(todo_id)                                          #Get the task
+    todo.edit = not todo.edit                                               #Toggle edit mode
     db.session.commit()
-    return redirect("/email")
+    return redirect("/email")                                               #Reload page
 
