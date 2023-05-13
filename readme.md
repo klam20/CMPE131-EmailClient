@@ -71,7 +71,8 @@ USING LINUX TERMINAL " > " denotes a Linux command
 
 <details>
     <summary> Install required dependencies within virtualenv </summary>
-    &ensp; &ensp;&ensp; pip install -r requirements.txt 
+    &ensp; &ensp;&ensp; Change directory to the cloned directory CMPE131-EmailClient <br>
+    &ensp; &ensp;&ensp; Install libraries using > pip install -r requirements.txt 
  </details>
 
  <details>
@@ -110,6 +111,7 @@ the list of libraries used in requirements.txt
 <li>typing_extensions</li>
 <li>Werkzeug</li>
 <li>WTForms</li>
+<li>Requests</li>
 </ul>
 
 </details>
