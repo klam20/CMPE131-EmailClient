@@ -14,7 +14,6 @@ UPLOAD_FOLDER = 'app/attachments/'
 myapp_obj.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-UPLOAD_FOLDER = os.path.join(basedir, 'uploads')
 myapp_obj.config.from_mapping(
     SECRET_KEY = 'you-will-never-guess',
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db'),

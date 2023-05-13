@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           
           <ul class="navbar-nav">
-            <img src = "static/img.jpg" class = "logo">
+            <img src = "{{ url_for('static', filename='img.jpg')}}" alt= "logo" class = "logo"/>
             <li class="nav-item ">
               <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
             </li>
@@ -24,7 +24,7 @@
           </ul>
         </div>
 
-        <form method="post" action="/home">
+        <form method="post">
           <button type="submit" value="Log-Out" name="logOut">Log-Out</button>
           <button type="submit" value="Delete Account" name="delAcc">Delete Account</button>
         </form>

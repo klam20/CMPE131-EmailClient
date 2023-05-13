@@ -1,0 +1,22 @@
+/*Style for navbar and items inside the navbar [excluding buttons] */
+.logo {
+    border:none;
+    border-radius:50%;
+    height:50px;
+    width:50px; 
+}
+
+.navbar-nav {
+    font-size: 15px;
+    line-height: 2.5;
+}
+
+.flash-message {
+    position:absolute;
+    left:0;
+    bottom:0;
+    color:#C1121F;
+    font-family: Helvetica, sans-serif;
+    font-size:20px;
+    padding-left:10px;
+}

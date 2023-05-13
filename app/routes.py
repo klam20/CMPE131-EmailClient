@@ -30,7 +30,7 @@ from datetime import datetime
 from app import ALLOWED_EXTENSIONS
 from flask import send_from_directory
 
-def allowed_file(filename):
+def allowed_file(filename):                                              #Global function for checking if an email attachment is valid
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -38,18 +38,17 @@ def allowed_file(filename):
 
 @myapp_obj.route("/home", methods=['GET','POST'])
 def home():
-    #api.randomImageAPI()
-    db.create_all()
-    form = LoginForm()
-    if current_user.is_authenticated:
-        if request.method == 'POST':
-            if request.form.get('logOut') == 'Log-Out': 
+    db.create_all()                                                       #DB created in the home
+    form = LoginForm()                                                    
+    if current_user.is_authenticated:                                     #Check if logged in, display an HTML specifically
+        if request.method == 'POST':                                      #for logged in user
+            if request.form.get('logOut') == 'Log-Out':                     
                 logout_user()
                 return redirect('/home')
-
         return render_template('home_logged_in.html', form = form)
-    else:
-        if request.method == 'POST':
+    
+    else:                                                                 #Likewise an HTML for logged-out user is used
+        if request.method == 'POST':                                     
             if request.form.get('logIn') == 'Log-In': 
                 return redirect('/login')
             elif request.form.get('signUp') == 'Sign-Up':
@@ -57,15 +56,15 @@ def home():
         return render_template('home_logged_out.html', form = form)
 
 
-@myapp_obj.route("/email/attachments/<name>")
-def download(name):
+@myapp_obj.route("/email/attachments/<name>")                             #Route specifically for retrieving attachments
+def download(name):                                                       #This is when user views content of email and clicks on hyperlink of attachment
     return send_from_directory('attachments/', name)
 
 @myapp_obj.route("/email", methods=['GET','POST'])
 @login_required
 def email():
-    currentUserEmail = User.query.get(current_user.id).email
-    form = sendEmailForm()
+    currentUserEmail = User.query.get(current_user.id).email             #Setup of various database queries that are
+    form = sendEmailForm()                                               #transferred to HTML using render_template parameters
     todo_list = task.query.all()
     sentEmails = Message.query.filter_by(user_id=current_user.id).order_by(Message.id.desc())
     receivedEmails = Message.query.filter_by(recipient=currentUserEmail).order_by(Message.id.desc())
@@ -73,9 +72,9 @@ def email():
     search_query = request.args.get('search_query', None)
 
     # Search bar 
-    if search_query:
-        receivedEmails = receivedEmails.filter(
-            or_(
+    if search_query:                                                    #If search queuries exist
+        receivedEmails = receivedEmails.filter(                         #Change all of the received and sent emails
+            or_(                                                        #based on the query
                 Message.recipient.ilike(f"%{search_query}%"),
                 Message.subject.ilike(f"%{search_query}%"),
                 Message.content.ilike(f"%{search_query}%"),
@@ -97,27 +96,23 @@ def email():
         if not receivedEmails and not sentEmails:
             flash('No emails found. Please try again')
             
-    if form.validate_on_submit():
-
-        #Attachment handling
-        # check if the post request has the file part
-        if 'file' not in request.files:
+    if form.validate_on_submit():                                       #If email submit button is pressed
+        if 'file' not in request.files:                                     #Check if post request has file
             flash('No file part')
             return redirect(request.url)
-        file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-
-        if file and allowed_file(file.filename):
+        file = request.files['file']                                        #Otherwise get the file
+                                               
+        if file and allowed_file(file.filename):                            #Case: allowed file extension
             filename = secure_filename(file.filename)
             file.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], filename))
 
-        if file and not allowed_file(file.filename):
+        if file and not allowed_file(file.filename):                        #Case: not allowed file extension
+            flash("File type not supported: Try {'png','jpg','jpeg','gif'}")
             return redirect(request.url)
 
-        sourceDate = datetime.now()
+        sourceDate = datetime.now()                                         #Store current time of submission
 
-        message = Message(
+        message = Message(                                                  #Generate email message
             sender = currentUserEmail,
             subject=form.subject.data,
             recipient=form.recipient.data,
@@ -126,32 +121,31 @@ def email():
             timestamp = sourceDate.strftime("%x"),
             attachment = secure_filename(file.filename)
         )
-        db.session.add(message)
+        db.session.add(message)                                             #Database storage
         db.session.commit()
 
         return redirect('/email')
     
-    if request.method == 'POST':
-            if request.form.get('delAcc') == 'Delete Account':
+    if request.method == 'POST':                                        #If other buttons are pressed among the website
+            if request.form.get('delAcc') == 'Delete Account':          #Delete Case
                 db.session.delete(current_user)
                 db.session.commit()    
                 logout_user()
                 return redirect('/home')
 
-            if request.form.get('logOut') == 'Log-Out': 
+            if request.form.get('logOut') == 'Log-Out':                 #Log-Out
                 logout_user()
                 return redirect('/home')
 
-            if request.form.get('Received') == 'Received':
+            if request.form.get('Received') == 'Received':              #Switch to Received Email View
                     return render_template('email.html', todo_list=todo_list, title='Inbox', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
 
-
-            if request.form.get('Sent') == 'Sent':
+            if request.form.get('Sent') == 'Sent':                      #Switch to Sent Email View
                     return render_template('emailSent.html', todo_list=todo_list, title='Sent', form=form, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
 
     return render_template('email.html', todo_list=todo_list, title='Inbox', form=form, sender = currentUserEmail, sentEmails=sentEmails, messageCount=messageCount, currentUserEmail=currentUserEmail, receivedEmails=receivedEmails)
 
-@myapp_obj.route('/email/<int:emailId>', methods=['GET','POST'])
+@myapp_obj.route('/email/<int:emailId>', methods=['GET','POST'])        #URL varies to view different email messages
 def viewEmail(emailId):
     currentUserEmail = User.query.get(current_user.id).email
     form = sendEmailForm()
@@ -197,18 +191,6 @@ def viewEmail(emailId):
     email = Message.query.get(emailId)
     attachment_name = email.attachment
     return render_template('viewEmail.html', todo_list=todo_list, title='View Email', form=form, currentUserEmail=currentUserEmail, email=email, attachment_name = attachment_name)
-
-
-@myapp_obj.route('/download_attachment/<int:message_id>/<int:attachment_index>')
-@login_required
-def download_attachment(message_id, attachment_index):
-    message = Message.query.get_or_404(message_id)
-    attachments = message.attachments.split(',')
-    if attachment_index < len(attachments):
-        attachment_path = attachments[attachment_index]
-        return send_from_directory(myapp_obj.config['UPLOAD_FOLDER'], attachment_path, as_attachment=True)
-    flash('Attachment not found')
-    return redirect(url_for('email'))
 
 @myapp_obj.route("/login", methods=['GET','POST'])
 def login():    
