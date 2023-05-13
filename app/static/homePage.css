@@ -3,3 +3,9 @@
 h2 {
     color:#FDF0D5;
 }
+
+.center {
+    position:absolute;
+    top:20%;
+    left:25%;
+}
