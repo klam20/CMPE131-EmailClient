@@ -65,3 +65,55 @@
     background-color: #3e8e41;
 }
 
+=======
+  position: fixed;
+  bottom: 30px;
+  right: 170px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1;
+  max-width: 800px;
+  width: 600px;
+  height: 500px;
+}
+
+#compose-tab form {
+  display: flex;
+  flex-direction: column;
+}
+
+#compose-tab label {
+  margin-bottom: 5px;
+}
+
+#compose-tab input[type="text"],
+#compose-tab textarea {
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 16px;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#compose-tab textarea {
+  height: 300px;
+  resize: none;
+}
+
+.send-btn {
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #669BBC;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+

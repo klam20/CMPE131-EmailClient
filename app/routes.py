@@ -23,11 +23,11 @@ from .forms import LoginForm
 from .forms import ChatForm
 from .forms import AddRecipientForm
 from sqlalchemy import or_
+from werkzeug.utils import secure_filename
+import os
 from app import api
 from datetime import datetime
 from app import ALLOWED_EXTENSIONS
-from werkzeug.utils import secure_filename
-import os
 from flask import send_from_directory
 
 def allowed_file(filename):
@@ -98,6 +98,7 @@ def email():
             flash('No emails found. Please try again')
             
     if form.validate_on_submit():
+
         #Attachment handling
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -115,7 +116,7 @@ def email():
             return redirect(request.url)
 
         sourceDate = datetime.now()
-        
+
         message = Message(
             sender = currentUserEmail,
             subject=form.subject.data,
@@ -197,6 +198,17 @@ def viewEmail(emailId):
     attachment_name = email.attachment
     return render_template('viewEmail.html', todo_list=todo_list, title='View Email', form=form, currentUserEmail=currentUserEmail, email=email, attachment_name = attachment_name)
 
+
+@myapp_obj.route('/download_attachment/<int:message_id>/<int:attachment_index>')
+@login_required
+def download_attachment(message_id, attachment_index):
+    message = Message.query.get_or_404(message_id)
+    attachments = message.attachments.split(',')
+    if attachment_index < len(attachments):
+        attachment_path = attachments[attachment_index]
+        return send_from_directory(myapp_obj.config['UPLOAD_FOLDER'], attachment_path, as_attachment=True)
+    flash('Attachment not found')
+    return redirect(url_for('email'))
 
 @myapp_obj.route("/login", methods=['GET','POST'])
 def login():    
