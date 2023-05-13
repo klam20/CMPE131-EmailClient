@@ -1,0 +1,44 @@
+/*Style for items related to inbox, search bar */
+
+.inbox {
+    padding:10px;
+    padding-top:30px;
+    margin-left: 40%;
+    margin-right:5%;
+}
+
+.inboxWidth {
+    padding-right:600px;
+}
+
+.searchBar {
+    padding-left:10px;
+    padding-top:30px;
+    margin-left:40%
+}
+
+.searchBar input {
+    padding:5px;
+    padding-right:300px;
+}
+
+
+.inboxNav {
+    position:relative;
+}
+
+.inboxSender {
+    padding-right:10px;
+    border-right:gray solid 1px;
+}
+
+.inboxSubject {
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.inboxTimestamp {
+    position:absolute;
+    right:0;
+    padding-right:20px;
+}

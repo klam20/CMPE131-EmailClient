@@ -74,3 +74,9 @@ form input[type="password"]::placeholder {
     color: #003049;
 }
 
+/*Collapse bar for password generation */
+.collapseBar {
+    position:absolute;
+    top:49.7%;
+    left:55.5%;
+}

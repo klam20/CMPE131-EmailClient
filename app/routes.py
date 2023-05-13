@@ -46,6 +46,7 @@ def home():
             if request.form.get('logOut') == 'Log-Out': 
                 logout_user()
                 return redirect('/home')
+
         return render_template('home_logged_in.html', form = form)
     else:
         if request.method == 'POST':
@@ -220,16 +221,9 @@ def login():
 @myapp_obj.route("/register", methods=['GET','POST'])
 def register():
     form = RegistrationForm()
-    newPW = ""
-    if request.method =='POST':
-        if request.form.get('generatePW') == 'generatePW':
-            newPW = api.generatePassword()
-
+    newPW = api.generatePassword
     if form.validate_on_submit():
         emailExists = bool(User.query.filter_by(email=form.email.data).first())
-        #for field, errors in form.errors.items():
-            #for error in errors:
-               # flash(f'{field.capitalize()} field: {error}', 'error-message')
 
         if(emailExists):
             flash(f'Account already exists')
