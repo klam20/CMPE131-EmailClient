@@ -23,11 +23,11 @@ from .forms import LoginForm
 from .forms import ChatForm
 from .forms import AddRecipientForm
 from sqlalchemy import or_
+from werkzeug.utils import secure_filename
+import os
 from app import api
 from datetime import datetime
 from app import ALLOWED_EXTENSIONS
-from werkzeug.utils import secure_filename
-import os
 from flask import send_from_directory
 
 def allowed_file(filename):
@@ -97,17 +97,7 @@ def email():
             flash('No emails found. Please try again')
             
     if form.validate_on_submit():
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
 
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], filename))
 
         sourceDate = datetime.now()
 

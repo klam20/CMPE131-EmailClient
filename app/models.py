@@ -15,6 +15,7 @@ class Message(db.Model):
     timestamp = db.Column(db.String)
     attachment = db.Column(db.String)
 
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(32), nullable=False)
