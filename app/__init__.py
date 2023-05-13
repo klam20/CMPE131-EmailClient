@@ -3,8 +3,15 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from werkzeug.utils import secure_filename
 
 myapp_obj = Flask(__name__)
+
+
+ALLOWED_EXTENSIONS = {'png','jpg','jpeg','gif'}
+UPLOAD_FOLDER = 'app/attachments/'
+
+myapp_obj.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 UPLOAD_FOLDER = os.path.join(basedir, 'uploads')
@@ -15,6 +22,10 @@ myapp_obj.config.from_mapping(
     UPLOAD_FOLDER = UPLOAD_FOLDER
 )
 
+myapp_obj.add_url_rule(
+    "/attachments/<name>", endpoint="download", build_only=True
+)
+
 db = SQLAlchemy(myapp_obj)
 
 migrate = Migrate(myapp_obj, db)
@@ -23,5 +34,5 @@ login = LoginManager(myapp_obj)
 
 login.login_view = 'login'
 
-from app import routes, models
+from app import routes, models, forms
 from .models import User

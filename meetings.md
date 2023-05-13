@@ -81,7 +81,26 @@
         Researching, implementing display for sent and received messages for the chat
 
 ### 2023-05-10 at 20:00
-
+      -Jeffrey, Bryant, Anthony, Nicole meeting
+      -Discussed current state of email client styling
+      -Discussing documentation, readme, commenting code
+    
+    Next tasks:
+    Jeffrey:
+        Make styling consistent across all pages
+        Assist in feature send attachments in email
+         
+    Nicole:
+        Research sending email attachments in Flask
+        Make styling consistent
+         
+    Anthony:
+        Commenting code for readability
+        Moving CSS out into separate files for less clutter
+        
+    Bryant:
+        Making style of chat message consistent with theme of website
+        Two-way chat message testing
 ### 2023-05-17 at 20:00
 
 ### 2023-05-23 at 20:00

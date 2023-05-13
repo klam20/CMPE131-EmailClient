@@ -2,16 +2,12 @@
 <html>
     <head>
         <title>Email</title>
-
-        <link href="{{url_for('static', filename='composeButton.css')}}" rel="stylesheet">
-        <link href="{{url_for('static', filename='todoList.css')}}" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
         <link href="{{url_for('static', filename='todoListStyle.css')}}" rel="stylesheet">
-
     </head>
     <body>
+
       <!--Email Nav Bar-->
       <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(90deg, hsla(201, 100%, 14%, 1) 23%, hsla(203, 39%, 57%, 1) 100%);">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,9 +25,6 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/email">Email <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/chat">Chat <span class="sr-only">(current)</span></a>
-            </li>
           </ul>
         </div>
         <form method="post" action="/home">
@@ -39,77 +32,9 @@
         </form>
     </nav>
 
-
-        <a href="/home">Home</a>
-        <!--Compose Button-->
-        <button id="compose-btn"><i class="fa-solid fa-pencil"></i>Compose</button>
-        <div id="compose-tab">
-        <form action="" method="post" novalidate enctype="multipart/form-data">
-          <div class="message-icon">
-            <i class="fas fa-envelope"></i>
-            <span>New Message</span>
-          </div>
-          <div id="input-field">
-            <input type="text" placeholder="Recipients" name="Email">
-          </div>
-          <div id="input-field">
-            <input type="text" placeholder="Subject" name="Subject">
-          </div>
-          <div id="input-field">
-            <textarea name="Message" placeholder="Message" rows="10"></textarea>
-          </div>
-          <div id="attachment-field">
-            <input type="file" name="attachment">
-          </div>
-          <button type="submit" class="send-btn"><i class="fas fa-paper-plane"></i></button>
-        </form>
-        </div>
-    
-        <div class="todo">
-            <h1>Todo List</h1>
-        <div class="linebreak"></div>
-        <form action="/addTodo" method="post">
-          <input type="taskInput" id="name" name="name" placeholder="Enter 
-task..." required>
-          <input type="date" id="date" name="date" placeholder="mm/dd" 
-required>
-          <button type="taskSubmit">+</button>
-        </form>
-
-        {%for task in todo_list%}
-        <div class="linebreak"></div>
-        <tr>
-            {%if task.done==False and task.edit==False %}
-            <li type="task" 
-onclick='window.location.href="/updateTodo/{{task.task_id}}"'>{{task.name}}
-              <div class="date">{{task.date}}</div>
-              <div class="linebreak"></div>
-            </li>
-            <td><a type="edit" 
-href="/startEdit/{{task.task_id}}">✎</a></td>
-            {%elif task.done==True and task.edit==False %}
-            <li type="task" class="checked" 
-onclick='window.location.href="/updateTodo/{{task.task_id}}"'>{{task.name}}
-              <div class="date">{{task.date}}</div>
-            </li>
-            <td><a type="edit" 
-href="/startEdit/{{task.task_id}}">✎</a></td>
-            {%else%}
-            <form action="/submitEdit/{{task.task_id}}" method="post">
-              <input type="editInputText" id="editInputText" 
-name="editInputText" value="{{task.name}}" required>
-              <input type="date" id="editInputDate" name="editInputDate" 
-value="{{task.date}}" required>
-              <button type="submitEdit">✎</button>
-            </form>
-            
-            {%endif%}
-            <td><a type = "delete" 
-href="/deleteTodo/{{task.task_id}}">X</a></td>
-        </tr>
-
-<!--Search Email Bar-->
 <div class = "email-background">
+
+
       <div class ="searchBar">
         <form method="GET" action="{{ url_for('email') }}">
           <input type="text" name="search_query" placeholder="Search emails" />
@@ -190,14 +115,14 @@ href="/deleteTodo/{{task.task_id}}">X</a></td>
             }
         </style>
 
-        <!--Email Inbox-->
 
+        <!--Email Inbox-->
         <div class = "inbox">
           <form method="post">
-            <button  type="submit" value="Received" name="Received">Received</button>
-            <button  type="submit" value="Sent" name="Sent">Sent</button>
+            <button  type="submit" value="return" name="return">Return</button>
           </form>
-            <!--Inbox Header-->
+
+            
             <div class="list-group">
               <a href="#" class="list-group-item list-group-item-action" style="background-color:#FDF0D5" aria-current="true">
                 <div class="d-flex w-100 justify-content-between">
@@ -205,37 +130,24 @@ href="/deleteTodo/{{task.task_id}}">X</a></td>
                 </div>
               </a>
             </div>
+              
+            <div class="list-group-item list-group-item-action" aria-current="true">
+                  <p><em><b>Sender:</b><em> {{email.sender}}</p>
+                  <p><em><b>Recipient:</b><em> {{email.recipient}}</p>
+                  <p>{{email.content}}</p>
+                  <a href = "attachments/{{attachment_name}}">{{attachment_name}}</a>
+            </div>
 
-              <!--Email Retrieval-->
+            <form method="post">
+              <button type="submit" value="Delete Email" name="delEmail">Delete Email</button>
+            </form>
 
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                <ul>
-                {% for message in messages %}
-                  <li>{{ message }}</li>
-                {% endfor %}
-                </ul>
-              {% endif %}
-            {% endwith %}
-
-
-              {%if messageCount > 0%}
-                {%for msg2 in receivedEmails%}
-                <a href="email/{{msg2.id}}" class="list-group-item list-group-item-action" aria-current="true">
-                  <div class="d-flex w-100">
-                    <h5 class="inboxSender">{{msg2.sender}}</h5>
-                    <h5 class="inboxSubject">{{msg2.subject}}</h5>
-                    <h5 class="inboxTimestamp">{{msg2.timestamp}}</h5>
-                  </div>
-                </a>
-                {%endfor%}
-              {%endif%}            
         </div>
 
         <!--Compose Button-->
         <button class="exclude" id="compose-btn">Compose</button>
         <div id="compose-tab">
-            <form action="" method="post" novalidate enctype="multipart/form-data">
+            <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
                 <p>
                     {{form.recipient.label }}<br>
@@ -249,16 +161,11 @@ href="/deleteTodo/{{task.task_id}}">X</a></td>
                     {{form.content.label}}<br>
                     {{form.content(size=32)}}
                 </p>
-                <input type="file" name="file">
                 <p>{{form.sendEmail()}}</p>
-
-                
               </form>
         </div>
 
-        
-        <!--To Do List-->
-
+        <!--ToDoList-->
         <div class="todo">
             <h1>Todo List</h1>
         <div class="linebreak"></div>
@@ -319,6 +226,16 @@ href="/deleteTodo/{{task.task_id}}">X</a></td>
             };
         </script>
 
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
   </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -326,3 +243,6 @@ href="/deleteTodo/{{task.task_id}}">X</a></td>
 
 
     </body>
+</html>
+
+
