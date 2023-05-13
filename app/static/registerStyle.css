@@ -61,30 +61,7 @@ form input[type="password"]::placeholder {
     color: #aaa;
 }
 
-/*
-form button[type="submit"] {
-    background-color: #669BBC;
-    border: none;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-form button[type="submit"]:hover {
-    background-color: #003049;
-}
-*/
-
 /* Sign in Instead link */
-.signin-container {
-
-}
-
-.signin-container p {
-}
 
 .signin-link {
     text-decoration: none;
@@ -97,3 +74,9 @@ form button[type="submit"]:hover {
     color: #003049;
 }
 
+/*Collapse bar for password generation */
+.collapseBar {
+    position:absolute;
+    top:49.7%;
+    left:55.5%;
+}

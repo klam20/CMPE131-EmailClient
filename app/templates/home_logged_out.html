@@ -6,12 +6,11 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #003049;">
-            <a class="navbar-brand" href="#">Logo</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+          
+
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
+                <img src = "static/img.jpg" class = "logo">
                 <li class="nav-item active">
                   <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
                 </li>
@@ -29,10 +28,21 @@
             </form>
         </nav>
 
+       
+
         <div class = "background-home">
+
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+            <div class = "flash-message">ERROR: {{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
           <div class="center">
-            <h2 class="display-1">Welcome to ____!</h1>
-            <h2 class="display-3">____ is a free email client.</h1>
+            <h2 class="display-1">Welcome to <a style ="color:#003049;">BluMail</a>!</h1>
+            <h2 class="display-3"><a style ="color:#003049;">BluMail</a> is a free email client.</h1>
+            
           </div>
         </div>
     </body>

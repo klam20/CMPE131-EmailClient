@@ -10,15 +10,11 @@
 
       <!--Email Nav Bar-->
       <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(90deg, hsla(201, 100%, 14%, 1) 23%, hsla(203, 39%, 57%, 1) 100%);">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+
         <div class="collapse navbar-collapse" id="navbarNav">
           
           <ul class="navbar-nav">
-            <li class="nav-item ">
-              <img src = "static/img.jpg" class = "logo">
-            </li>
+            <img src = "static/img.jpg" class = "logo">
             <li class="nav-item ">
               <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
             </li>
@@ -27,14 +23,24 @@
             </li>
           </ul>
         </div>
+
         <form method="post" action="/home">
+          <button type="submit" value="Log-Out" name="logOut">Log-Out</button>
           <button type="submit" value="Delete Account" name="delAcc">Delete Account</button>
         </form>
     </nav>
 
+
+    
 <div class = "email-background">
 
-
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+    <div class = "flash-message">ERROR: {{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
       <div class ="searchBar">
         <form method="GET" action="{{ url_for('email') }}">
           <input type="text" name="search_query" placeholder="Search emails" />

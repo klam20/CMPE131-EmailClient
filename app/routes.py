@@ -46,6 +46,7 @@ def home():
             if request.form.get('logOut') == 'Log-Out': 
                 logout_user()
                 return redirect('/home')
+
         return render_template('home_logged_in.html', form = form)
     else:
         if request.method == 'POST':
@@ -98,6 +99,21 @@ def email():
             
     if form.validate_on_submit():
 
+        #Attachment handling
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(myapp_obj.config['UPLOAD_FOLDER'], filename))
+
+        if file and not allowed_file(file.filename):
+            return redirect(request.url)
 
         sourceDate = datetime.now()
 
@@ -113,13 +129,16 @@ def email():
         db.session.add(message)
         db.session.commit()
 
-        flash('Email is sent')
         return redirect('/email')
     
     if request.method == 'POST':
             if request.form.get('delAcc') == 'Delete Account':
                 db.session.delete(current_user)
                 db.session.commit()    
+                logout_user()
+                return redirect('/home')
+
+            if request.form.get('logOut') == 'Log-Out': 
                 logout_user()
                 return redirect('/home')
 
@@ -153,13 +172,16 @@ def viewEmail(emailId):
         db.session.add(message)
         db.session.commit()
 
-        flash('Email is sent')
         return redirect('/email')
     
     if request.method == 'POST':
             if request.form.get('delAcc') == 'Delete Account':
                 db.session.delete(current_user)
                 db.session.commit()    
+                logout_user()
+                return redirect('/home')
+
+            if request.form.get('logOut') == 'Log-Out': 
                 logout_user()
                 return redirect('/home')
 
@@ -200,7 +222,6 @@ def login():
             user = User.query.filter_by(email = form.email.data).first()
             #Check the password entered hashes and matches with database
             if (user.check_password(form.password.data)):
-                flash(f'Successful login')
                 login_user(user)
                 return redirect('/email')
             else:
@@ -212,13 +233,9 @@ def login():
 @myapp_obj.route("/register", methods=['GET','POST'])
 def register():
     form = RegistrationForm()
-    
-
+    newPW = api.generatePassword
     if form.validate_on_submit():
         emailExists = bool(User.query.filter_by(email=form.email.data).first())
-        #for field, errors in form.errors.items():
-            #for error in errors:
-               # flash(f'{field.capitalize()} field: {error}', 'error-message')
 
         if(emailExists):
             flash(f'Account already exists')
@@ -229,10 +246,9 @@ def register():
             new_user.set_password(form.password.data)
             db.session.add(new_user)
             db.session.commit()
-            flash('You are now a registered user!')
             return redirect("/login")
        
-    return render_template('register.html', title='Register', form = form)
+    return render_template('register.html', title='Register', form = form, newPW = newPW)
 
 @myapp_obj.route("/chat")
 @login_required
@@ -241,7 +257,15 @@ def chat():
     current_user_id = current_user.id
     sent_messages = ChatMessage.query.all()
     recipients = Recipient.query.filter_by(user_id=current_user.id, sender_id=current_user.id).all()
+
+    if request.method == 'POST':
+            if request.form.get('logOut') == 'Log-Out': 
+                logout_user()
+                return redirect('/home')
+
     return render_template('chat.html', sent_messages=sent_messages, recipients=recipients, form=form, selected_recipient_id=None)
+
+    
 
 @myapp_obj.route("/chat/send_message/<int:recipient_id>", methods=["GET", "POST"])
 @login_required
@@ -274,6 +298,12 @@ def chat_with_recipient(recipient_id):
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
+
+     if request.method == 'POST':
+            if request.form.get('logOut') == 'Log-Out': 
+                logout_user()
+                return redirect('/home')
+
      return render_template('chat.html', recipients=recipients, messages=messages, form=form, selected_recipient_id=recipient_id, user=user)
 
 @myapp_obj.route("/add_recipient", methods=["GET", "POST"])

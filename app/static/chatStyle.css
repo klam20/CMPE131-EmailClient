@@ -3,6 +3,7 @@
 }
 
 .left-panel {
+    background-color: white;
     display: flex;
     flex-direction: column;
     width: 400px;
@@ -15,7 +16,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #f2f2f2;
+    background-color: #003049;
     border-bottom: 1px solid black;
 }
 
@@ -23,6 +24,7 @@
     font-weight: bold;
     font-size: 16px;
     margin-right: 10px;
+    color:white;
 }
 
 .del-button {
@@ -55,6 +57,7 @@
 }
 
 .message-box {
+    background-color: white;
     height: 90%;
     overflow-y: auto;
     padding: 10px;
@@ -69,7 +72,8 @@
     justify-content: space-between;
     height: 10%;
     padding: 10px;
-    background-color: #f2f2f2;
+    background-color: #003049;
+
 }
 
 .message-input {
@@ -100,6 +104,7 @@
     border: 1px solid black;
     border-radius:5px;
     cursor: pointer;
+    background-color:#669BBC;
 }
 
 .recipient-box.selected {
@@ -108,8 +113,8 @@
 }
 
 .remove-recipient-button {
-    color: #C1121F;
-    float: right;
+    float:right;
+    color: #FDF0D5;
     background: none;
     border: none;
     font-size: 18px;
@@ -148,16 +153,6 @@
     display: block;
 }
 
-.centerForm {
-    display:block;
-    margin-left:25%;
-    margin-right:25%;
-    margin-top:5%;
-    border: 0.5px solid #669BBC;
-    background-color: #FDF0D5;
-    border-radius:5%;
-    padding:25px;
-}
 
 .sent-message {
     align-self: flex-end;

@@ -9,9 +9,9 @@
 7. Creating todo list
 8. Add items to todo list
 9. Mark off completed items on todo list
-10. Utilizes Random Image API
+10. Connects with Random Image API
 11. Deleting Email
-12. Add Attachments to Email Message
+12. PLACEHOLDER
 
 ## Non-functional Requirements
 
@@ -94,19 +94,22 @@ address
   2. User did not enter a valid/existing email address
        * System displays an error message to user
        * System prompts user to enter a valid email address
+  3. User adds an attachment to email body
+       * File explorer opens and user chooses attachment
+          * If not valid attachment then email will not be sent
   
 4. Send Messages through Chat (Bryant)
-- **Pre-condition:** User must be logged in
+- **Pre-condition:** User must be logged in, user must be in the chat inbox, user must have a recipient email
   
-- **Trigger:** User clicks chat button
+- **Trigger:**  Press "New Message" button
   
 - **Primary Sequence:**
   1. Text field for entering email recipient pops up
-  1. Enter email of person you want to message
-  2. Press Start Chat button
-  3. Opens a chat box with the recipient email auto-filled
-  4. Type your message
-  5. User clicks the "send" button to send the message
+  2. Enter email of person you want to message
+  3. Press Start Chat button
+  4. Opens a chat box with the recipient email auto-filled
+  5. Type your message
+  6. User clicks the "send" button to send the message
 
 - **Primary Postconditions:**
 
@@ -209,16 +212,16 @@ address
        * The user is taken back to the lists page
 
 
-12. Add Attachments to Email Message (Jeffrey)
+12.  View Email
 
-- **Preconditions:** User must have an account, User must be in the Compose Email form already
+- **Preconditions:** User must be already be in the sent or received inbox
 
-- **Trigger:** User presses Add Attachment button
+- **Trigger:** User presses on an email
 
 - **Primary Sequence:**
 
   1. A file explorer window will open showing user's file directory
-  2. Once a file has been selected, the name of the file will display at the bottom of the compose message form
+  2. User selects file using the explorer window, the name of the file will display at the bottom of the compose message form
 
 - **Primary Postconditions:**
   1.  An attachment will be ready for transfer if email is successfully composed/sent
