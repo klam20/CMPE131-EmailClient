@@ -97,8 +97,10 @@ def email():
             flash('No emails found. Please try again')
             
     if form.validate_on_submit():
+
+
         sourceDate = datetime.now()
-        
+
         message = Message(
             sender = currentUserEmail,
             subject=form.subject.data,
