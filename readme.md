@@ -1,4 +1,4 @@
-# Email Client
+# BluMail
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -46,12 +46,40 @@ with others through a chat system
 - Nicole Nacua (@nnacua)
 
 ## Installation and Setup  <a name="installation-and-setup"></a>
-1. Clone the repository
-2. Navigate to the project directory
-3. Install the required dependencies: pip install -r requirements.txt
-4. Start the application: python run.py 
-5. Open the web browser and visit the link provided in the terminal 
-(http://127.0.0.1:5000)
+USING LINUX TERMINAL " > " denotes a Linux command
+ <details>
+    <summary> Install Python 3 and PIP </summary>
+    &ensp; &ensp;&ensp; > sudo apt update <br>
+    &ensp; &ensp;&ensp; > sudo apt install python3 <br>
+    &ensp; &ensp;&ensp; > sudo apt install python3-pip
+ </details>
+
+ <details>
+    <summary> Setting up virtualenv </summary>
+    &ensp; &ensp;&ensp; > pip install virtualenv <br>
+    &ensp; &ensp;&ensp; Create and enter into a directory which you want the virtual environment to be in <br>
+    &ensp; &ensp;&ensp; Create the environment using > virtualenv [choose a name here for your virtualenv] <br>
+    &ensp; &ensp;&ensp; Activate the environment using > source [name of virtualenv]/bin/activate <br>
+    &ensp; &ensp;&ensp; If you want to deactivate the environment use > deactivate 
+ </details>
+
+  <details>
+    <summary> Clone the repository </summary>
+    &ensp; &ensp;&ensp; Create a directory that you want to clone the repository into <br>
+    &ensp; &ensp;&ensp; Inside the directory run > git clone https://github.com/klam20/CMPE131-EmailClient.git 
+ </details>
+
+<details>
+    <summary> Install required dependencies within virtualenv </summary>
+    &ensp; &ensp;&ensp; pip install -r requirements.txt 
+ </details>
+
+ <details>
+    <summary> Using the application </summary>
+    &ensp; &ensp;&ensp; Run the application using > python3 run.py <br>
+    &ensp; &ensp;&ensp; Stop the application with CTRL + C
+ </details>
+ <br>
 
 ## Libraries <a name=“libraries”></a>
 Once you have followed the installation and setup process, you should see 
@@ -219,7 +247,7 @@ chat window
 </details>
 
 <details>
-<summary>ToDo List Management</summary>
+<summary>To Do List Management</summary>
 This section covers the management of the To-Do List feature. Here are the 
 instructions for each action:
 
