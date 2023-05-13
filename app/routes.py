@@ -154,7 +154,7 @@ def viewEmail(emailId):
     receivedEmails = Message.query.filter_by(recipient=currentUserEmail)
     messageCount = sentEmails.count() + receivedEmails.count()
 
-    if form.validate_on_submit():
+    if form.validate_on_submit():                                       #Likewise this handles when an email is sent
         message = Message(
             sender = currentUserEmail,
             subject=form.subject.data,
@@ -195,36 +195,31 @@ def viewEmail(emailId):
 @myapp_obj.route("/login", methods=['GET','POST'])
 def login():    
     form = LoginForm()
-    #Assume register page entered this into a database already
-    if form.validate_on_submit():
-        # Check if email account exists first
-        emailExists = bool(User.query.filter_by(email=form.email.data).first())
-        if (emailExists):
-            #Query the database for the user
-            user = User.query.filter_by(email = form.email.data).first()
-            #Check the password entered hashes and matches with database
-            if (user.check_password(form.password.data)):
+    if form.validate_on_submit():                                                           #If Login Form submit is pressed
+        emailExists = bool(User.query.filter_by(email=form.email.data).first())                 #Check if email exists
+        if (emailExists):                                                                   
+            user = User.query.filter_by(email = form.email.data).first()                        #Query DB
+            if (user.check_password(form.password.data)):                                       #Check if form PW matches DB password
                 login_user(user)
                 return redirect('/email')
             else:
                 flash(f'Invalid password')
-        else:
+        else:                                                                               #Else email does not exist
             flash(f'Account does not exist')
     return render_template('login.html', form=form)
     
 @myapp_obj.route("/register", methods=['GET','POST'])
 def register():
     form = RegistrationForm()
-    newPW = api.generatePassword
+    newPW = api.generatePassword                                                            #Generate Password is a function calling an API
     if form.validate_on_submit():
-        emailExists = bool(User.query.filter_by(email=form.email.data).first())
-
-        if(emailExists):
+        emailExists = bool(User.query.filter_by(email=form.email.data).first())             #If Email Exists
+        if(emailExists):                                                                        #Do Not Register then
             flash(f'Account already exists')
             return redirect("/register")
 
-        else:
-            new_user = User(email=form.email.data)
+        else:                                                                               #Else does not exist
+            new_user = User(email=form.email.data)                                              #Register then
             new_user.set_password(form.password.data)
             db.session.add(new_user)
             db.session.commit()
@@ -292,21 +287,21 @@ def chat_with_recipient(recipient_id):
 @login_required
 def add_recipient():
     form = AddRecipientForm()
-    if form.validate_on_submit():
-        recipient_email = form.name.data
+    if form.validate_on_submit():                                                                       #If recipient added
+        recipient_email = form.name.data                                                                #Check for the user entered
         recipient = User.query.filter_by(email=recipient_email).first()
-        if recipient:
+        if recipient:                                                                                   #If they exist add new recipient
             user_id = current_user.id
             sender_id = current_user.id
             new_recipient = Recipient(name=recipient_email, user_id=user_id, sender_id=sender_id)
             db.session.add(new_recipient)
 
-            user_as_recipient = Recipient(name=current_user.email, user_id=recipient.id, sender_id=recipient.id)
+            user_as_recipient = Recipient(name=current_user.email, user_id=recipient.id, sender_id=recipient.id)    #Also add the current user
             db.session.add(user_as_recipient)
 
             db.session.commit()
             return redirect(url_for("chat"))
-        else:
+        else:                                                                                           #Otherwise user not found
             flash('User email not found')
             return redirect(url_for("chat"))
     return render_template("chat.html", form=form)
@@ -320,9 +315,9 @@ def delete_messages():
 
 @myapp_obj.route('/openReactRecieved/<int:id>')
 @login_required
-def openReactRecieved(id):
+def openReactRecieved(id):                                     
     message = ChatMessage.query.get(id)
-    message.reactMode = not message.reactMode
+    message.reactMode = not message.reactMode                  
     db.session.commit()
     sender_id=message.sender_id
     redirect_URL = "/chat/" + str(sender_id)

@@ -259,21 +259,3 @@ edit mode.
     <summary> Show example </summary>
     <img width="460" alt="Screen Shot 2023-05-11 at 9 38 56 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/5b9b670c-7308-49a7-a5bf-a4140cb6fbe8">
     </details>
-
-### Registering
-  From the home page, you may sign-up for an account by pressing the following button
-  You will need to provide an email address and a password
-  
-### Logging In
-  With a created account, you can log-in to access the other features of the web page
-  A registered email and password is required.
-  
-### Logging Out
-  You may log-out using this button located at the nav-bar
-  
-### Deleting Account
-   You may delete account using this button located at the nav-bar
-   
-
-
-</details>
