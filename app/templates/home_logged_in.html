@@ -2,11 +2,14 @@
     <head>
         <title>Home_LOGGED_IN</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='buttons.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='navBar.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='homePage.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='background.css')}}" rel="stylesheet">
     </head>
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #003049;">
+      <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(90deg, hsla(201, 100%, 14%, 1) 23%, hsla(203, 39%, 57%, 1) 100%);">
           
             
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -40,8 +43,8 @@
           {% endif %}
         {% endwith %}
           <div class="center">
-            <h2 class="display-1">Welcome to BluMail!</h1>
-            <h2 class="display-3">BluMail is a free email client.</h1>
+            <h2 class="display-1">Welcome to <a style ="color:#003049;">BluMail</a>!</h1>
+              <h2 class="display-3"><a style ="color:#003049;">BluMail</a> is a free email client.</h1>
           </div>
 
         </div>

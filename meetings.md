@@ -101,6 +101,4 @@
     Bryant:
         Making style of chat message consistent with theme of website
         Two-way chat message testing
-### 2023-05-17 at 20:00
 
-### 2023-05-23 at 20:00

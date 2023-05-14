@@ -9,14 +9,14 @@
 7. Creating todo list
 8. Add items to todo list
 9. Mark off completed items on todo list
-10. Connects with Random Image API
+10. Generate a Random Password for User Registration Purposes
 11. Deleting Email
-12. PLACEHOLDER
+12. Add attachments to emails
 
 ## Non-functional Requirements
 
-1. Must have an interactive UI (small user feedbacks on hover)
-2. PLACEHOLDER
+1. Must implement Bootstrap, interactive response (hovers)
+2. Web application must follow this color theme https://coolors.co/palette/780000-c1121f-fdf0d5-003049-669bbc
 
 ## Use Cases
 
@@ -94,10 +94,12 @@ address
   2. User did not enter a valid/existing email address
        * System displays an error message to user
        * System prompts user to enter a valid email address
-  3. User adds an attachment to email body
-       * File explorer opens and user chooses attachment
-          * If not valid attachment then email will not be sent
-  
+  3. User added an attachment to email
+       * The attachment will transfer to the recipient alongside the email
+  4. User added an unsupported attachment to email
+       * The email will not be sent
+       * A message will flash asking the user to follow the supported file extensions
+
 4. Send Messages through Chat (Bryant)
 - **Pre-condition:** User must be logged in, user must be in the chat inbox, user must have a recipient email
   
@@ -212,16 +214,17 @@ address
        * The user is taken back to the lists page
 
 
-12.  View Email
+12.  Add attachments to email
 
-- **Preconditions:** User must be already be in the sent or received inbox
+- **Preconditions:** User must be already be in compose email box, user must be logged in.
 
-- **Trigger:** User presses on an email
+- **Trigger:** User presses Choose File
 
 - **Primary Sequence:**
 
   1. A file explorer window will open showing user's file directory
-  2. User selects file using the explorer window, the name of the file will display at the bottom of the compose message form
+  2. User selects file using the explorer window
+  3. Explorer window will close and the name of the file will then show next to the Choose File button
 
 - **Primary Postconditions:**
   1.  An attachment will be ready for transfer if email is successfully composed/sent
@@ -229,6 +232,6 @@ address
 - **Alternative Sequence:**
 
   1. Unsupported file type is added
-    A. Small prompt will be asserted
-    B. File name will not show within the compose email box
+    A. Attachment will still show next to Choose File button
+    B. Send Email functional requirement will then handle the validation
 

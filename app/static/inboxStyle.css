@@ -42,3 +42,8 @@
     right:0;
     padding-right:20px;
 }
+
+.email-background:not(.exclude-background) {
+    background-color:#669BBC;
+    min-height: 100vh;
+}

@@ -7,14 +7,12 @@ from werkzeug.utils import secure_filename
 
 myapp_obj = Flask(__name__)
 
-
-ALLOWED_EXTENSIONS = {'png','jpg','jpeg','gif'}
+#Settings for Email Attachments
+ALLOWED_EXTENSIONS = {'png','jpg','jpeg','gif', 'pdf', 'docx'}
 UPLOAD_FOLDER = 'app/attachments/'
-
 myapp_obj.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-UPLOAD_FOLDER = os.path.join(basedir, 'uploads')
 myapp_obj.config.from_mapping(
     SECRET_KEY = 'you-will-never-guess',
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db'),
@@ -22,12 +20,12 @@ myapp_obj.config.from_mapping(
     UPLOAD_FOLDER = UPLOAD_FOLDER
 )
 
-
-
+#Initialize the db
 db = SQLAlchemy(myapp_obj)
 
 migrate = Migrate(myapp_obj, db)
 
+#Setup Flask-Login
 login = LoginManager(myapp_obj)
 
 login.login_view = 'login'

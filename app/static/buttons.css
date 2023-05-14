@@ -1,0 +1,20 @@
+/*Style for items related to navigation buttons */
+
+button:not(.exclude) {
+    all:unset;
+    color: #FDF0D5;
+    padding:5px;
+    border-radius:5%;
+    border:2px solid;
+
+}
+
+button:not(.exclude):hover {
+    all:unset;
+    background-color: #FDF0D5;
+    color: black;
+    padding:5px;
+    border-radius:5%;
+    border:2px solid;
+
+}

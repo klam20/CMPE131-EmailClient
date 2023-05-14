@@ -4,8 +4,12 @@
         <title>Chat</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="{{url_for('static', filename='chatStyle.css')}}" rel="stylesheet">
-        <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
         <link href="{{url_for('static', filename='todoListStyle.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='background.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='navBar.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='buttons.css')}}" rel="stylesheet">
+        <link href="{{url_for('static', filename='homePage.css')}}" rel="stylesheet">
+
     </head>
     <body>
       <!--Email Nav Bar-->
@@ -35,7 +39,7 @@
    
 
     <!--Background-->
-    <div class = "email-background">
+    <div class = "background-home">
       {% with messages = get_flashed_messages() %}
       {% if messages %}
         {% for message in messages %}
