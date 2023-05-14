@@ -5,6 +5,12 @@ from datetime import datetime
 from app import login
 from app import myapp_obj
 
+# Table for the many-to-many relationship between users and recipients
+user_recipients = db.Table('user_recipients',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('recipient_id', db.Integer, db.ForeignKey('user.id'), primary_key=True)
+)
+
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sender = db.Column(db.String(60))
@@ -20,6 +26,11 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(32), nullable=False)
     password = db.Column(db.String(32), nullable=False)
+    recipients = db.relationship(
+        "User", secondary=user_recipients,
+        primaryjoin=(user_recipients.c.user_id == id),
+        secondaryjoin=(user_recipients.c.recipient_id == id),
+        backref=db.backref('recipients_of', lazy='dynamic'), lazy='dynamic')
 
     def set_password(self,password):
         self.password = generate_password_hash(password)
@@ -34,7 +45,7 @@ class ChatMessage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200), nullable=False)
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    recipient_id= db.Column(db.Integer, db.ForeignKey('recipient.id'), nullable=False)
+    recipient_id= db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     reactMode = db.Column(db.Boolean)
     reaction = db.Column(db.String(10))
     
