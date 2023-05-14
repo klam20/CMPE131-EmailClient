@@ -231,9 +231,9 @@ def register():
 @login_required
 def chat():
     form = ChatForm()
-    current_user_id = current_user.id
+    current_user_id = current_user.id           # Id of current user (logged in) is received
     sent_messages = ChatMessage.query.all()
-    recipients = Recipient.query.filter_by(user_id=current_user.id, sender_id=current_user.id).all()
+    recipients = current_user.recipients.all()  # Recipients associated with that current user
 
     if request.method == 'POST':
             if request.form.get('logOut') == 'Log-Out': 
@@ -250,7 +250,7 @@ def send_message(recipient_id):
     if request.method == "POST":
         message_content = request.form["message"]
         sender_id = current_user.id
-        new_message = ChatMessage(content=message_content, sender_id=sender_id, recipient_id=recipient_id, reactMode=False)
+        new_message = ChatMessage(content=message_content, sender_id=sender_id, recipient_id=recipient_id, reactMode=False) # 
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for("chat_with_recipient", recipient_id=recipient_id))
@@ -261,7 +261,7 @@ def send_message(recipient_id):
 @login_required
 def chat_with_recipient(recipient_id):
      form = ChatForm()
-     recipients = Recipient.query.filter_by(user_id=current_user.id, sender_id=current_user.id).all()
+     recipients = current_user.recipients.all()
      current_user_id = current_user.id
      messages = ChatMessage.query.filter(
         ((ChatMessage.recipient_id == recipient_id) & (ChatMessage.sender_id == current_user_id)) |
@@ -290,15 +290,10 @@ def add_recipient():
     if form.validate_on_submit():                                                                       #If recipient added
         recipient_email = form.name.data                                                                #Check for the user entered
         recipient = User.query.filter_by(email=recipient_email).first()
-        if recipient:                                                                                   #If they exist add new recipient
-            user_id = current_user.id
-            sender_id = current_user.id
-            new_recipient = Recipient(name=recipient_email, user_id=user_id, sender_id=sender_id)
-            db.session.add(new_recipient)
 
-            user_as_recipient = Recipient(name=current_user.email, user_id=recipient.id, sender_id=recipient.id)    #Also add the current user
-            db.session.add(user_as_recipient)
-
+        if recipient and recipient != current_user:                                                     #If they exist and recipient is not the current user
+            current_user.recipients.append(recipient)                                                   #Recipient is added into current user's box
+            recipient.recipients.append(current_user)                                                   #Current user is added into recipient's box
             db.session.commit()
             return redirect(url_for("chat"))
         else:                                                                                           #Otherwise user not found

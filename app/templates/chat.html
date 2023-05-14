@@ -81,7 +81,7 @@
         <div class="recipient-list">
           {% for recipient in recipients %}
             <div class="recipient-box {% if recipient.id == selected_recipient_id %}selected{% endif %}" onclick="location.href='{{ url_for('chat_with_recipient', recipient_id=recipient.id) }}'">
-               {{ recipient.name }}
+               {{ recipient.email }}
                <form action="{{ url_for('remove_recipient', recipient_id=recipient.id) }}" method="POST" style="display:inline;">
                  {{ form.hidden_tag() }}
                  <button class="remove-recipient-button exclude">x</button>
