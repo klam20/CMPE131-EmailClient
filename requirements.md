@@ -214,7 +214,7 @@ address
        * The user is taken back to the lists page
 
 
-12.  Add attachments to email
+12.  Add attachments to email (Jeffrey)
 
 - **Preconditions:** User must be already be in compose email box, user must be logged in.
 
