@@ -80,7 +80,6 @@ USING LINUX TERMINAL " > " denotes a Linux command
     &ensp; &ensp;&ensp; Run the application using > python3 run.py <br>
     &ensp; &ensp;&ensp; Stop the application with CTRL + C
  </details>
- <br>
 
 ## Libraries <a name="libraries"></a>
 Once you have followed the installation and setup process, you should see 
