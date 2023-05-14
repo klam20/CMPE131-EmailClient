@@ -130,8 +130,8 @@ button
 - Create an email address and password to complete registration
     <details>
     <summary> Show example </summary>
-    <img width="166" alt="Screen Shot 2023-05-11 at 9 23 06 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/983ceda8-ba50-4d6e-ac7a-9ccf7aaede4b">
-    <img width="591" alt="registration" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/7cdb752b-2db1-4d98-a37f-34c50933f121">
+    <img width="450" alt="Screen Shot 2023-05-11 at 9 23 06 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/85579906/da6692ba-c1d5-4603-8184-17a2ef3dee8a">
+    <img width="450" alt="registration" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/7cdb752b-2db1-4d98-a37f-34c50933f121">
     </details>
 
 ### Logging In (Jeffrey)
@@ -140,8 +140,8 @@ other functionalities.
 - Enter your registered email and password to log in
     <details>
     <summary> Show example </summary>
-    <img width="166" alt="Screen Shot 2023-05-11 at 9 23 06 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/5330893d-a699-4e31-8fb0-9892a9bb6707">
-    <img width="715" alt="login" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/4ef2547a-2a7a-4e1c-bbb7-8d627127ab8b">
+    <img width="450" alt="Screen Shot 2023-05-11 at 9 23 06 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/85579906/813fc4d1-8504-480c-9aac-4ee1a2677e6e">
+    <img width="450" alt="login" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/4ef2547a-2a7a-4e1c-bbb7-8d627127ab8b">
     </details>
 
 ### Logging Out (Jeffrey)
@@ -150,16 +150,15 @@ on it
 - Logging out will terminate your current session
     <details>
     <summary> Show example </summary>
-    <img width="106" alt="Screen Shot 2023-05-11 at 9 24 43 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/d4ab372c-bbad-439b-90c5-77db189bbd39">
+    <img width="450" alt="Screen Shot 2023-05-11 at 9 24 43 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/85579906/d7712acb-3193-4aed-9e06-95536a14b2e9">
     </details>
 
 ### Deleting Account (Jeffrey)
-- If you wish to delete your account, find the "Delete Account" button in 
-the navigation bar.
+- If you wish to delete your account, find the "Delete Account" button in the email page navigation bar
 - Click on the button to initiate the account deletion process
     <details>
     <summary> Show example </summary>
-    <img width="143" alt="Screen Shot 2023-05-11 at 9 25 47 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/2c56c947-dc28-49dc-bb45-b90ce2409805">
+    <img width="450" alt="Screen Shot 2023-05-11 at 9 25 47 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/85579906/88191a27-7c04-41e6-b6f6-491888350af9">
     </details>
 </details>
 
@@ -173,7 +172,7 @@ application. Here are the instructions for each action:
 - Click on the compose button to create and send emails
     <details>
     <summary> Show example </summary>
-    <img width="106" alt="Screen Shot 2023-05-11 at 9 26 13 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/140209d6-4008-4054-bd25-a2881ee21f41">
+    <img width="450" alt="Screen Shot 2023-05-11 at 9 26 13 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/85579906/38f69434-e652-45e0-8c1b-61131eac6ec9">
     </details>
 
 ### Filling out the Form (Nicole)
@@ -199,8 +198,8 @@ look for an “Choose File” button
 sender, subject, and message
     <details>
     <summary> Show example </summary>
-    <img width="637" alt="Screen Shot 2023-05-11 at 9 32 27 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/adb39945-9dd2-45b5-be48-4fd64adc7a69">
-    <img width="605" alt="Screen Shot 2023-05-11 at 9 32 36 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/25e522cb-01f8-4ba6-8d4e-257705d9a395">
+    <img width="450" alt="Screen Shot 2023-05-11 at 9 32 27 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/adb39945-9dd2-45b5-be48-4fd64adc7a69">
+    <img width="450" alt="Screen Shot 2023-05-11 at 9 34 08 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/9feccf1b-2e1d-499d-8384-15930d501c67">
     </details>
     
 ### Search Bar (Bryant)
@@ -236,14 +235,26 @@ instructions for each action:
 chat window
     <details>
     <summary> Show example </summary>
-    <img width="396" alt="Screen Shot 2023-05-11 at 9 35 14 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/5b526e57-cdad-4da0-a2df-b2d15521c118">
-    <img width="235" alt="Screen Shot 2023-05-11 at 9 35 18 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/8849617d-c198-49b1-a10a-c17e9513e532">
+
+    <img width="450" alt="Screen Shot 2023-05-11 at 9 35 14 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/85579906/724bdcc5-39f1-4461-b370-1f705406f8bf">
+    <img width="450" alt="Screen Shot 2023-05-11 at 9 35 18 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/85579906/29767a8c-efd0-464c-a065-1b4a43d100c1">
+    <img width="450" alt="Screen Shot 2023-05-11 at 9 35 18 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/85579906/d497280b-785a-499b-9571-80d222b22559">
+    <img width="450" alt="Screen Shot 2023-05-11 at 9 35 18 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/85579906/976fb6c3-0360-40e4-948d-9ec2c692d5e5">
     </details>
+
+### Add Reactions To Chat (Anthony)
+- By clicking on a received chat message, the user is able to react with certain emojis
+    <details>
+    <summary> Show example </summary>
+    <img width="450" alt="Screen Shot 2023-05-11 at 9 35 14 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/85579906/32c01445-a4ff-4865-803d-fa1dd595e9b5">
+    <img width="450" alt="Screen Shot 2023-05-11 at 9 35 18 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/85579906/f622f53d-9e47-4d50-8330-4e66245f5bb3">
+    </details>
+ 
 ### Delete Messages and Conversations (Bryant)
 - You are able to delete messages and will be no longer visible to the other participant
     <details>
     <summary> Show example </summary>
-    <img width="396" alt="Screen Shot 2023-05-11 at 9 35 14 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/125083955/2341f4e1-6f3c-474e-886b-549954fdb457">
+    <img width="450" alt="Screen Shot 2023-05-11 at 9 35 14 PM" src="https://github.com/klam20/CMPE131-EmailClient/assets/85579906/5cc64f70-5b97-4e70-ab1a-7cae769cac50">
     </details>
 
 </details>
