@@ -84,7 +84,6 @@
                {{ recipient.email }}
                <form action="{{ url_for('remove_recipient', recipient_id=recipient.id) }}" method="POST" style="display:inline;">
                  {{ form.hidden_tag() }}
-                 <button class="remove-recipient-button exclude">x</button>
                </form>
             </div>
           {% endfor %}
