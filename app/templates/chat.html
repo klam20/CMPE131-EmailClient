@@ -120,13 +120,16 @@
         <div class="send-message">
         {% if selected_recipient_id %}
          <form action="{{ url_for('send_message', recipient_id=selected_recipient_id) }}" method="POST">
+            {{ form.hidden_tag() }}
+            <input class="message-input" name="message" type="text" placeholder="Type your message here...">
+            <button class="send-button">Send</button>
+          </form>
         {% else %}
          <form method ="POST">
+            {{ form.hidden_tag() }}
+            <input class="message-input" name="message" type="text" placeholder="Select recipient first!">
+          </form>
         {% endif %}
-           {{ form.hidden_tag() }}
-          <input class="message-input" name="message" type="text" placeholder="Type your message here...">
-          <button class="send-button">Send</button>
-         </form>
         </div>
       </div>
     </div>
