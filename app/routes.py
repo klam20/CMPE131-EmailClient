@@ -227,7 +227,7 @@ def register():
        
     return render_template('register.html', title='Register', form = form, newPW = newPW)
 
-@myapp_obj.route("/chat")
+@myapp_obj.route("/chat", methods=['GET', 'POST'])
 @login_required
 def chat():
     form = ChatForm()
@@ -236,6 +236,10 @@ def chat():
     recipients = current_user.recipients.all()  # Recipients associated with that current user
 
     if request.method == 'POST':
+        if form.validate_on_submit():
+            if not recipients:
+                flash("Select recipient first")
+                return redirect(url_for("chat"))
             if request.form.get('logOut') == 'Log-Out': 
                 logout_user()
                 return redirect('/home')
@@ -295,7 +299,7 @@ def add_recipient():
             current_user.recipients.append(recipient)                                                   #Recipient is added into current user's box
             recipient.recipients.append(current_user)                                                   #Current user is added into recipient's box
             db.session.commit()
-            return redirect(url_for("chat"))
+            return redirect(url_for("chat_with_recipient", recipient_id=recipient.id))
         else:                                                                                           #Otherwise user not found
             flash('User email not found')
             return redirect(url_for("chat"))
